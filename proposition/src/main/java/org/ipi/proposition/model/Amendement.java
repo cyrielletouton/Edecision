@@ -12,6 +12,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Amendement extends PropositionGenerale{
 
+    @Column
     private String contenu;
 
     public void amender(){

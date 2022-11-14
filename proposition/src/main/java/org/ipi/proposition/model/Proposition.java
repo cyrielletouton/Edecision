@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import java.util.List;
 
@@ -15,13 +16,22 @@ import java.util.List;
 @NoArgsConstructor
 public class Proposition extends PropositionGenerale{
 
+    @Column
     private String problematique;
+    @Column
     private String commentaire;
+    @Column
     private String status;
+    @Column
     private boolean estAccepte;
+    @Column
     private int impact;
+    @Column
     private int maxVote;
+    @Column
     private int nbrVote;
+    @Column
     private List<String> proprietaires;
+    @Column
     private List<String> equipe;
 }
