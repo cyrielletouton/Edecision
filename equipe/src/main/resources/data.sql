@@ -1,0 +1,22 @@
+INSERT INTO teams (type,utilisateur,projet,derniereProposition)
+VALUES
+  ('Développement','1','5, 9','2022-01-01'),
+  ('Analyse et conception','3, 5','15, 11','2022-01-02'),
+  ('Planification','5, 9, 6', '17, 19, 9','2022-01-03'),
+  ('Test et déploiement','4', '3, 15, 5','2022-01-04'),
+  ('Recherche et état de l art','8, 3','11, 7','2022-01-05'),
+  ('Veille et maintenance','6, 7','9, 7','2022-01-06'),
+  ('Développement','1,2,3,4,5,6','9, 3','2022-01-07'),
+  ('Planification','9,1','5, 7, 13','2022-01-08'),
+  ('Test et déploiement','5','3, 9','2022-01-09'),
+  ('Recherche et état de l art','7,8,9,5,6','1, 3','2022-01-10'),
+  ('Veille et maintenance','7,8','13','2022-01-11'),
+  ('Développement','2,3,4,5','17','2022-01-12'),
+  ('Analyse et conception','8,9','1, 19','2022-01-13'),
+  ('Planification','1,2,3,4,5','7, 5','2022-01-14'),
+  ('Test et déploiement','2','11, 13, 15','2022-01-15'),
+  ('Recherche et état de l art','3','9, 1','2022-01-16'),
+  ('Veille et maintenance','4','13','2022-01-17'),
+  ('Développement','5','17, 19','2022-01-18'),
+  ('Analyse et conception','6,7','5, 13','2022-01-19'),
+  ('Communauté','1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20', NULL,NULL);
