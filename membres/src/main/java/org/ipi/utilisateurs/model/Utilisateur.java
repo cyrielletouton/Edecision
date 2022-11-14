@@ -14,11 +14,11 @@ public class Utilisateur {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
-    public String id;
+    private String id;
     @Column(name = "nom", nullable = false)
-    public String nom;
+    private String nom;
     @Column(name = "mdp", nullable = false)
-    public String mdp;
+    private String mdp;
 
 
 }
