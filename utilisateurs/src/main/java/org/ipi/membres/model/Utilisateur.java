@@ -5,10 +5,6 @@ public class Utilisateur {
     public String nom;
     public String mdp;
 
-    public List<Proposition> propositions;
-
-    public List<Equipe> equipes;
-
     public String getId() {
         return id;
     }
@@ -26,9 +22,4 @@ public class Utilisateur {
     public String getMdp(){ return mdp; };
     public void setMdp(String mdp) {this.mdp = mdp;}
 
-    public List<Proposition> getPropositions(){ return propositions; };
-    public void setPropositions(List<Proposition> propositions) {this.propositions = proposition;}
-
-    public List<Equipe> getEquipes(){ return equipes; };
-    public void setEquipes(List<Equipe> equipes) {this.equipes = equipes;}
 }

@@ -1,16 +1,9 @@
-import
 package org.ipi.equipe.model;
 
 public class Equipe {
-            utilisateur
-    projet
-                    dernierproposition
-
     public String id;
 
     public TypeEquipe typeEquipe;
-
-    public List<Utilisateur>
 
     public String getId() {
         return id;
