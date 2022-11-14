@@ -4,6 +4,7 @@
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/equipe" />
     <file type="web" url="file://$PROJECT_DIR$/gateway" />
+    <file type="web" url="file://$PROJECT_DIR$/membres" />
     <file type="web" url="file://$PROJECT_DIR$/projet" />
     <file type="web" url="file://$PROJECT_DIR$/proposition" />
     <file type="web" url="file://$PROJECT_DIR$/utilisateurs" />

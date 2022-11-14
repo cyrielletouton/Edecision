@@ -7,7 +7,9 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import java.util.List;
 
+//Specify that a class is an entity
 @Entity
+//Annotations from lombok, generates getters, setters and a constructor without argument
 @Getter
 @Setter
 @NoArgsConstructor
