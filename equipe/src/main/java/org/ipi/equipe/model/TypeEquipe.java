@@ -1,6 +1,10 @@
 package org.ipi.equipe.model;
 
 public enum TypeEquipe {
-    DEV,
-    RH
+    DEVELOPPEMENT,
+    ANALYSE_ET_CONCEPTION,
+    PLANIFICATION,
+    TEST_ET_DEPLOIEMENT,
+    RECHERCHE,
+    COMMUNAUTE,
 }
