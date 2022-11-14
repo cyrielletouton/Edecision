@@ -1,0 +1,22 @@
+INSERT INTO members (nom,mdp,proposition,equipe)
+VALUES
+  ('Harriet Cooley','OUC49LFU7YT','5, 9','1, 17, 11'),
+  ('Sheila Johns','VTV50BXN7GI','15, 11','17, 13'),
+  ('Rahim Martinez','ECK41DNJ0MS','17, 19, 9','11, 5, 7, 17'),
+  ('Tad Morris','QPF54CXH1EI','3, 15, 5','7'),
+  ('Camden Browning','HVB19RPV8ID','11, 7','19, 1'),
+  ('Branden Chaney','WGA74OKD6YK','9, 7','7'),
+  ('Oliver Nguyen','MBK33GMQ2BN','9, 3','9, 13, 11, 19'),
+  ('Shea Robinson','DNO21ZJC8NX','5, 7, 13','19, 11'),
+  ('Aquila Gregory','JLM05CMU0ZR','3, 9','15, 1, 9'),
+  ('Zia Wilkins','TFS82CES8XV','1, 3','15, 3, 5, 19'),
+  ('Unity Benton','GYF20MBJ6RM','13','17, 1'),
+  ('Jack Lawson','YCW86BIB4MW','17','17, 11, 7'),
+  ('Tanek Barry','WXU97BXF1YN','1, 19','9, 19'),
+  ('Kim Wooten','SAU48VLB5LK','7, 5','17, 15, 9, 13'),
+  ('Shana Greene','DPI40TEI5XN','11, 13, 15','7, 1, 15'),
+  ('Chiquita Irwin','VQA36CCT5JY','9, 1','19, 1'),
+  ('Stewart Larsen','MNH17JSC3OJ','13','19, 15, 1'),
+  ('Rama Harris','RRK72RTE2KT','17, 19','5, 1'),
+  ('Alisa Pitts','FMI03ITD6RJ','5, 13','11, 17'),
+  ('Sage Wolf','UTQ33WPY3SH','5, 7','9, 11');
