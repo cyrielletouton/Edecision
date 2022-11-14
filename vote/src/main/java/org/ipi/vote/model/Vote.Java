@@ -1,21 +1,20 @@
 package org.ipi.vote.model;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import javax.persistence.*;
+
+@Entity
+@Getter
+@Setter
+@NoArgsConstructor
 public class Vote {
-    public String id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", nullable = false)
+    private String id;
+    @Column(name = "voteStatut", nullable = false)
     public VoteStatut voteStatut;
-
-    public String getId() {
-        return id;
-    }
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public VoteStatut getVoteStatut() {
-        return voteStatut;
-    }
-    public void setVoteStatut(VoteStatut voteStatut) {
-        this.voteStatut = voteStatut;
-    }
-
 }
