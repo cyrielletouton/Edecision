@@ -1,4 +1,4 @@
-package org.ipi.membres.model;
+package org.ipi.utilisateurs.model;
 
 public class Utilisateur {
     public String id;
