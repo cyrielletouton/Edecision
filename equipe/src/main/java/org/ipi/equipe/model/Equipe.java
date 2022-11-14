@@ -1,18 +1,22 @@
 package org.ipi.equipe.model;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import javax.persistence.*;
+
+@Entity
+@Getter
+@Setter
+@NoArgsConstructor
 public class Equipe {
-    public String id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", nullable = false)
+    private int id;
 
-    public TypeEquipe typeEquipe;
-
-    public String getId() {
-        return id;
-    }
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public TypeEquipe getTypeEquipe() {return typeEquipe; }
-    public void setTypeEquipe(TypeEquipe typeEquipe) {this.typeEquipe = typeEquipe; }
+    @Column(name = "typeEquipe", nullable = false)
+    private TypeEquipe typeEquipe;
 
 }

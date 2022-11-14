@@ -1,25 +1,24 @@
 package org.ipi.utilisateurs.model;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import javax.persistence.*;
+
+@Entity
+@Getter
+@Setter
+@NoArgsConstructor
 public class Utilisateur {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", nullable = false)
     public String id;
+    @Column(name = "nom", nullable = false)
     public String nom;
+    @Column(name = "mdp", nullable = false)
     public String mdp;
 
-    public String getId() {
-        return id;
-    }
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public String getMdp(){ return mdp; };
-    public void setMdp(String mdp) {this.mdp = mdp;}
 
 }
