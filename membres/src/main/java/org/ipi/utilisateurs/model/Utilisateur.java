@@ -19,6 +19,4 @@ public class Utilisateur {
     private String nom;
     @Column(name = "mdp", nullable = false)
     private String mdp;
-
-
 }
