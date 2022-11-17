@@ -18,11 +18,11 @@ public class Projet {
     @Column(name = "id", nullable = false)
     private int id;
 
-    @Column
+    @Column(name = "nom", nullable = false)
     private String nom;
-    @Column
+    @Column(name = "equipes", nullable = false)
     private List<String> equipes;
-    @Column
+    @Column(name = "propositions", nullable = false)
     private List<String> propositions;
 
     public void intégrerEquipe(){

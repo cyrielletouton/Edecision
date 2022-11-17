@@ -19,4 +19,20 @@ public class Equipe {
     @Column(name = "typeEquipe", nullable = false)
     private TypeEquipe typeEquipe;
 
+    public void integrerUtilisateur(){
+
+    }
+
+    public void supprimerUtilisateur(){
+
+    }
+    public void creerEquipe(){
+
+    }
+    public void modifierEquipe(){
+
+    }
+    public void supprimerEquipe(){
+
+    }
 }

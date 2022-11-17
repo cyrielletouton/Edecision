@@ -30,8 +30,14 @@ public class Proposition extends PropositionGenerale{
     private int maxVote;
     @Column
     private int nbrVote;
+    //Liste d'utilisateurs
     @Column
     private List<String> proprietaires;
+    //Liste d'équipes
     @Column
-    private List<String> equipe;
+    private List<String> scope;
+
+    public void escalade(){
+
+    }
 }
