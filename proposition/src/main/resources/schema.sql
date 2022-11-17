@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS propositions;
 
 CREATE TABLE propositions (
-  id int AUTO_INCREMENT PRIMARY KEY NOT NULL,
+  id bigint AUTO_INCREMENT PRIMARY KEY NOT NULL,
   problematique varchar(5000) default NOT NULL,
   commentaire varchar(5000) default NULL,
   status enum ('Ouvert','En cours', 'Terminé') default NOT NULL,
@@ -17,14 +17,14 @@ CREATE TABLE propositions (
 DROP TABLE IF EXISTS amendements;
 
 CREATE TABLE amendements (
-  id int AUTO_INCREMENT PRIMARY KEY NOT NULL,
+  id bigint AUTO_INCREMENT PRIMARY KEY NOT NULL,
   contenu varchar(255) default NOT NULL
 );
 
 DROP TABLE IF EXISTS propositions_generales;
 
 CREATE TABLE propositions_generales (
-  id int AUTO_INCREMENT PRIMARY KEY NOT NULL,
+  id bigint AUTO_INCREMENT PRIMARY KEY NOT NULL,
   proposition int default NULL,
   amendement int default NULL
 );
