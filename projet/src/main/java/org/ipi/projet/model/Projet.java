@@ -14,9 +14,9 @@ import java.util.List;
 public class Projet {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private int id;
+    private Long id;
 
     @Column(name = "nom", nullable = false)
     private String nom;

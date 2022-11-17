@@ -9,9 +9,9 @@ import javax.persistence.Id;
 public abstract class PropositionGenerale {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private int id;
+    private Long id;
 
     @Column
     private int proposition;

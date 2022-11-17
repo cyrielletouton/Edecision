@@ -13,9 +13,9 @@ import java.util.List;
 @NoArgsConstructor
 public class Vote {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private String id;
+    private Long id;
     @Column(name = "voteStatut", nullable = false)
     private VoteStatut voteStatut;
     @Column(name = "utilisateurs", nullable = false)
