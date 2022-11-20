@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import java.util.List;
 
@@ -32,9 +33,11 @@ public class Proposition extends PropositionGenerale{
     private int nbrVote;
     //Liste d'utilisateurs
     @Column
+    @ElementCollection
     private List<String> proprietaires;
     //Liste d'équipes
     @Column
+    @ElementCollection
     private List<String> scope;
 
     public void escalade(){

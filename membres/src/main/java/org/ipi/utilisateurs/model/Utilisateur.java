@@ -21,8 +21,10 @@ public class Utilisateur {
     @Column(name = "mdp", nullable = false)
     private String mdp;
     @Column(name = "propositions", nullable = false)
+    @ElementCollection
     private List<String> propositions;
     @Column(name = "equipes", nullable = false)
+    @ElementCollection
     private List<String> equipes;
 
     public void details(){

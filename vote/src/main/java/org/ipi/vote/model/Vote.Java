@@ -19,8 +19,10 @@ public class Vote {
     @Column(name = "voteStatut", nullable = false)
     private VoteStatut voteStatut;
     @Column(name = "utilisateurs", nullable = false)
+    @ElementCollection
     private List<String> Utilisateurs;
     @Column(name = "propositions", nullable = false)
+    @ElementCollection
     private List<String> Propositions;
 
     private void consulterResultats(){

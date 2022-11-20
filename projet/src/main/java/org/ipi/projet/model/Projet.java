@@ -23,6 +23,7 @@ public class Projet {
     @Column(name = "equipes", nullable = false)
     private List<String> equipes;
     @Column(name = "propositions", nullable = false)
+    @ElementCollection
     private List<String> propositions;
 
     public void intégrerEquipe(){
