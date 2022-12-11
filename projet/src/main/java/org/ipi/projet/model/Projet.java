@@ -21,18 +21,19 @@ public class Projet {
     @Column(name = "nom", nullable = false)
     private String nom;
     @Column(name = "equipes", nullable = false)
+    @ElementCollection
     private List<String> equipes;
     @Column(name = "propositions", nullable = false)
     @ElementCollection
     private List<String> propositions;
 
-    public void intégrerEquipe(){
+    //public void intégrerEquipe(){
 
-    }
-    public void supprimerEquipe(){
-
-    }
-    public void creerProjet(){
-
-    }
+    //}
+    //public void supprimerEquipe(){}
+    public void creerProjet(){}
+    public void voirTousProjets(){}
+    public void voirProjetParId(){}
+    public void supprimerProjet(){}
+    public void mettreAJourProjet(){}
 }
