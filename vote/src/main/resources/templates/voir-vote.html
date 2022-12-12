@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head><!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Votes</title>
+</head>
+<body>
+<div th:each="vote : ${votes}">
+    <div>Status du vote :
+        <span th:text="${vote.voteStatut}"></span>
+    </div>
+    <div>Utilisateur :
+        <span>ID utilisateur : <span th:text="${vote.utilisateur}"></span></span>
+        <span>Status utilisateur : <span th:text="${vote.statusUtilisateur}"></span></span>
+    </div>
+    <div>Proposition :
+        <span th:text="${vote.proposition}"></span>
+    </div>
+    <hr>
+</div>
+</body>
+</html>
+<body>
+
+</body>
+</html>
