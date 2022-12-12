@@ -27,7 +27,7 @@ public class VoteController {
         out.addAttribute("votes",votes);
         return "voir-vote";
     }
-    
+
     @GetMapping("/votes/proposition/{id}")
     public String voirVotesParProposition(Model out, @PathVariable String id){
         List<Vote> votes = voteRepository.findAllByProposition(id);
