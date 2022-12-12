@@ -1,8 +1,19 @@
-DROP TABLE IF EXISTS projets;
+DROP TABLE IF EXISTS projet;
 
-CREATE TABLE projets (
+CREATE TABLE projet (
   id bigint AUTO_INCREMENT PRIMARY KEY NOT NULL,
   nom varchar(255) default NOT NULL,
-  proposition varchar(255) default NULL,
-  equipe varchar(255) default NULL
+  propositions varchar(255) default NULL
+);
+DROP TABLE IF EXISTS equipe;
+
+CREATE TABLE equipe (
+    projet_id bigint NOT NULL,
+    equipe_id bigint NOT NULL
+);
+DROP TABLE IF EXISTS proposition;
+
+CREATE TABLE proposition (
+    projet_id bigint NOT NULL,
+    proposition_id bigint NOT NULL
 );
