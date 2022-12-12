@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Modifier projet</title>
+</head>
+<body>
+<form th:action="@{/projets/modifier-projet}" method="post" th:object="${projet}">
+  <input name="id" th:value="${projet.id}" type="hidden">
+  <label for="nomProjet">Nom du projet : </label>
+  <input id="nomProjet" name="nom" th:field="*{nom}" th:value="*{nom}" required type="text">
+  <label for="choixEquipe">Choisir équipes : </label>
+  <select id="choixEquipe" name="equipes" th:field="*{equipes}" required multiple>
+    <option th:each="equipe : ${equipesList}" th:text="${equipe}" th:value="${equipe}" th:selected="${projet.equipes == equipe}"></option>
+  </select>
+  <label for="choixProposition">Choisir proposition : </label>
+  <select id="choixProposition" name="propositions" th:field="*{propositions}" required multiple>
+    <option th:each="proposition : ${propositionsList}" th:text="${proposition}" th:value="${proposition}" th:selected="${projet.propositions == proposition}"></option>
+  </select>
+
+  <input type="submit" value="Créer">
+</form>
+</body>
+</html>

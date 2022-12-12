@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Projet</title>
+</head>
+<body>
+<p>Nom :
+    <a th:text="${projet.nom}"></a>
+</p>
+<p>Equipes : </p>
+<div th:each="equipe : ${projet.equipes}">
+    <span th:text="${equipe}"></span>
+</div>
+<p>Propositions : </p>
+<div th:each="proposition : ${projet.propositions}">
+    <span th:text="${proposition}"></span>
+</div>
+</body>
+</html>
