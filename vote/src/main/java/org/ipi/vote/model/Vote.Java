@@ -11,19 +11,22 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@Table(name = "VOTES")
 public class Vote {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
-    @Column(name = "voteStatut", nullable = false)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
     private VoteStatut voteStatut;
-    @Column(name = "utilisateurs", nullable = false)
-    @ElementCollection
-    private List<String> Utilisateurs;
-    @Column(name = "propositions", nullable = false)
-    @ElementCollection
-    private List<String> Propositions;
+    @Column(name = "statusutilisateur ", nullable = false)
+    private String statusUtilisateur;
+    @Column(name = "utilisateur", nullable = false)
+    private String utilisateur;
+    @Column(name = "proposition", nullable = false)
+    private String proposition;
 
     private void consulterResultats(){
 
