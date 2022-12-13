@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Creer vote</title>
+</head>
+<body>
+<form th:action="@{/votes/utilisateur/creer-vote}" method="post" th:object="${vote}">
+    <label for="idUtilisateur">ID utilisateur : </label>
+    <input id="idUtilisateur" name="utilisateur" type="text" th:placeholder="${user}" th:value="${user}" readonly>
+    <label for="choixVoteStatus">Choix status : </label>
+    <select id="choixVoteStatus" name="choixVoteStatus" th:field="*{voteStatut}" required>
+        <option th:each="status : ${statusVoteList}" th:text="${status}" th:value="${status}"></option>
+    </select>
+    <label for="choixProposition">Choix proposition : </label>
+    <select id="choixProposition" name="choixProposition" th:field="*{proposition}" required>
+        <option th:each="proposition : ${propositionList}" th:text="${proposition}" th:value="${proposition}"></option>
+    </select>
+    <input type="submit" value="Créer">
+</form>
+</body>
+</html>

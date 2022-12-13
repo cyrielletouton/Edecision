@@ -10,4 +10,5 @@ import java.util.List;
 public interface VoteRepository extends JpaRepository<Vote, Long> {
     List<Vote> findAllByUtilisateur(String id);
     List<Vote> findAllByProposition(String id);
+    String findDistinctByUtilisateur(String id);
 }
