@@ -21,8 +21,6 @@ public class Vote {
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     private VoteStatut voteStatut;
-    @Column(name = "statusutilisateur ", nullable = false)
-    private String statusUtilisateur;
     @Column(name = "utilisateur", nullable = false)
     private String utilisateur;
     @Column(name = "proposition", nullable = false)
