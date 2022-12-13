@@ -3,11 +3,9 @@ package org.ipi.proposition.model;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.stereotype.Component;
 
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 //Specify that a class is an entity
@@ -16,30 +14,36 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@Component
 @Table(name = "PROPOSITIONS")
 public class Proposition extends PropositionGenerale{
-
-    @Column
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Long id;
+    @Column(name = "problematique")
     private String problematique;
-    @Column
+    @Column(name = "commentaire")
     private String commentaire;
-    @Column
+    @Column(name = "status")
     private String status;
-    @Column
+    @Column(name = "estAccepte")
     private boolean estAccepte;
-    @Column
+    @Column(name = "impact")
     private int impact;
-    @Column
+    @Column(name = "maxVote")
     private int maxVote;
-    @Column
+    @Column(name = "nbrVote")
     private int nbrVote;
     //Liste d'utilisateurs
-    @Column
-    @ElementCollection
+    @ElementCollection(targetClass=String.class)
+    @CollectionTable(name = "PROPRIETAIRE", joinColumns = @JoinColumn(name = "PROPOSITION_ID"))
+    @Column(name = "PROPRIETAIRE_ID")
     private List<String> proprietaires;
     //Liste d'équipes
-    @Column
-    @ElementCollection
+    @ElementCollection(targetClass=String.class)
+    @CollectionTable(name = "SCOPE", joinColumns = @JoinColumn(name = "PROPOSITION_ID"))
+    @Column(name = "SCOPE_ID")
     private List<String> scope;
 
     public void escalade(){

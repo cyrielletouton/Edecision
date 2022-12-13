@@ -6,17 +6,10 @@ import javax.persistence.*;
 @MappedSuperclass
 @Table(name = "PROPOSITIONS_GENERALES")
 public abstract class PropositionGenerale {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Long id;
-
-    @Column
-    private int proposition;
-
-    @Column
-    private int amendement;
+    @Column(name = "proposition")
+    private String proposition;
+    @Column(name = "amendement")
+    private String amendement;
 
 
     public void soumettre(){

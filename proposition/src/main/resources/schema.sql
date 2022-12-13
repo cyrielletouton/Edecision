@@ -9,9 +9,21 @@ CREATE TABLE propositions (
   impact int default NULL,
   maxVote int default NULL,
   nbrVote int default NULL,
-  proprietaire varchar(255) default NULL,
-  scope varchar(255) default NULL,
   dateDepot DATE default(NOW()) NULL
+);
+
+DROP TABLE IF EXISTS proprietaire;
+
+CREATE TABLE proprietaire (
+     proprietaire_id bigint NOT NULL,
+     proposition_id bigint NOT NULL
+);
+
+DROP TABLE IF EXISTS scope;
+
+CREATE TABLE scope (
+     scope_id bigint NOT NULL,
+     proposition_id bigint NOT NULL
 );
 
 DROP TABLE IF EXISTS amendements;
@@ -24,7 +36,6 @@ CREATE TABLE amendements (
 DROP TABLE IF EXISTS propositions_generales;
 
 CREATE TABLE propositions_generales (
-  id bigint AUTO_INCREMENT PRIMARY KEY NOT NULL,
-  proposition int default NULL,
-  amendement int default NULL
+  proposition varchar(200) default NULL,
+  amendement varchar(200) default NULL
 );
