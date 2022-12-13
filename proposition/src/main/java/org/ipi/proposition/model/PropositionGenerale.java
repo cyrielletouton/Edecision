@@ -4,6 +4,7 @@ package org.ipi.proposition.model;
 import javax.persistence.*;
 
 @MappedSuperclass
+@Table(name = "PROPOSITIONS_GENERALES")
 public abstract class PropositionGenerale {
 
     @Id

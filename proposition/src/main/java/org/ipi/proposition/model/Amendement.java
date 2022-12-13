@@ -10,6 +10,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
+@Table(name = "AMENDEMENTS")
 public class Amendement extends PropositionGenerale{
 
     @Column
