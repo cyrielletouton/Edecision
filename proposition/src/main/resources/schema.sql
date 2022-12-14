@@ -32,10 +32,3 @@ CREATE TABLE amendements (
   id bigint AUTO_INCREMENT PRIMARY KEY NOT NULL,
   contenu varchar(255) default NOT NULL
 );
-
-DROP TABLE IF EXISTS propositions_generales;
-
-CREATE TABLE propositions_generales (
-  proposition varchar(200) default NULL,
-  amendement varchar(200) default NULL
-);

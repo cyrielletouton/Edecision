@@ -6,6 +6,8 @@ import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 //Specify that a class is an entity
@@ -27,13 +29,13 @@ public class Proposition extends PropositionGenerale{
     private String commentaire;
     @Column(name = "status")
     private String status;
-    @Column(name = "estAccepte")
+    @Column(name = "ESTACCEPTE")
     private boolean estAccepte;
     @Column(name = "impact")
     private int impact;
-    @Column(name = "maxVote")
+    @Column(name = "MAXVOTE")
     private int maxVote;
-    @Column(name = "nbrVote")
+    @Column(name = "NBRVOTE")
     private int nbrVote;
     //Liste d'utilisateurs
     @ElementCollection(targetClass=String.class)
@@ -45,6 +47,8 @@ public class Proposition extends PropositionGenerale{
     @CollectionTable(name = "SCOPE", joinColumns = @JoinColumn(name = "PROPOSITION_ID"))
     @Column(name = "SCOPE_ID")
     private List<String> scope;
+    @Column(name = "DATEDEPOT")
+    private LocalDate dateDepot;
 
     public void escalade(){
 

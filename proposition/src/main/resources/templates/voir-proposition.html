@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Propositions</title>
+</head>
+<body>
+<h2>Les propositions ouvertes par l'équipe :</h2>
+<div th:each="proposition : ${propositionProprietaireList}">
+    <p>Problematique : <span th:text="${proposition.problematique}"></span></p>
+    <p>Status problématique : <span th:text="${proposition.status}"></span></p>
+    <p>Scope : <span th:text="${#strings.listJoin(proposition.scope,',')}"></span></p>
+    <p>Date dépôt : <span th:text="${proposition.dateDepot}"></span></p>
+    <hr>
+</div>
+<h2>Les propositions ouvertes pour l'équipe :</h2>
+<div th:each="proposition : ${propositionScopeList}">
+    <p>Problematique : <span th:text="${proposition.problematique}"></span></p>
+    <p>Status problématique : <span th:text="${proposition.status}"></span></p>
+    <p>Proprietaire : <span th:text="${#strings.listJoin(proposition.proprietaires,',')}"></span></p>
+    <p>Date dépôt : <span th:text="${proposition.dateDepot}"></span></p>
+    <hr>
+</div>
+</body>
+</html>
