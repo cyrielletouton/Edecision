@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Getter
@@ -17,8 +18,18 @@ public class Equipe {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "typeEquipe", nullable = false)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type", nullable = false)
     private TypeEquipe typeEquipe;
+
+    @Column(name = "utilisateur")
+    private String utilisateur;
+
+    @Column(name = "projet")
+    private String projet;
+
+    @Column(name = "derniereProposition")
+    private Date derniereProposition;
 
     public void integrerUtilisateur(){
 

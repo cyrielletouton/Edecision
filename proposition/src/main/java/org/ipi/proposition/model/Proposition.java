@@ -23,13 +23,13 @@ public class Proposition extends PropositionGenerale{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
-    @Column(name = "problematique")
+    @Column(name = "problematique", nullable = false)
     private String problematique;
     @Column(name = "commentaire")
     private String commentaire;
-    @Column(name = "status")
+    @Column(name = "status", nullable = false)
     private String status;
-    @Column(name = "ESTACCEPTE")
+    @Column(name = "ESTACCEPTE", nullable = false)
     private boolean estAccepte;
     @Column(name = "impact")
     private int impact;
