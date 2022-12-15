@@ -27,8 +27,9 @@ public class Proposition extends PropositionGenerale{
     private String problematique;
     @Column(name = "commentaire")
     private String commentaire;
+    @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
-    private String status;
+    private Status status;
     @Column(name = "ESTACCEPTE", nullable = false)
     private boolean estAccepte;
     @Column(name = "impact")
@@ -48,7 +49,7 @@ public class Proposition extends PropositionGenerale{
     @Column(name = "SCOPE_ID")
     private List<String> scope;
     @Column(name = "DATEDEPOT")
-    private LocalDate dateDepot;
+    private Date dateDepot;
 
     public void escalade(){
 
