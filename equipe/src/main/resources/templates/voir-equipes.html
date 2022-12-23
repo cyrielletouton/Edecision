@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Equipes</title>
+</head>
+<body>
+<p>Toutes les équipes :</p>
+<div th:each="equipe : ${equipes}">
+  <a th:href="@{/equipes/equipe/{id}/modifier-equipe(id=${equipe.id})}">Modifier équipe</a>
+  <p>Type d'équipe :
+    <span th:text="${equipe.typeEquipe}"></span>
+  </p>
+  <p>Dernière proposition :
+    <span th:text="${equipe.derniereProposition}"></span>
+  </p>
+  <p>Utilisateurs : </p>
+  <div th:each="utilisateur : ${equipe.utilisateurs}">
+    <span th:text="${utilisateur}"></span>
+  </div>
+  <p>Projets : </p>
+  <div th:each="projet : ${equipe.projets}">
+    <span th:text="${projet}"></span>
+  </div>
+  <hr>
+</div>
+</body>
+</html>

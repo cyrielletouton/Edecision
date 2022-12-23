@@ -5,7 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -22,13 +23,17 @@ public class Equipe {
     @Column(name = "type", nullable = false)
     private TypeEquipe typeEquipe;
 
-    @Column(name = "utilisateur")
-    private String utilisateur;
+    @ElementCollection(targetClass=String.class)
+    @CollectionTable(name = "UTILISATEUR", joinColumns = @JoinColumn(name = "EQUIPE_ID"))
+    @Column(name = "UTILISATEUR_ID")
+    private List<String> utilisateurs;
 
-    @Column(name = "projet")
-    private String projet;
+    @ElementCollection(targetClass=String.class)
+    @CollectionTable(name = "PROJET", joinColumns = @JoinColumn(name = "EQUIPE_ID"))
+    @Column(name = "PROJET_ID")
+    private List<String> projets;
 
-    @Column(name = "derniereProposition")
+    @Column(name = "DERNIEREPROPOSITION")
     private Date derniereProposition;
 
     public void integrerUtilisateur(){

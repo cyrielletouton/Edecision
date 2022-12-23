@@ -6,5 +6,6 @@ public enum TypeEquipe {
     PLANIFICATION,
     TEST_ET_DEPLOIEMENT,
     RECHERCHE,
-    COMMUNAUTE,
+    MAINTENANCE,
+    COMMUNAUTE;
 }
