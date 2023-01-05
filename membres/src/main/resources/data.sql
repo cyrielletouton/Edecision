@@ -1,4 +1,4 @@
-INSERT INTO members (nom,mdp,proposition,equipe)
+INSERT INTO members (nom,mdp,propositions,equipes)
 VALUES
   ('Harriet Cooley','OUC49LFU7YT','5, 9','1, 17, 11'),
   ('Sheila Johns','VTV50BXN7GI','15, 11','17, 13'),

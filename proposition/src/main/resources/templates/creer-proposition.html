@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Creer proposition</title>
+</head>
+<body>
+<form th:action="@{/propositions/equipe/creer-proposition}" method="post" th:object="${proposition}">
+  <input name="id" th:value="${proposition.id}" type="hidden">
+  <label for="problematique">Problématique : </label>
+  <input id="problematique" name="problematique" th:field="*{problematique}" th:value="*{problematique}" required type="text">
+  <br>
+  <label for="commentaire">Commentaire : </label>
+  <input id="commentaire" name="commentaire" th:field="*{commentaire}" th:value="*{commentaire}" required type="text">
+  <br>
+  <label for="choixStatus">Status : </label>
+  <select id="choixStatus" name="status" th:field="*{status}" required>
+    <option th:each="statut : ${tousStatus}" th:text="${statut}" th:value="${statut}" th:selected="${proposition.status == statut}"></option>
+  </select>
+  <br>
+  <label for="estAccepteBool">Est accepté : </label>
+  <input id="estAccepteBool" type="checkbox" th:field="*{estAccepte}" th:value="${proposition.estAccepte}">
+  <br>
+  <label for="impact">Impact : </label>
+  <input id="impact" th:field="*{impact}" th:value="${proposition.impact}" type="number" required>
+  <br>
+  <label for="maxVote">Max vote : </label>
+  <input id="maxVote" th:field="*{maxVote}" th:value="${proposition.maxVote}" type="number" required>
+  <br>
+  <label for="choixProprietaire">Choisir propriétaire : </label>
+  <select id="choixProprietaire" name="proprietaires" th:field="*{proprietaires}" required multiple>
+    <option th:each="utilisateur : ${utilisateursList}" th:text="${utilisateur}" th:value="${utilisateur}"></option>
+  </select>
+  <br>
+  <label for="choixScope">Choisir scope : </label>
+  <select id="choixScope" name="scope" th:field="*{scope}" required multiple>
+    <option th:each="scope : ${utilisateursList}" th:text="${scope}" th:value="${scope}"></option>
+  </select>
+  <br>
+  <label for="dateDepot"></label>
+  <input id="dateDepot" type="date" th:field="*{dateDepot}" th:value="${proposition.dateDepot}" required>
+  <br>
+  <input type="submit" value="Créer">
+</form>
+</body>
+</html>

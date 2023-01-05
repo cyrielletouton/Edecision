@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Projets</title>
+</head>
+<body>
+<p>Les projets disponibles :</p>
+<a th:href="@{/projets/creer-projet}">Créer projet</a>
+<div th:each="projet : ${projets}">
+    <p>Nom :
+        <a th:text="${projet.nom}" th:href="@{/projet/{id}(id=${projet.id})}"></a>
+    </p>
+    <p>Equipes : </p>
+    <div th:each="equipe : ${projet.equipes}">
+        <span th:text="${equipe}"></span>
+    </div>
+    <p>Propositions : </p>
+    <div th:each="proposition : ${projet.propositions}">
+        <span th:text="${proposition}"></span>
+    </div>
+    <a th:href="@{/projets/modifier-projet/{id}(id=${projet.id})}">Modifier projet</a>
+    <a th:href="@{/projets/supprimer-projet/{id}(id=${projet.id})}">Supprimer projet</a>
+    <hr>
+</div>
+</body>
+</html>

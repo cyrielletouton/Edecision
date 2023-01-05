@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Votes</title>
+</head>
+<body>
+<p>Les votes :</p>
+<div th:each="vote : ${votes}">
+  <div>Utilisateur :
+      <a th:text="${vote.utilisateur}" th:href="@{/votes/utilisateur/{id}(id=${vote.utilisateur})}"></a>
+      <br>
+      <span>Status utilisateur : <span th:text="${vote.voteStatut}"></span></span>
+  </div>
+  <div>Proposition :
+    <a th:text="${vote.proposition}" th:href="@{/votes/proposition/{id}(id=${vote.proposition})}"></a>
+  </div>
+  <hr>
+</div>
+</body>
+</html>

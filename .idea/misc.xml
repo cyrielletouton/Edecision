@@ -7,6 +7,7 @@
     <file type="web" url="file://$PROJECT_DIR$/membres" />
     <file type="web" url="file://$PROJECT_DIR$/projet" />
     <file type="web" url="file://$PROJECT_DIR$/proposition" />
+    <file type="web" url="file://$PROJECT_DIR$/utilisateurs" />
     <file type="web" url="file://$PROJECT_DIR$/vote" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_17" project-jdk-name="corretto-17" project-jdk-type="JavaSDK" />

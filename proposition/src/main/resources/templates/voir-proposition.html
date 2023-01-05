@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Propositions</title>
+</head>
+<body>
+<!-- TODO: Trier les propositions par status, ex : pas possible de modifier les TERMINE -->
+<h2 th:text="'Les propositions ouvertes par l\'utilisateur : '+${idUtilisateur}">Les propositions ouvertes par l'utilisateur :</h2>
+<a th:href="@{/propositions/equipe/{id}/creer-proposition(id=${idUtilisateur})}">Créer proposition</a>
+<br>
+<div th:each="proposition : ${propositionProprietaireList}">
+    <!-- TODO: Ne pas afficher la modification de proposition si proposition est TERMINE -->
+    <a th:href="@{/propositions/equipe/{idUtilisateur}/modifier-proposition/{idProposition}(idUtilisateur=${idUtilisateur},idProposition=${proposition.id})}">Modifier problématique</a>
+    <p>Problematique : <span th:text="${proposition.problematique}"></span></p>
+    <p>Status problématique : <span th:text="${proposition.status}"></span></p>
+    <p>Scope : <span th:text="${#strings.listJoin(proposition.scope,',')}"></span></p>
+    <p>Date dépôt : <span th:text="${proposition.dateDepot}"></span></p>
+    <a th:href="@{/propositions/supprimer-proposition/{id}(id=${proposition.id})}">Supprimer proposition</a>
+    <hr>
+</div>
+<h2>Les propositions ouvertes pour l'équipe :</h2>
+<div th:each="proposition : ${propositionScopeList}">
+    <p>Problematique : <span th:text="${proposition.problematique}"></span></p>
+    <p>Status problématique : <span th:text="${proposition.status}"></span></p>
+    <p>Proprietaire : <span th:text="${#strings.listJoin(proposition.proprietaires,',')}"></span></p>
+    <p>Date dépôt : <span th:text="${proposition.dateDepot}"></span></p>
+    <hr>
+</div>
+</body>
+</html>
