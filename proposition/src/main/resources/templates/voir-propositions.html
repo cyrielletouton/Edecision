@@ -9,8 +9,8 @@
 <div th:each="proposition : ${propositions}">
   <p>Problematique : <span th:text="${proposition.problematique}"></span></p>
   <p>Status problématique : <span th:text="${proposition.status}"></span></p>
-  <p >Propriétaire : <a th:each="proprietaire : ${proposition.proprietaires}" th:href="@{/propositions/equipe/{id}(id=${proprietaire})}" th:text="${proprietaire}+''"></a></p>
-  <p>Scope : <a th:each="scope : ${proposition.scope}" th:href="@{/propositions/equipe/{id}(id=${scope})}" th:text="${scope}+''"></a></p>
+  <p >Propriétaire : <a th:each="proprietaire : ${proposition.proprietaires}" th:href="@{/get/equipe/{id}(id=${proprietaire})}" th:text="${proprietaire}+''"></a></p>
+  <p>Scope : <a th:each="scope : ${proposition.scope}" th:href="@{/get/equipe/{id}(id=${scope})}" th:text="${scope}+''"></a></p>
   <p>Date dépôt : <span th:text="${proposition.dateDepot}"></span></p>
   <hr>
 </div>

@@ -6,10 +6,10 @@
 </head>
 <body>
 <p>Les projets disponibles :</p>
-<a th:href="@{/projets/creer-projet}">Créer projet</a>
+<a th:href="@{/create/creer-projet}">Créer projet</a>
 <div th:each="projet : ${projets}">
     <p>Nom :
-        <a th:text="${projet.nom}" th:href="@{/projet/{id}(id=${projet.id})}"></a>
+        <a th:text="${projet.nom}" th:href="@{/get/{id}(id=${projet.id})}"></a>
     </p>
     <p>Equipes : </p>
     <div th:each="equipe : ${projet.equipes}">
@@ -19,8 +19,8 @@
     <div th:each="proposition : ${projet.propositions}">
         <span th:text="${proposition}"></span>
     </div>
-    <a th:href="@{/projets/modifier-projet/{id}(id=${projet.id})}">Modifier projet</a>
-    <a th:href="@{/projets/supprimer-projet/{id}(id=${projet.id})}">Supprimer projet</a>
+    <a th:href="@{/update/modifier-projet/{id}(id=${projet.id})}">Modifier projet</a>
+    <a th:href="@{/delete/supprimer-projet/{id}(id=${projet.id})}">Supprimer projet</a>
     <hr>
 </div>
 </body>

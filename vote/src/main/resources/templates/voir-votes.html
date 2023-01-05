@@ -8,12 +8,12 @@
 <p>Les votes :</p>
 <div th:each="vote : ${votes}">
   <div>Utilisateur :
-      <a th:text="${vote.utilisateur}" th:href="@{/votes/utilisateur/{id}(id=${vote.utilisateur})}"></a>
+      <a th:text="${vote.utilisateur}" th:href="@{/get/utilisateur/{id}(id=${vote.utilisateur})}"></a>
       <br>
       <span>Status utilisateur : <span th:text="${vote.voteStatut}"></span></span>
   </div>
   <div>Proposition :
-    <a th:text="${vote.proposition}" th:href="@{/votes/proposition/{id}(id=${vote.proposition})}"></a>
+    <a th:text="${vote.proposition}" th:href="@{/get/proposition/{id}(id=${vote.proposition})}"></a>
   </div>
   <hr>
 </div>

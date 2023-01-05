@@ -7,7 +7,7 @@
 <body>
 <p>Toutes les équipes :</p>
 <div th:each="equipe : ${equipes}">
-  <a th:href="@{/equipes/equipe/{id}/modifier-equipe(id=${equipe.id})}">Modifier équipe</a>
+  <a th:href="@{/update/{id}/modifier-equipe(id=${equipe.id})}">Modifier équipe</a>
   <p>Type d'équipe :
     <span th:text="${equipe.typeEquipe}"></span>
   </p>

@@ -17,14 +17,14 @@ public class PropositionController {
     @Autowired
     private PropositionRepository propositionRepository;
 
-    @GetMapping("/propositions")
+    @GetMapping("/get")
     public String voirPropositions(Model out){
         List<Proposition> propositions =  propositionRepository.findAll();
         out.addAttribute("propositions", propositions);
         return "voir-propositions";
     }
 
-    @GetMapping("/propositions/equipe/{id}")
+    @GetMapping("/get/equipe/{id}")
     public String voirPropositionsParEquipe(Model out, @PathVariable String id) {
         List<Proposition> propositions = propositionRepository.findAll();
         ///// TROUVE TOUTES LES PROPOSITIONS PAR PROPRIETAIRE /////
@@ -51,7 +51,7 @@ public class PropositionController {
         return "voir-proposition";
     }
 
-    @GetMapping("/propositions/equipe/{idUtilisateur}/modifier-proposition/{idProposition}")
+    @GetMapping("/update/equipe/{idUtilisateur}/modifier-proposition/{idProposition}")
     public String modifierPropositionFormulaire(Model out, @PathVariable String idUtilisateur, @PathVariable Long idProposition){
         Proposition propositionParID = propositionRepository.findById(idProposition).get();
         List<Proposition> propositionList = propositionRepository.findAll();
@@ -69,7 +69,7 @@ public class PropositionController {
         return "modifier-proposition";
     }
 
-    @PostMapping("/propositions/equipe/modifier-proposition")
+    @PostMapping("/update/equipe/modifier-proposition")
     public String modifierPropositionParID(@ModelAttribute Proposition model, @RequestParam Long id){
         Proposition proposition = propositionRepository.findById(id).get();
         proposition.setProblematique(model.getProblematique());
@@ -82,13 +82,13 @@ public class PropositionController {
         return "redirect:/propositions";
     }
 
-    @GetMapping("/propositions/supprimer-proposition/{id}")
+    @GetMapping("/delete/supprimer-proposition/{id}")
     public String supprimerProposition(@PathVariable Long id){
         propositionRepository.deleteById(id);
         return "redirect:/propositions";
     }
 
-    @GetMapping("/propositions/equipe/{id}/creer-proposition")
+    @GetMapping("/create/equipe/{id}/creer-proposition")
     public String creerPropositionFormulaire(Model out, @PathVariable String id){
         List<Proposition> propositionList = propositionRepository.findAll();
         ///// TROUVER TOUS LES UTILISATEURS ET STATUS DISPONIBLES /////
@@ -105,7 +105,7 @@ public class PropositionController {
         return "creer-proposition";
     }
 
-    @PostMapping("/propositions/equipe/creer-proposition")
+    @PostMapping("/create/equipe/creer-proposition")
     public String creerProposition(@ModelAttribute Proposition proposition){
         propositionRepository.save(proposition);
         return "redirect:/propositions";

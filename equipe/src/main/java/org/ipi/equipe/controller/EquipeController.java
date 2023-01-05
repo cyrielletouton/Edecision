@@ -11,19 +11,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.util.HashSet;
 import java.util.List;
 
+//Base path is /api/equipe/
 @Controller
 public class EquipeController {
     @Autowired
     private EquipeRepository equipeRepository;
 
-    @GetMapping("/equipes")
+    @GetMapping("/get")
     public String voirEquipes(Model out){
         List<Equipe> equipeList = equipeRepository.findAll();
         out.addAttribute("equipes", equipeList);
         return "voir-equipes";
     }
 
-    @GetMapping("/equipes/equipe/{id}/modifier-equipe")
+    @GetMapping("/update/{id}/modifier-equipe")
     public String modifierEquipeFormulaire(Model out, @PathVariable Long id){
         Equipe equipe = equipeRepository.findById(id).get();
         ///// TROUVE TOUS LES UTILISATEURS DISPONIBLES /////

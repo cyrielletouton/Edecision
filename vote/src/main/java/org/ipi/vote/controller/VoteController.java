@@ -21,21 +21,21 @@ public class VoteController {
     @Autowired
     private VoteRepository voteRepository;
 
-    @GetMapping("/votes")
+    @GetMapping("/get")
     public String voirVotes(Model out){
         List<Vote> votes = voteRepository.findAll();
         out.addAttribute("votes",votes);
         return "voir-votes";
     }
 
-    @GetMapping("/votes/utilisateur/{id}")
+    @GetMapping("/get/utilisateur/{id}")
     public String voirVotesParUtilisateur(Model out, @PathVariable String id){
         List<Vote> votes = voteRepository.findAllByUtilisateur(id);
         out.addAttribute("user", id);
         out.addAttribute("votes",votes);
         return "voir-vote";
     }
-    @GetMapping("/votes/utilisateur/{id}/creer-vote")
+    @GetMapping("/create/utilisateur/{id}/creer-vote")
     public String creerVoteParUtilisateurPourPropositionGet(Model out, @PathVariable String id){
         List<Vote> votesList = voteRepository.findAll();
         List<Vote> votesUtilisateur = voteRepository.findAllByUtilisateur(id);
@@ -63,13 +63,13 @@ public class VoteController {
         out.addAttribute("vote",new Vote());
         return "creer-vote";
     }
-    @PostMapping("/votes/utilisateur/creer-vote")
+    @PostMapping("/create/utilisateur/creer-vote")
     public String creerVoteParUtilisateurPourProposition(@ModelAttribute Vote vote){
         voteRepository.save(vote);
         return "redirect:/votes";
     }
 
-    @GetMapping("/votes/proposition/{id}")
+    @GetMapping("/get/proposition/{id}")
     public String voirVotesParProposition(Model out, @PathVariable String id){
         List<Vote> votes = voteRepository.findAllByProposition(id);
         out.addAttribute("votes",votes);

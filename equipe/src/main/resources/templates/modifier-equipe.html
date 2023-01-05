@@ -5,7 +5,7 @@
     <title>Modifier équipe</title>
 </head>
 <body>
-<form th:action="@{/equipes/equipe/{id}/modifier-projet(id=${equipe.id})}" method="post" th:object="${equipe}">
+<form th:action="@{/update/{id}/modifier-projet(id=${equipe.id})}" method="post" th:object="${equipe}">
     <input name="id" th:value="${equipe.id}" type="hidden">
     <label for="utilisateurChoix">Modifier utilisateur : </label>
     <select id="utilisateurChoix" name="utilisateurs" th:field="*{utilisateurs}" required multiple>

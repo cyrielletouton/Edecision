@@ -5,7 +5,7 @@
   <title>Creer proposition</title>
 </head>
 <body>
-<form th:action="@{/propositions/equipe/creer-proposition}" method="post" th:object="${proposition}">
+<form th:action="@{/create/equipe/creer-proposition}" method="post" th:object="${proposition}">
   <input name="id" th:value="${proposition.id}" type="hidden">
   <label for="problematique">Problématique : </label>
   <input id="problematique" name="problematique" th:field="*{problematique}" th:value="*{problematique}" required type="text">

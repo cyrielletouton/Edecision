@@ -5,7 +5,7 @@
   <title>Modifier projet</title>
 </head>
 <body>
-<form th:action="@{/projets/modifier-projet}" method="post" th:object="${projet}">
+<form th:action="@{/update/modifier-projet}" method="post" th:object="${projet}">
   <input name="id" th:value="${projet.id}" type="hidden">
   <label for="nomProjet">Nom du projet : </label>
   <input id="nomProjet" name="nom" th:field="*{nom}" th:value="*{nom}" required type="text">

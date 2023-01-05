@@ -5,7 +5,7 @@
     <title>Creer projet</title>
 </head>
 <body>
-<form th:action="@{/projets/creer-projet}" method="post" th:object="${projet}">
+<form th:action="@{/create/creer-projet}" method="post" th:object="${projet}">
     <label for="nomProjet">Nom du projet : </label>
     <input id="nomProjet" name="nom" th:field="*{nom}" required type="text">
     <label for="choixEquipe">Choisir équipes : </label>
