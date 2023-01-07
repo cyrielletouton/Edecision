@@ -5,7 +5,7 @@
   <title>Utilisateurs</title>
 </head>
 <body>
-<a th:href="@{/utilisateurs/utilisateur/{id}/modifier-utilisateur(id=${utilisateur.id})}">Modifier utilisateur</a>
+<a th:href="@{/update/{id}/modifier-utilisateur(id=${utilisateur.id})}">Modifier utilisateur</a>
 <p th:text="'Utilisateur : '+${utilisateur.nom}">Utilisateur :</p>
 <p>Nom :
   <span th:text="${utilisateur.nom}"></span>

@@ -5,7 +5,7 @@
   <title>Modifier utilisateur</title>
 </head>
 <body>
-<form th:action="@{/utilisateurs/utilisateur/{id}/modifier-utilisateur(id=${utilisateur.id})}" method="post" th:object="${utilisateur}">
+<form th:action="@{/update/{id}/modifier-utilisateur(id=${utilisateur.id})}" method="post" th:object="${utilisateur}">
   <input name="id" th:value="${utilisateur.id}" type="hidden">
   <label for="modifierNom">Modifier nom : </label>
   <input id="modifierNom" th:value="${utilisateur.nom}" th:field="*{nom}">

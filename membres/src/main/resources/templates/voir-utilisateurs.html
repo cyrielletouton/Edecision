@@ -6,10 +6,10 @@
 </head>
 <body>
 <p>Tous les utilisateurs :</p>
-<a th:href="@{/utilisateurs/creer-utilisateur}">Créer utilisateur</a>
+<a th:href="@{/create/creer-utilisateur}">Créer utilisateur</a>
 <div th:each="utilisateur : ${utilisateurs}">
   <p>Nom :
-  <a th:href="@{/utilisateurs/utilisateur/{id}(id=${utilisateur.id})}" th:text="${utilisateur.nom}"></a>
+  <a th:href="@{/get/{id}(id=${utilisateur.id})}" th:text="${utilisateur.nom}"></a>
   </p>
   <p>Equipes : </p>
   <div th:each="equipe : ${utilisateur.equipes}">
@@ -19,8 +19,8 @@
   <div th:each="proposition : ${utilisateur.propositions}">
     <span th:text="${proposition}"></span>
   </div>
-  <a th:href="@{/utilisateurs/utilisateur/{id}/modifier-utilisateur(id=${utilisateur.id})}">Modifier utilisateur</a>
-  <a th:href="@{/utilisateurs/utilisateur/{id}/supprimer-utilisateur(id=${utilisateur.id})}">Supprimer utilisateur</a>
+  <a th:href="@{/update/{id}/modifier-utilisateur(id=${utilisateur.id})}">Modifier utilisateur</a>
+  <a th:href="@{/update/{id}/supprimer-utilisateur(id=${utilisateur.id})}">Supprimer utilisateur</a>
 </div>
 </body>
 </html>

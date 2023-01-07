@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
@@ -21,21 +19,21 @@ public class UtilisateurController {
     @Autowired
     private MembresRepository membresRepository;
 
-    @GetMapping("/utilisateurs")
+    @GetMapping("/get")
     public String voirUtilisateurs(Model out){
         List<Utilisateur> utilisateursList = membresRepository.findAll();
         out.addAttribute("utilisateurs", utilisateursList);
         return "voir-utilisateurs";
     }
 
-    @GetMapping("/utilisateurs/utilisateur/{id}")
+    @GetMapping("/get/{id}")
     public String voirUtilisateurParID(Model out, @PathVariable Long id){
         Utilisateur utilisateur = membresRepository.findById(id).get();
         out.addAttribute("utilisateur",utilisateur);
         return "voir-utilisateur";
     }
 
-    @GetMapping("/utilisateurs/utilisateur/{id}/modifier-utilisateur")
+    @GetMapping("/update/{id}/modifier-utilisateur")
     public String modifierUtilisateurFormulaire(Model out,@PathVariable Long id){
         List<Utilisateur> utilisateurList = membresRepository.findAll();
         Utilisateur utilisateur = membresRepository.findById(id).get();
@@ -54,7 +52,7 @@ public class UtilisateurController {
         return "modifier-utilisateur";
     }
 
-    @PostMapping("/utilisateurs/utilisateur/{id}/modifier-utilisateur")
+    @PostMapping("/update/{id}/modifier-utilisateur")
     public String modifierUtilisateur(@ModelAttribute Utilisateur utilisateurData, @PathVariable Long id){
         Utilisateur utilisateur = membresRepository.findById(id).get();
         utilisateur.setNom(utilisateurData.getNom());
@@ -65,13 +63,13 @@ public class UtilisateurController {
         return "redirect:/utilisateurs";
     }
 
-    @GetMapping("/utilisateurs/utilisateur/{id}/supprimer-utilisateur")
+    @GetMapping("/update/{id}/supprimer-utilisateur")
     public String supprimerUtilisateur(@PathVariable Long id){
         membresRepository.deleteById(id);
         return "redirect:/utilisateurs";
     }
 
-    @GetMapping("/utilisateurs/creer-utilisateur")
+    @GetMapping("/create/creer-utilisateur")
     public String creerUtilisateurFormulaire(Model out){
         List<Utilisateur> utilisateursListe = membresRepository.findAll();
         ///// TROUVER TOUTES LES EQUIPES ET PROPOSITIONS DISPONIBLES /////
@@ -87,7 +85,7 @@ public class UtilisateurController {
         return "creer-utilisateur";
     }
 
-    @PostMapping("/utilisateurs/creer-utilisateur")
+    @PostMapping("/update/creer-utilisateur")
     public String creerUtilisateur(@ModelAttribute Utilisateur utilisateur) {
         membresRepository.save(utilisateur);
         return "redirect:/utilisateurs";

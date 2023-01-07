@@ -5,7 +5,7 @@
   <title>Creer utilisateur</title>
 </head>
 <body>
-<form th:action="@{/utilisateurs/creer-utilisateur}" method="post" th:object="${utilisateur}">
+<form th:action="@{/create/creer-utilisateur}" method="post" th:object="${utilisateur}">
   <label for="utilisateurNom">Nom de l'utilisateur : </label>
   <input id="utilisateurNom" name="nom" th:field="*{nom}" required type="text">
   <label for="utilisateurMdp">Mot de passe de l'utilisateur : </label>
