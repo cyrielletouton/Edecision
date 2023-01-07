@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Creer utilisateur</title>
+</head>
+<body>
+<form th:action="@{/create/creer-utilisateur}" method="post" th:object="${utilisateur}">
+  <label for="utilisateurNom">Nom de l'utilisateur : </label>
+  <input id="utilisateurNom" name="nom" th:field="*{nom}" required type="text">
+  <label for="utilisateurMdp">Mot de passe de l'utilisateur : </label>
+  <input id="utilisateurMdp" name="mdp" th:field="*{mdp}" required type="password">
+  <label for="choixEquipe">Choisir équipes : </label>
+  <select id="choixEquipe" name="equipes" th:field="*{equipes}" required multiple>
+    <option th:each="equipe : ${equipesListe}" th:text="${equipe}" th:value="${equipe}"></option>
+  </select>
+  <label for="choixProposition">Choisir proposition : </label>
+  <select id="choixProposition" name="propositions" th:field="*{propositions}" required multiple>
+    <option th:each="proposition : ${propositionsListe}" th:text="${proposition}" th:value="${proposition}"></option>
+  </select>
+
+  <input type="submit" value="Créer">
+</form>
+</body>
+</html>
