@@ -3,6 +3,7 @@ package org.ipi.equipe.controller;
 import org.ipi.equipe.model.Equipe;
 import org.ipi.equipe.repository.EquipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,11 +18,17 @@ public class EquipeController {
     @Autowired
     private EquipeRepository equipeRepository;
 
-    @GetMapping("/get")
+    @GetMapping("/getHTML")
     public String voirEquipes(Model out){
         List<Equipe> equipeList = equipeRepository.findAll();
         out.addAttribute("equipes", equipeList);
         return "voir-equipes";
+    }
+
+    @GetMapping("/get")
+    public ResponseEntity<List<Equipe>> getEquipe(Model out){
+        List<Equipe> equipeList = equipeRepository.findAll();
+        return ResponseEntity.ok(equipeList);
     }
 
     @GetMapping("/update/{id}/modifier-equipe")
