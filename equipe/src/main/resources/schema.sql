@@ -9,7 +9,7 @@ CREATE TABLE teams (
 DROP TABLE IF EXISTS membres;
 
 CREATE TABLE membres (
-    utilisateur_id bigint default NULL,
+    membre_id bigint default NULL,
     equipe_id bigint default NULL
 );
 

@@ -23,15 +23,15 @@ public class Equipe {
     @Column(name = "type", nullable = false)
     private TypeEquipe typeEquipe;
 
-    @ElementCollection(targetClass=String.class)
-    @CollectionTable(name = "UTILISATEUR", joinColumns = @JoinColumn(name = "EQUIPE_ID"))
-    @Column(name = "UTILISATEUR_ID")
-    private List<String> utilisateurs;
+    @ElementCollection(targetClass=Long.class)
+    @CollectionTable(name = "MEMBRES", joinColumns = @JoinColumn(name = "EQUIPE_ID"))
+    @Column(name = "MEMBRE_ID")
+    private List<Long> membres;
 
-    @ElementCollection(targetClass=String.class)
+    @ElementCollection(targetClass=Long.class)
     @CollectionTable(name = "PROJET", joinColumns = @JoinColumn(name = "EQUIPE_ID"))
     @Column(name = "PROJET_ID")
-    private List<String> projets;
+    private List<Long> projets;
 
     @Column(name = "DERNIEREPROPOSITION")
     private Date derniereProposition;
