@@ -1,6 +1,6 @@
 INSERT INTO projet (nom)
 VALUES
-  ('Projet 1'),
+  ('Projet 1');
 
 INSERT INTO equipe (projet_id,equipe_id)
 VALUES
