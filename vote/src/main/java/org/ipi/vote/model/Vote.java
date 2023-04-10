@@ -3,6 +3,7 @@ package org.ipi.vote.model;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -11,6 +12,7 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @Table(name = "VOTES")
+@ToString
 public class Vote {
 
     @Id
@@ -21,9 +23,9 @@ public class Vote {
     @Column(name = "status", nullable = false)
     private VoteStatut voteStatut;
     @Column(name = "utilisateur", nullable = false)
-    private String utilisateur;
+    private Long utilisateur;
     @Column(name = "proposition", nullable = false)
-    private String proposition;
+    private Long proposition;
 
     private void consulterResultats(){
 

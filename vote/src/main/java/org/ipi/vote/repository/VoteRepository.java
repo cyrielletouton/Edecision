@@ -8,7 +8,7 @@ import java.util.List;
 
 @Repository
 public interface VoteRepository extends JpaRepository<Vote, Long> {
-    List<Vote> findAllByUtilisateur(String id);
-    List<Vote> findAllByProposition(String id);
-    String findDistinctByUtilisateur(String id);
+    List<Vote> findAllByUtilisateur(Long id);
+    List<Vote> findAllByProposition(Long id);
+    String findDistinctByUtilisateur(Long id);
 }

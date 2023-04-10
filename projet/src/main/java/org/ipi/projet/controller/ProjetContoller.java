@@ -16,28 +16,57 @@ public class ProjetContoller {
     @Autowired
     private ProjetRepository projetRepository;
 
-    @GetMapping("/getHTML")
+    //Create projet
+    @PostMapping("/create")
+    public ResponseEntity<Projet> createProjet(@RequestBody Projet projet) {
+        projetRepository.save(projet);
+        return ResponseEntity.ok(projet);
+    }
+
+    //Get projets
+    @GetMapping("/get")
+    public ResponseEntity<List<Projet>> getProjets(){
+        List<Projet> projets = projetRepository.findAll();
+        return ResponseEntity.ok(projets);
+    }
+    //Get Projets by id
+    @GetMapping("/get/{id}")
+    public ResponseEntity<Projet> getProjetById(@PathVariable Long id) {
+        Projet projet = projetRepository.findById(id).get();
+        return ResponseEntity.ok(projet);
+    }
+    //Update projet
+    @PostMapping("/update/{id}")
+    public ResponseEntity<Projet>  updateProjetById(@RequestBody Projet updatedProjet, @RequestParam Long id) {
+        Projet projet = projetRepository.findById(id).get();
+        updatedProjet.setId(projet.getId());
+        projetRepository.save(updatedProjet);
+        return ResponseEntity.ok(updatedProjet);
+    }
+
+    //Delete projet
+    @GetMapping("/delete/{id}")
+    public ResponseEntity<Long> delete(@PathVariable Long id){
+        projetRepository.deleteById(id);
+        return ResponseEntity.ok(id);
+    }
+
+    /*
+
+        @GetMapping("/getHTML")
     public String voirProjets(Model out){
         List<Projet> projets = projetRepository.findAll();
         out.addAttribute("projets", projets);
         return "voir-projets";
     }
-
-    @GetMapping("/get")
-    public ResponseEntity<List<Projet>> getProjets(Model out){
-        List<Projet> projets = projetRepository.findAll();
-        out.addAttribute("projets", projets);
-        return ResponseEntity.ok(projets);
-    }
-
-    @GetMapping("/get/{id}")
+        @GetMapping("/get/{id}")
     public String voirProjetParId(Model out,@PathVariable Long id) {
         Projet projet = projetRepository.findById(id).get();
         out.addAttribute("projet",projet);
         return "voir-projet";
     }
 
-    @GetMapping("/create/creer-projet")
+        @GetMapping("/create/creer-projet")
     public String creerProjetGet(Model out) {
         List<Projet> projets = projetRepository.findAll();
         HashSet<String> equipes = new HashSet<>();
@@ -52,11 +81,6 @@ public class ProjetContoller {
         return "creer-projet";
     }
 
-    @PostMapping("/create/creer-projet")
-    public String creerProjet(@ModelAttribute Projet projet) {
-        projetRepository.save(projet);
-        return "redirect:/projets";
-    }
 
     @GetMapping("/update/modifier-projet/{id}")
     public String modifierProjetGet(Model out, @PathVariable Long id) {
@@ -73,6 +97,8 @@ public class ProjetContoller {
         out.addAttribute("projet", projet);
         return "modifier-projet";
     }
+
+
     @PostMapping("/update/modifier-projet")
     public String aJourProjet(@ModelAttribute Projet projet, @RequestParam Long id) {
         Projet projetAJour = projetRepository.findById(id).get();
@@ -83,9 +109,11 @@ public class ProjetContoller {
         return "redirect:/projets";
     }
 
-    @GetMapping("/update/supprimer-projet/{id}")
+        @GetMapping("/update/supprimer-projet/{id}")
     public String supprimerProjet(@PathVariable Long id){
         projetRepository.deleteById(id);
         return "redirect:/projets";
     }
+
+     */
 }

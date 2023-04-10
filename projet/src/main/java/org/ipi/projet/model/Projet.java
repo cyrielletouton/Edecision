@@ -22,14 +22,14 @@ public class Projet {
 
     @Column(name = "nom", nullable = false)
     private String nom;
-    @ElementCollection(targetClass=String.class)
+    @ElementCollection(targetClass=Long.class)
     @CollectionTable(name = "EQUIPE", joinColumns = @JoinColumn(name = "PROJET_ID"))
     @Column(name = "EQUIPE_ID")
-    private List<String> equipes;
-    @ElementCollection(targetClass=String.class)
+    private List<Long> equipes;
+    @ElementCollection(targetClass=Long.class)
     @CollectionTable(name = "PROPOSITION", joinColumns = @JoinColumn(name = "PROJET_ID"))
     @Column(name = "PROPOSITION_ID")
-    private List<String> propositions;
+    private List<Long> propositions;
 
     //public void intégrerEquipe(){
 
