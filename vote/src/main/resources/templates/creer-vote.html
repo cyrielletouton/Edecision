@@ -5,9 +5,9 @@
     <title>Creer vote</title>
 </head>
 <body>
-<form th:action="@{/create/utilisateur/creer-vote}" method="post" th:object="${vote}">
-    <label for="idUtilisateur">ID utilisateur : </label>
-    <input id="idUtilisateur" name="utilisateur" type="text" th:placeholder="${user}" th:value="${user}" readonly>
+<form th:action="@{/create/membres/creer-vote}" method="post" th:object="${vote}">
+    <label for="idUtilisateur">ID membres : </label>
+    <input id="idUtilisateur" name="membres" type="text" th:placeholder="${user}" th:value="${user}" readonly>
     <label for="choixVoteStatus">Choix status : </label>
     <select id="choixVoteStatus" name="choixVoteStatus" th:field="*{voteStatut}" required>
         <option th:each="status : ${statusVoteList}" th:text="${status}" th:value="${status}"></option>

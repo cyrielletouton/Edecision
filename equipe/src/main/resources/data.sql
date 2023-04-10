@@ -8,7 +8,7 @@ VALUES
     ('1','1'),
     ('1','2');
 
-INSERT INTO utilisateur (utilisateur_id,equipe_id)
+INSERT INTO membres (utilisateur_id,equipe_id)
 VALUES
     ('1', '1'),
     ('2', '1'),
@@ -20,4 +20,3 @@ VALUES
     ('8', '2'),
     ('9', '2'),
     ('10', '2');
-

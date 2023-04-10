@@ -15,8 +15,8 @@
     <span th:text="${equipe.derniereProposition}"></span>
   </p>
   <p>Utilisateurs : </p>
-  <div th:each="utilisateur : ${equipe.utilisateurs}">
-    <span th:text="${utilisateur}"></span>
+  <div th:each="membres : ${equipe.utilisateurs}">
+    <span th:text="${membres}"></span>
   </div>
   <p>Projets : </p>
   <div th:each="projet : ${equipe.projets}">

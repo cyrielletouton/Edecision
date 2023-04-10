@@ -12,13 +12,13 @@
 <body>
 <div th:if="${user}">
     <p th:text="'Utilisateur ID : '+${user}"></p>
-    <a th:href="@{/get/utilisateur/{id}/creer-vote(id=${user})}">Creer vote</a>
+    <a th:href="@{/get/membres/{id}/creer-vote(id=${user})}">Creer vote</a>
 </div>
 <div th:each="vote : ${votes}">
     <div>Utilisateur :
-        <span>ID utilisateur : <span th:text="${vote.utilisateur}"></span></span>
+        <span>ID membres : <span th:text="${vote.membres}"></span></span>
         <br>
-        <span>Status utilisateur : <span th:text="${vote.voteStatut}"></span></span>
+        <span>Status membres : <span th:text="${vote.voteStatut}"></span></span>
     </div>
     <div>Proposition :
         <span th:text="${vote.proposition}"></span>

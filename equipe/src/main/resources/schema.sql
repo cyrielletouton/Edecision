@@ -6,9 +6,9 @@ CREATE TABLE teams (
   derniereProposition DATE NULL
 );
 
-DROP TABLE IF EXISTS utilisateur;
+DROP TABLE IF EXISTS membres;
 
-CREATE TABLE utilisateur (
+CREATE TABLE membres (
     utilisateur_id bigint default NULL,
     equipe_id bigint default NULL
 );

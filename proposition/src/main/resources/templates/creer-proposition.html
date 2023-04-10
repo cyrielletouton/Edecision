@@ -29,7 +29,7 @@
   <br>
   <label for="choixProprietaire">Choisir propriétaire : </label>
   <select id="choixProprietaire" name="proprietaires" th:field="*{proprietaires}" required multiple>
-    <option th:each="utilisateur : ${utilisateursList}" th:text="${utilisateur}" th:value="${utilisateur}"></option>
+    <option th:each="membres : ${utilisateursList}" th:text="${membres}" th:value="${membres}"></option>
   </select>
   <br>
   <label for="choixScope">Choisir scope : </label>

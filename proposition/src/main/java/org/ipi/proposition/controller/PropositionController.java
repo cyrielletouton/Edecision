@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:8080")
 public class PropositionController {
     @Autowired
     private PropositionRepository propositionRepository;

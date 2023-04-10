@@ -5,17 +5,17 @@
   <title>Utilisateurs</title>
 </head>
 <body>
-<a th:href="@{/update/{id}/modifier-utilisateur(id=${utilisateur.id})}">Modifier utilisateur</a>
-<p th:text="'Utilisateur : '+${utilisateur.nom}">Utilisateur :</p>
+<a th:href="@{/update/{id}/modifier-membres(id=${membres.id})}">Modifier membres</a>
+<p th:text="'Utilisateur : '+${membres.nom}">Utilisateur :</p>
 <p>Nom :
-  <span th:text="${utilisateur.nom}"></span>
+  <span th:text="${membres.nom}"></span>
 </p>
 <p>Equipes : </p>
-<div th:each="equipe : ${utilisateur.equipes}">
+<div th:each="equipe : ${membres.equipes}">
   <span th:text="${equipe}"></span>
 </div>
 <p>Propositions : </p>
-<div th:each="proposition : ${utilisateur.propositions}">
+<div th:each="proposition : ${membres.propositions}">
   <span th:text="${proposition}"></span>
 </div>
 </body>

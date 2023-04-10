@@ -6,7 +6,7 @@
 </head>
 <body>
 <!-- TODO: Trier les propositions par status, ex : pas possible de modifier les TERMINE -->
-<h2 th:text="'Les propositions ouvertes par l\'utilisateur : '+${idUtilisateur}">Les propositions ouvertes par l'utilisateur :</h2>
+<h2 th:text="'Les propositions ouvertes par l\'membres : '+${idUtilisateur}">Les propositions ouvertes par l'membres :</h2>
 <a th:href="@{/create/equipe/{id}/creer-proposition(id=${idUtilisateur})}">Créer proposition</a>
 <br>
 <div th:each="proposition : ${propositionProprietaireList}">

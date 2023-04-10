@@ -2,13 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Creer utilisateur</title>
+  <title>Creer membres</title>
 </head>
 <body>
-<form th:action="@{/create/creer-utilisateur}" method="post" th:object="${utilisateur}">
-  <label for="utilisateurNom">Nom de l'utilisateur : </label>
+<form th:action="@{/create/creer-membres}" method="post" th:object="${membres}">
+  <label for="utilisateurNom">Nom de l'membres : </label>
   <input id="utilisateurNom" name="nom" th:field="*{nom}" required type="text">
-  <label for="utilisateurMdp">Mot de passe de l'utilisateur : </label>
+  <label for="utilisateurMdp">Mot de passe de l'membres : </label>
   <input id="utilisateurMdp" name="mdp" th:field="*{mdp}" required type="password">
   <label for="choixEquipe">Choisir équipes : </label>
   <select id="choixEquipe" name="equipes" th:field="*{equipes}" required multiple>

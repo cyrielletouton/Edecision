@@ -1,8 +1,9 @@
-package org.ipi.utilisateurs.model;
+package org.ipi.membres.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
@@ -12,7 +13,8 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Table(name = "MEMBERS")
-public class Utilisateur {
+@ToString
+public class Membres {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -21,14 +23,14 @@ public class Utilisateur {
     private String nom;
     @Column(name = "mdp", nullable = false)
     private String mdp;
-    @ElementCollection(targetClass=String.class)
+    @ElementCollection(targetClass=Long.class)
     @CollectionTable(name = "PROPOSITIONS", joinColumns = @JoinColumn(name = "MEMBRE_ID"))
     @Column(name = "PROPOSITION_ID")
-    private List<String> propositions;
-    @ElementCollection(targetClass=String.class)
+    private List<Long> propositions;
+    @ElementCollection(targetClass=Long.class)
     @CollectionTable(name = "EQUIPES", joinColumns = @JoinColumn(name = "MEMBRE_ID"))
     @Column(name = "EQUIPE_ID")
-    private List<String> equipes;
+    private List<Long> equipes;
 
     public void details(){
 

@@ -6,21 +6,21 @@
 </head>
 <body>
 <p>Tous les utilisateurs :</p>
-<a th:href="@{/create/creer-utilisateur}">Créer utilisateur</a>
-<div th:each="utilisateur : ${utilisateurs}">
+<a th:href="@{/create/creer-membres}">Créer membres</a>
+<div th:each="membres : ${utilisateurs}">
   <p>Nom :
-  <a th:href="@{/get/{id}(id=${utilisateur.id})}" th:text="${utilisateur.nom}"></a>
+  <a th:href="@{/get/{id}(id=${membres.id})}" th:text="${membres.nom}"></a>
   </p>
   <p>Equipes : </p>
-  <div th:each="equipe : ${utilisateur.equipes}">
+  <div th:each="equipe : ${membres.equipes}">
     <span th:text="${equipe}"></span>
   </div>
   <p>Propositions : </p>
-  <div th:each="proposition : ${utilisateur.propositions}">
+  <div th:each="proposition : ${membres.propositions}">
     <span th:text="${proposition}"></span>
   </div>
-  <a th:href="@{/update/{id}/modifier-utilisateur(id=${utilisateur.id})}">Modifier utilisateur</a>
-  <a th:href="@{/update/{id}/supprimer-utilisateur(id=${utilisateur.id})}">Supprimer utilisateur</a>
+  <a th:href="@{/update/{id}/modifier-membres(id=${membres.id})}">Modifier membres</a>
+  <a th:href="@{/update/{id}/supprimer-membres(id=${membres.id})}">Supprimer membres</a>
 </div>
 </body>
 </html>

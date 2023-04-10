@@ -1,4 +1,4 @@
-package org.ipi.utilisateurs;
+package org.ipi.membres;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

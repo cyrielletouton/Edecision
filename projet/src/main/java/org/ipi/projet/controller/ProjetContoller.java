@@ -12,6 +12,7 @@ import java.util.HashSet;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:8080")
 public class ProjetContoller {
     @Autowired
     private ProjetRepository projetRepository;
