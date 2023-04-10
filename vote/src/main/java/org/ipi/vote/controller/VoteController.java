@@ -6,6 +6,7 @@ import org.ipi.vote.model.Vote;
 import org.ipi.vote.model.VoteStatut;
 import org.ipi.vote.repository.VoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -69,8 +70,14 @@ public class VoteController {
         return "redirect:/votes";
     }
 
-    @GetMapping("/get/proposition/{id}")
-    public String voirVotesParProposition(Model out, @PathVariable String id){
+    @GetMapping("/getVotePourProposition/{id}")
+    public ResponseEntity<List<Vote>> voirVotesParProposition(Model out, @PathVariable String id){
+        List<Vote> votes = voteRepository.findAllByProposition(id);
+        out.addAttribute("votes",votes);
+        return ResponseEntity.ok(votes);
+    }
+    @GetMapping("/getVotePourPropositionHTML/{id}")
+    public String voirVotesParPropositionHTML(Model out, @PathVariable String id){
         List<Vote> votes = voteRepository.findAllByProposition(id);
         out.addAttribute("votes",votes);
         return "voir-vote";
