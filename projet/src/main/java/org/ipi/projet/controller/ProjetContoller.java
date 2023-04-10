@@ -3,6 +3,7 @@ package org.ipi.projet.controller;
 import org.ipi.projet.model.Projet;
 import org.ipi.projet.repository.ProjetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,11 +16,18 @@ public class ProjetContoller {
     @Autowired
     private ProjetRepository projetRepository;
 
-    @GetMapping("/get")
+    @GetMapping("/getHTML")
     public String voirProjets(Model out){
         List<Projet> projets = projetRepository.findAll();
         out.addAttribute("projets", projets);
         return "voir-projets";
+    }
+
+    @GetMapping("/get")
+    public ResponseEntity<List<Projet>> getProjets(Model out){
+        List<Projet> projets = projetRepository.findAll();
+        out.addAttribute("projets", projets);
+        return ResponseEntity.ok(projets);
     }
 
     @GetMapping("/get/{id}")

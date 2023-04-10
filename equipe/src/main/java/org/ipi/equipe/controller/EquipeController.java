@@ -26,7 +26,7 @@ public class EquipeController {
     }
 
     @GetMapping("/get")
-    public ResponseEntity<List<Equipe>> getEquipe(Model out){
+    public ResponseEntity<List<Equipe>> getEquipes(Model out){
         List<Equipe> equipeList = equipeRepository.findAll();
         return ResponseEntity.ok(equipeList);
     }
