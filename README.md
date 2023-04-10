@@ -11,3 +11,6 @@ Prérequis : utiliser intelliJ comme éditeur de code
 - Onglet Gradle (à droite, vertical), faire reload all gradle projects (l'icône 'reload')
 - Onglet services (en bas), faire run sur SpringBoot
 - lets go
+
+Documentation des API d'un service donné accessible via ce chemin:
+http://localhost:8080/api/NOMDUSERVICE/swagger-ui.html
