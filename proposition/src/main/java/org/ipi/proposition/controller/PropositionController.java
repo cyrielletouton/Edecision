@@ -4,6 +4,7 @@ import org.ipi.proposition.model.Proposition;
 import org.ipi.proposition.model.Status;
 import org.ipi.proposition.repository.PropositionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,11 +18,17 @@ public class PropositionController {
     @Autowired
     private PropositionRepository propositionRepository;
 
-    @GetMapping("/get")
+    @GetMapping("/getHTML")
     public String voirPropositions(Model out){
         List<Proposition> propositions =  propositionRepository.findAll();
         out.addAttribute("propositions", propositions);
         return "voir-propositions";
+    }
+    @GetMapping("/get")
+    public ResponseEntity<List<Proposition>> getPropositions(Model out){
+        List<Proposition> propositions =  propositionRepository.findAll();
+        out.addAttribute("propositions", propositions);
+        return ResponseEntity.ok(propositions);
     }
 
     @GetMapping("/get/equipe/{id}")
