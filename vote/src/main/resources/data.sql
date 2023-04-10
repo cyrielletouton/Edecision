@@ -1,22 +1,3 @@
 INSERT INTO votes (status, utilisateur, proposition)
 VALUES
-    ('Pour','1','9'),
-    ('Contre','3','11'),
-    ('Abstention','5','9'),
-    ('Pour','4','3'),
-    ('Contre','8','11'),
-    ('Abstention','6','7'),
-    ('Pour','1','3'),
-    ('Contre','9','13'),
-    ('Abstention','5','9'),
-    ('Pour','7','3'),
-    ('Contre','7','13'),
-    ('Abstention','2','17'),
-    ('Pour','8','19'),
-    ('Contre','1','5'),
-    ('Abstention','2','15'),
-    ('Pour','3','1'),
-    ('Contre','4','13'),
-    ('Abstention','5','19'),
-    ('Pour','6','13'),
-    ('Contre','1','2');
+    ('Pour','1','1');
