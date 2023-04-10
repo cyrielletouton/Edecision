@@ -2,6 +2,7 @@ package org.ipi.vote.controller;
 
 import com.sun.xml.bind.v2.TODO;
 
+import org.ipi.vote.model.PropositionDto;
 import org.ipi.vote.model.Vote;
 import org.ipi.vote.model.VoteStatut;
 import org.ipi.vote.repository.VoteRepository;
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.HashSet;
 import java.util.List;
@@ -29,6 +31,11 @@ public class VoteController {
     public ResponseEntity<Vote> createVote(@RequestBody Vote vote){
         voteRepository.save(vote);
         logger.info("Vote saved:" + vote.toString());
+        RestTemplate restTemplate = new RestTemplate();
+        logger.info(vote.getProposition().toString());
+        PropositionDto response = restTemplate.getForObject("http://localhost:8080/api/proposition/get?id=" + vote.getProposition().toString(), PropositionDto.class);
+
+
         return ResponseEntity.ok(vote);
     }
 
