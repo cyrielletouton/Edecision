@@ -22,7 +22,7 @@ public class Vote {
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     private VoteStatut voteStatut;
-    @Column(name = "utilisateur", nullable = false)
+    @Column(name = "membre", nullable = false)
     private Long utilisateur;
     @Column(name = "proposition", nullable = false)
     private Long proposition;
