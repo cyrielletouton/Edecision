@@ -31,11 +31,6 @@ public class VoteController {
     public ResponseEntity<Vote> createVote(@RequestBody Vote vote){
         voteRepository.save(vote);
         logger.info("Vote saved:" + vote.toString());
-        RestTemplate restTemplate = new RestTemplate();
-        logger.info(vote.getProposition().toString());
-        PropositionDto response = restTemplate.getForObject("http://localhost:8080/api/proposition/get?id=" + vote.getProposition().toString(), PropositionDto.class);
-
-
         return ResponseEntity.ok(vote);
     }
 
