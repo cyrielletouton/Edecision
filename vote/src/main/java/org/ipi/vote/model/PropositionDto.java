@@ -16,7 +16,4 @@ public class PropositionDto {
     private List<String> proprietaires;
     private List<String> scope;
 //    private Date dateDepot;
-    public void escalade(){
-
-    }
 }

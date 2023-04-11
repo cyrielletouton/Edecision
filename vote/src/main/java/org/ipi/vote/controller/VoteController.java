@@ -6,6 +6,7 @@ import org.ipi.vote.model.PropositionDto;
 import org.ipi.vote.model.Vote;
 import org.ipi.vote.model.VoteStatut;
 import org.ipi.vote.repository.VoteRepository;
+import org.ipi.vote.service.VoteService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8080")
@@ -25,12 +27,17 @@ public class VoteController {
     Logger logger = LoggerFactory.getLogger(VoteController.class);
     @Autowired
     private VoteRepository voteRepository;
+    @Autowired
+    private VoteService voteService;
 
     //Create vote
-    @PostMapping("/create/")
+    @PostMapping("/create")
     public ResponseEntity<Vote> createVote(@RequestBody Vote vote){
         voteRepository.save(vote);
         logger.info("Vote saved:" + vote.toString());
+        logger.info(vote.getProposition().toString());
+        voteService.updatePropositionAfterVote("1");
+
         return ResponseEntity.ok(vote);
     }
 
@@ -73,6 +80,12 @@ public class VoteController {
     public ResponseEntity<Long> delete(@PathVariable Long id){
         voteRepository.deleteById(id);
         return ResponseEntity.ok(id);
+    }
+
+    @GetMapping("/ok")
+    public ResponseEntity<String> ok(){
+        voteService.updatePropositionAfterVote("1");
+        return ResponseEntity.ok("ok");
     }
 
 
