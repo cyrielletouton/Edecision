@@ -8,8 +8,7 @@ CREATE TABLE propositions (
                               estAccepte boolean default NOT NULL,
                               impact int default NULL,
                               maxVote int default NULL,
-                              nbrVote int default NULL,
-                              dateDepot DATE default(NOW()) NULL
+                              nbrVote int default NULL
 );
 
 DROP TABLE IF EXISTS proprietaire;

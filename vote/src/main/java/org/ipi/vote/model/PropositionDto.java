@@ -15,7 +15,7 @@ public class PropositionDto {
     private int nbrVote;
     private List<String> proprietaires;
     private List<String> scope;
-    private Date dateDepot;
+//    private Date dateDepot;
     public void escalade(){
 
     }

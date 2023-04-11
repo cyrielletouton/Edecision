@@ -48,8 +48,8 @@ public class Proposition extends PropositionGenerale{
     @CollectionTable(name = "SCOPE", joinColumns = @JoinColumn(name = "PROPOSITION_ID"))
     @Column(name = "SCOPE_ID")
     private List<String> scope;
-    @Column(name = "DATEDEPOT")
-    private Date dateDepot;
+//    @Column(name = "DATEDEPOT")
+//    private Date dateDepot;
 
     public void escalade(){
 
