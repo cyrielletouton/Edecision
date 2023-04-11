@@ -1,15 +1,12 @@
 package org.ipi.equipe.controller;
 
 import org.ipi.equipe.model.Equipe;
+import org.ipi.equipe.model.dto.MembresDTO;
 import org.ipi.equipe.repository.EquipeRepository;
+import org.ipi.equipe.service.EquipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashSet;
-import java.util.List;
 
 //Base path is /api/equipe/
 @RestController
@@ -17,6 +14,8 @@ import java.util.List;
 public class EquipeController {
     @Autowired
     private EquipeRepository equipeRepository;
+    @Autowired
+    private EquipeService equipeService;
 
     //Create équipe
     @PostMapping("/create")
@@ -26,9 +25,10 @@ public class EquipeController {
     }
     //Get équipes
     @GetMapping("/get")
-    public ResponseEntity<List<Equipe>> getEquipe(){
-        List<Equipe> equipeList = equipeRepository.findAll();
-        return ResponseEntity.ok(equipeList);
+    public ResponseEntity<MembresDTO[]> getEquipe(){
+        //List<Equipe> equipeList = equipeRepository.findAll();
+        //return ResponseEntity.ok(equipeList);
+        return equipeService.getEquipe();
     }
     //Get équipes by id
     @GetMapping("/get/{id}")
@@ -38,9 +38,9 @@ public class EquipeController {
     }
     //Update équipe
     @PostMapping("/update/{id}")
-    public ResponseEntity<Equipe> updateMembre(@RequestBody Equipe updatedEquipe, @PathVariable Long id){
-        Equipe membres = equipeRepository.findById(id).get();
-        updatedEquipe.setId(membres.getId());
+    public ResponseEntity<Equipe> updateEquipeById(@RequestBody Equipe updatedEquipe, @PathVariable Long id){
+        Equipe equipe = equipeRepository.findById(id).get();
+        updatedEquipe.setId(equipe.getId());
         equipeRepository.save(updatedEquipe);
         return ResponseEntity.ok(updatedEquipe);
     }
