@@ -32,22 +32,19 @@ public class Proposition extends PropositionGenerale{
     private Status status;
     @Column(name = "ESTACCEPTE", nullable = false)
     private boolean estAccepte;
-    @Column(name = "impact")
-    private int impact;
     @Column(name = "MAXVOTE")
     private int maxVote;
     @Column(name = "NBRVOTE")
     private int nbrVote;
     //Liste d'utilisateurs
-    @ElementCollection(targetClass=String.class)
     @CollectionTable(name = "PROPRIETAIRE", joinColumns = @JoinColumn(name = "PROPOSITION_ID"))
     @Column(name = "PROPRIETAIRE_ID")
-    private List<String> proprietaire;
+    private String proprietaire;
     //Liste d'équipes
     @ElementCollection(targetClass=String.class)
-    @CollectionTable(name = "SCOPE", joinColumns = @JoinColumn(name = "PROPOSITION_ID"))
-    @Column(name = "SCOPE_ID")
-    private List<String> scope;
+    @CollectionTable(name = "EQUIPES", joinColumns = @JoinColumn(name = "PROPOSITION_ID"))
+    @Column(name = "EQUIPES_ID")
+    private List<String> equipes;
 //    @Column(name = "DATEDEPOT")
 //    private Date dateDepot;
 

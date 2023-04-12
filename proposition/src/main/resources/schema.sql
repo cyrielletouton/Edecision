@@ -6,7 +6,6 @@ CREATE TABLE propositions (
                               description varchar(5000) default NULL,
                               status enum ('OUVERT','ENCOURS', 'TERMINE') default NOT NULL,
                               estAccepte boolean default NOT NULL,
-                              impact int default NULL,
                               maxVote int default NULL,
                               nbrVote int default NULL
 );
@@ -18,10 +17,10 @@ CREATE TABLE proprietaire (
                               proposition_id bigint NOT NULL
 );
 
-DROP TABLE IF EXISTS scope;
+DROP TABLE IF EXISTS equipe;
 
-CREATE TABLE scope (
-                       scope_id bigint NOT NULL,
+CREATE TABLE equipe (
+                       equipe_id bigint NOT NULL,
                        proposition_id bigint NOT NULL
 );
 
