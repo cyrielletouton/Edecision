@@ -6,14 +6,13 @@ import java.util.List;
 
 public class PropositionDto {
     private Long id;
-    private String problematique;
-    private String commentaire;
-    private String status;
+    private String titre;
+    private String description;
+    private StatusDto status;
     private boolean estAccepte;
-    private int impact;
     private int maxVote;
     private int nbrVote;
-    private List<String> proprietaires;
-    private List<String> scope;
+    private int proprietaire;
+    private List<Integer> equipes;
 //    private Date dateDepot;
 }
