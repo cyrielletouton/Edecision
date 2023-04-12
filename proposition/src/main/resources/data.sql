@@ -1,6 +1,6 @@
-INSERT INTO propositions (problematique,commentaire,status,estAccepte,impact,maxVote,nbrVote,dateDepot)
+INSERT INTO propositions (titre,description,status,estAccepte,impact,maxVote,nbrVote)
 VALUES
-    ('Problematique 1','Commentaire 1','OUVERT', false, 1, 5, 0, '2022-11-16');
+    ('Titre 1','Description','OUVERT', false, 1, 5, 0);
 
 INSERT INTO scope (scope_id,proposition_id)
 VALUES

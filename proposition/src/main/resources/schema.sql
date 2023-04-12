@@ -2,14 +2,13 @@ DROP TABLE IF EXISTS propositions;
 
 CREATE TABLE propositions (
                               id bigint AUTO_INCREMENT PRIMARY KEY NOT NULL,
-                              problematique varchar(5000) default NOT NULL,
-                              commentaire varchar(5000) default NULL,
+                              titre varchar(5000) default NOT NULL,
+                              description varchar(5000) default NULL,
                               status enum ('OUVERT','ENCOURS', 'TERMINE') default NOT NULL,
                               estAccepte boolean default NOT NULL,
                               impact int default NULL,
                               maxVote int default NULL,
-                              nbrVote int default NULL,
-                              dateDepot DATE default(NOW()) NULL
+                              nbrVote int default NULL
 );
 
 DROP TABLE IF EXISTS proprietaire;

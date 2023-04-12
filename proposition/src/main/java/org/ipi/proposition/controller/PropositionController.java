@@ -15,7 +15,7 @@ public class PropositionController {
     private PropositionRepository propositionRepository;
 
     //Create proposition
-    @PostMapping("/create/")
+    @PostMapping("/create")
     public ResponseEntity<Proposition> create(@RequestBody Proposition proposition){
         propositionRepository.save(proposition);
         return ResponseEntity.ok(proposition);
@@ -28,8 +28,8 @@ public class PropositionController {
     }
     //Get proposition by id
     @GetMapping("/get/{id}")
-    public ResponseEntity<Optional<Proposition>> getById(@RequestParam Long id){
-        Optional<Proposition> proposition =  propositionRepository.findById(id);
+    public ResponseEntity<Proposition> getById(@PathVariable("id") long id){
+        Proposition proposition =  propositionRepository.findById(id).get();
         return ResponseEntity.ok(proposition);
     }
     @GetMapping("/get/byEquipe/{id}")
@@ -39,7 +39,7 @@ public class PropositionController {
         //Find proposition by equipe id
         List<Proposition> propositionProprietaireList = new ArrayList<>();
         for (Proposition proposition : propositions){
-            for (String proprietaireID : proposition.getProprietaires()){
+            for (String proprietaireID : proposition.getProprietaire()){
                 if (proprietaireID.equals(id)){
                     propositionProprietaireList.add(proposition);
                 }
@@ -49,7 +49,7 @@ public class PropositionController {
     }
     //Update proposition by id
     @PostMapping("/update/{id}")
-    public ResponseEntity<Proposition> updateById(@RequestBody Proposition updatedProposition, @RequestParam Long id){
+    public ResponseEntity<Proposition> updateById(@RequestBody Proposition updatedProposition, @PathVariable Long id){
         Proposition proposition = propositionRepository.findById(id).get();
         updatedProposition.setId(proposition.getId());
         propositionRepository.save(updatedProposition);
