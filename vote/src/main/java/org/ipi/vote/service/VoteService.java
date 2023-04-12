@@ -22,8 +22,36 @@ public class VoteService {
 
     RestTemplate restTemplate = new RestTemplate();
 
-    public ResponseEntity<PropositionDto> updatePropositionAfterVote(String propId){
-        return restTemplate.getForEntity(apiGateway + propositionApi + "/get/" + propId, PropositionDto.class);
+    public void updatePropositionAfterVote(String propId){
+        ResponseEntity <PropositionDto> propositionOfCurrentVote =  restTemplate.getForEntity(apiGateway + propositionApi + "/get/" + propId, PropositionDto.class);
+        HttpEntity<PropositionDto> request = new HttpEntity<>(propositionOfCurrentVote.getBody());
+        ResponseEntity<PropositionDto> response = restTemplate.exchange(apiGateway + propositionApi + "/update/" + propId, HttpMethod.PUT, request, PropositionDto.class);
+
+        // Check if the response is OK
+        if (response.getStatusCode() == HttpStatus.OK) {
+            // The update was successful
+            logger.info("yes");
+        } else {
+            // The update was not successful
+            logger.info("no");
+        }
+
+
+        // Verifier si la proposition existe
+
+        // Verifier si la proposition est votable
+
+        // Verifier si le votant appartient à l'équipe
+
+        // Verifier si le votant a déjà voté
+
+        // Si les conditions précédentes sont réunies :
+
+        // Mettre à jour la proposition
+
+        // Si tout le monde a voté alors cloturer la proposition
+
+
     }
 
 

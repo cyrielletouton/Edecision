@@ -1,12 +1,8 @@
-INSERT INTO propositions (titre,description,status,estAccepte,impact,maxVote,nbrVote)
+INSERT INTO propositions (titre,description,status,estAccepte,maxVote,nbrVote,proprietaire)
 VALUES
-    ('Titre 1','Description','OUVERT', false, 1, 5, 0);
+    ('Titre 1','Description','OUVERT', false, 5, 0, 1);
 
-INSERT INTO scope (scope_id,proposition_id)
-VALUES
-    ('1', '1');
-
-INSERT INTO proprietaire (proprietaire_id,proposition_id)
+INSERT INTO equipes (equipe_id,proprietaire)
 VALUES
     ('1', '1');
 

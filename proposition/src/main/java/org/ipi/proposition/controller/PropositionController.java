@@ -32,21 +32,20 @@ public class PropositionController {
         Proposition proposition =  propositionRepository.findById(id).get();
         return ResponseEntity.ok(proposition);
     }
-    @GetMapping("/get/byEquipe/{id}")
-    public ResponseEntity<List<Proposition>> getPropositionByEquipeId(@PathVariable String id) {
-        List<Proposition> propositions = propositionRepository.findAll();
-
-        //Find proposition by equipe id
-        List<Proposition> propositionProprietaireList = new ArrayList<>();
-        for (Proposition proposition : propositions){
-            for (String proprietaireID : proposition.getProprietaire()){
-                if (proprietaireID.equals(id)){
-                    propositionProprietaireList.add(proposition);
-                }
-            }
-        }
-        return ResponseEntity.ok(propositionProprietaireList);
-    }
+//    @GetMapping("/get/byEquipe/{id}")
+//    public ResponseEntity<List<Proposition>> getPropositionByEquipeId(@PathVariable String id) {
+//        List<Proposition> propositions = propositionRepository.findAll();
+//
+//        //Find proposition by equipe id
+//        List<Proposition> propositionProprietaireList = new ArrayList<>();
+//        for (Proposition proposition : propositions){
+//            String proprietaireID = proposition.getProprietaire();
+//                if (proprietaireID.equals(id)){
+//                    propositionProprietaireList.add(proposition);
+//            }
+//        }
+//        return ResponseEntity.ok(propositionProprietaireList);
+//    }
     //Update proposition by id
     @PostMapping("/update/{id}")
     public ResponseEntity<Proposition> updateById(@RequestBody Proposition updatedProposition, @PathVariable Long id){
