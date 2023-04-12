@@ -6,13 +6,6 @@ CREATE TABLE teams (
   derniereProposition DATE NULL
 );
 
-DROP TABLE IF EXISTS membres;
-
-CREATE TABLE membres (
-    membre_id bigint default NULL,
-    equipe_id bigint default NULL
-);
-
 DROP TABLE IF EXISTS projet;
 
 CREATE TABLE projet (

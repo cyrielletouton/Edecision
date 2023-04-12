@@ -1,15 +1,13 @@
 package org.ipi.membres.controller;
 
-import org.ipi.membres.model.Membres;
+import org.ipi.membres.model.Membre;
 import org.ipi.membres.repository.MembresRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
 import java.util.List;
 
 @RestController
@@ -23,27 +21,27 @@ public class MembresController {
 
     //Create utilisateur
     @PostMapping("/create")
-    public ResponseEntity<Membres> createMembre(@RequestBody Membres membres) {
-        membresRepository.save(membres);
-        return ResponseEntity.ok(membres);
+    public ResponseEntity<Membre> createMembre(@RequestBody Membre membre) {
+        membresRepository.save(membre);
+        return ResponseEntity.ok(membre);
     }
     //Get utilisateurs
     @GetMapping("/get")
-    public ResponseEntity<List<Membres>> getMembres(){
-        List<Membres> membresList = membresRepository.findAll();
+    public ResponseEntity<List<Membre>> getMembres(){
+        List<Membre> membresList = membresRepository.findAll();
         logger.info(membresList.toString());
         return ResponseEntity.ok(membresList);
     }
     //Get utilisateur by id
     @GetMapping("/get/{id}")
-    public ResponseEntity<Membres> getMembresById(@PathVariable Long id){
-        Membres membres = membresRepository.findById(id).get();
+    public ResponseEntity<Membre> getMembresById(@PathVariable Long id){
+        Membre membres = membresRepository.findById(id).get();
         return ResponseEntity.ok(membres);
     }
     //Update utilisateur
     @PostMapping("/update/{id}")
-    public ResponseEntity<Membres> updateMembre(@RequestBody Membres updatedMembres, @PathVariable Long id){
-        Membres membres = membresRepository.findById(id).get();
+    public ResponseEntity<Membre> updateMembre(@RequestBody Membre updatedMembres, @PathVariable Long id){
+        Membre membres = membresRepository.findById(id).get();
         updatedMembres.setId(membres.getId());
         membresRepository.save(updatedMembres);
         return ResponseEntity.ok(updatedMembres);

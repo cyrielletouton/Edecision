@@ -1,12 +1,14 @@
 package org.ipi.equipe.controller;
 
-import org.ipi.equipe.model.Equipe;
-import org.ipi.equipe.model.dto.MembresDTO;
+import org.ipi.equipe.model.CompositionEquipe;
+import org.ipi.equipe.model.entity.Equipe;
 import org.ipi.equipe.repository.EquipeRepository;
 import org.ipi.equipe.service.EquipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 //Base path is /api/equipe/
 @RestController
@@ -25,16 +27,20 @@ public class EquipeController {
     }
     //Get équipes
     @GetMapping("/get")
-    public ResponseEntity<MembresDTO[]> getEquipe(){
-        //List<Equipe> equipeList = equipeRepository.findAll();
-        //return ResponseEntity.ok(equipeList);
-        return equipeService.getEquipe();
+    public ResponseEntity<List<Equipe>> getEquipe(){
+        List<Equipe> equipeList = equipeRepository.findAll();
+        return ResponseEntity.ok(equipeList);
     }
     //Get équipes by id
     @GetMapping("/get/{id}")
     public ResponseEntity<Equipe> getEquipeById(@PathVariable Long id){
         Equipe equipe = equipeRepository.findById(id).get();
         return ResponseEntity.ok(equipe);
+    }
+    @GetMapping("/get/{id}/composition")
+    public ResponseEntity<CompositionEquipe> getCompositionEquipe(@PathVariable Long id){
+        return ResponseEntity.ok(equipeService.compositionEquipeService(id));
+
     }
     //Update équipe
     @PostMapping("/update/{id}")

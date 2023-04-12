@@ -13,5 +13,5 @@ public class MembresDTO {
     private String nom;
     private String mdp;
     private List<Long> propositions;
-    private List<Long> equipes;
+    private Long equipe;
 }
