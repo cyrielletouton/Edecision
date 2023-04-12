@@ -39,7 +39,7 @@ public class PropositionController {
         //Find proposition by equipe id
         List<Proposition> propositionProprietaireList = new ArrayList<>();
         for (Proposition proposition : propositions){
-            for (String proprietaireID : proposition.getProprietaires()){
+            for (String proprietaireID : proposition.getProprietaire()){
                 if (proprietaireID.equals(id)){
                     propositionProprietaireList.add(proposition);
                 }

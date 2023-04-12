@@ -23,10 +23,10 @@ public class Proposition extends PropositionGenerale{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
-    @Column(name = "problematique", nullable = false)
-    private String problematique;
-    @Column(name = "commentaire")
-    private String commentaire;
+    @Column(name = "titre", nullable = false)
+    private String titre;
+    @Column(name = "description")
+    private String description;
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     private Status status;
@@ -42,7 +42,7 @@ public class Proposition extends PropositionGenerale{
     @ElementCollection(targetClass=String.class)
     @CollectionTable(name = "PROPRIETAIRE", joinColumns = @JoinColumn(name = "PROPOSITION_ID"))
     @Column(name = "PROPRIETAIRE_ID")
-    private List<String> proprietaires;
+    private List<String> proprietaire;
     //Liste d'équipes
     @ElementCollection(targetClass=String.class)
     @CollectionTable(name = "SCOPE", joinColumns = @JoinColumn(name = "PROPOSITION_ID"))
