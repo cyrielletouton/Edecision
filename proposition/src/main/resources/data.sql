@@ -1,6 +1,6 @@
 INSERT INTO propositions (titre,description,status,estAccepte,maxVote,nbrVote,proprietaire)
 VALUES
-    ('Titre 1','Description','OUVERT', false, 5, 0, 1);
+    ('Titre 1','Description','EN COURS', false, 5, 0, 1);
 
 INSERT INTO equipes (equipe_id,proprietaire)
 VALUES
