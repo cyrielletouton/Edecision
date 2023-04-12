@@ -1,8 +1,9 @@
-package org.ipi.equipe.model;
+package org.ipi.equipe.model.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.ipi.equipe.model.TypeEquipe;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -22,11 +23,6 @@ public class Equipe {
     @Enumerated(EnumType.STRING)
     @Column(name = "type", nullable = false)
     private TypeEquipe typeEquipe;
-
-    @ElementCollection(targetClass=Long.class)
-    @CollectionTable(name = "MEMBRES", joinColumns = @JoinColumn(name = "EQUIPE_ID"))
-    @Column(name = "MEMBRE_ID")
-    private List<Long> membres;
 
     @ElementCollection(targetClass=Long.class)
     @CollectionTable(name = "PROJET", joinColumns = @JoinColumn(name = "EQUIPE_ID"))

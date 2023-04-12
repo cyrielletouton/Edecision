@@ -1,14 +1,13 @@
 package org.ipi.equipe.controller;
 
-import org.ipi.equipe.model.Equipe;
+import org.ipi.equipe.model.CompositionEquipe;
+import org.ipi.equipe.model.entity.Equipe;
 import org.ipi.equipe.repository.EquipeRepository;
+import org.ipi.equipe.service.EquipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
 import java.util.List;
 
 //Base path is /api/equipe/
@@ -17,6 +16,8 @@ import java.util.List;
 public class EquipeController {
     @Autowired
     private EquipeRepository equipeRepository;
+    @Autowired
+    private EquipeService equipeService;
 
     //Create équipe
     @PostMapping("/create")
@@ -36,11 +37,16 @@ public class EquipeController {
         Equipe equipe = equipeRepository.findById(id).get();
         return ResponseEntity.ok(equipe);
     }
+    @GetMapping("/get/{id}/composition")
+    public ResponseEntity<CompositionEquipe> getCompositionEquipe(@PathVariable Long id){
+        return ResponseEntity.ok(equipeService.compositionEquipeService(id));
+
+    }
     //Update équipe
     @PostMapping("/update/{id}")
-    public ResponseEntity<Equipe> updateMembre(@RequestBody Equipe updatedEquipe, @PathVariable Long id){
-        Equipe membres = equipeRepository.findById(id).get();
-        updatedEquipe.setId(membres.getId());
+    public ResponseEntity<Equipe> updateEquipeById(@RequestBody Equipe updatedEquipe, @PathVariable Long id){
+        Equipe equipe = equipeRepository.findById(id).get();
+        updatedEquipe.setId(equipe.getId());
         equipeRepository.save(updatedEquipe);
         return ResponseEntity.ok(updatedEquipe);
     }
