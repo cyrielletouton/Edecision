@@ -5,7 +5,7 @@ CREATE TABLE propositions
     id          bigint AUTO_INCREMENT PRIMARY KEY NOT NULL,
     titre       varchar(5000) default NOT NULL,
     description varchar(5000) default NULL,
-    status      enum ('OUVERT','ENCOURS', 'TERMINE') default NOT NULL,
+    status      enum ('OUVERT','EN COURS', 'TERMINE') default NOT NULL,
     estAccepte  boolean       default NOT NULL,
     maxVote     int           default NULL,
     nbrVote     int           default NULL,

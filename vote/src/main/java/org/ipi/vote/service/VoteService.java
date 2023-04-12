@@ -11,6 +11,10 @@ import org.springframework.web.client.RestTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Objects;
+
+import static org.ipi.vote.model.StatusDto.ENCOURS;
+
 @Component
 public class VoteService {
 
@@ -22,26 +26,25 @@ public class VoteService {
 
     RestTemplate restTemplate = new RestTemplate();
 
-    public void updatePropositionAfterVote(String propId){
-        ResponseEntity <PropositionDto> propositionOfCurrentVote =  restTemplate.getForEntity(apiGateway + propositionApi + "/get/" + propId, PropositionDto.class);
-        HttpEntity<PropositionDto> request = new HttpEntity<>(propositionOfCurrentVote.getBody());
-        ResponseEntity<PropositionDto> response = restTemplate.exchange(apiGateway + propositionApi + "/update/" + propId, HttpMethod.PUT, request, PropositionDto.class);
+    public void updatePropositionAfterVote(String propId, long voterId){
+        ResponseEntity <PropositionDto> prop =  restTemplate.getForEntity(apiGateway + propositionApi + "/get/" + propId, PropositionDto.class);
+        // Verifier si la proposition existe
+        PropositionDto propositionOfCurrentVote = prop.getBody();
+        if (propositionOfCurrentVote != null){
+            // Verifier si la proposition est votable
+            if (propositionOfCurrentVote.status == ENCOURS) {
+                // Verifier si le votant appartient à l'équipe
 
-        // Check if the response is OK
-        if (response.getStatusCode() == HttpStatus.OK) {
-            // The update was successful
-            logger.info("yes");
-        } else {
-            // The update was not successful
-            logger.info("no");
+            }
         }
 
 
-        // Verifier si la proposition existe
+//        HttpEntity<PropositionDto> request = new HttpEntity<>(Objects.requireNonNull(propositionOfCurrentVote.getBody()));
 
-        // Verifier si la proposition est votable
 
-        // Verifier si le votant appartient à l'équipe
+
+
+        // increment le nombre max de vote si il est null ou 0
 
         // Verifier si le votant a déjà voté
 
@@ -51,7 +54,16 @@ public class VoteService {
 
         // Si tout le monde a voté alors cloturer la proposition
 
+        //ResponseEntity<PropositionDto> response = restTemplate.exchange(apiGateway + propositionApi + "/update/" + propId, HttpMethod.PUT, request, PropositionDto.class);
 
+        // Check if the response is OK
+//        if (response.getStatusCode() == HttpStatus.OK) {
+//            // The update was successful
+//            logger.info("yes");
+//        } else {
+//            // The update was not successful
+//            logger.info("no");
+//        }
     }
 
 

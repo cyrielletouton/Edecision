@@ -1,3 +1,3 @@
-INSERT INTO votes (status, membre, proposition)
+INSERT INTO votes (status, membre, proposition, equipe)
 VALUES
-    ('Pour','1','1');
+    ('POUR',1,1,1);

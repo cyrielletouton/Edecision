@@ -23,9 +23,11 @@ public class Vote {
     @Column(name = "status", nullable = false)
     private VoteStatut voteStatut;
     @Column(name = "membre", nullable = false)
-    private Long utilisateur;
+    private Long membre;
     @Column(name = "proposition", nullable = false)
     private Long proposition;
+    @Column(name = "equipe", nullable = false)
+    private Long equipe;
 
     private void consulterResultats(){
 
