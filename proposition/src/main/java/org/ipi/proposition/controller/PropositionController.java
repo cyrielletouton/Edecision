@@ -49,7 +49,7 @@ public class PropositionController {
     }
     //Update proposition by id
     @PostMapping("/update/{id}")
-    public ResponseEntity<Proposition> updateById(@RequestBody Proposition updatedProposition, @RequestParam Long id){
+    public ResponseEntity<Proposition> updateById(@RequestBody Proposition updatedProposition, @PathVariable Long id){
         Proposition proposition = propositionRepository.findById(id).get();
         updatedProposition.setId(proposition.getId());
         propositionRepository.save(updatedProposition);
