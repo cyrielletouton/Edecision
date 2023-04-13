@@ -12,5 +12,6 @@ public class PropositionDto {
     public int nbrVote;
     public int proprietaire;
     public List<Integer> equipes;
+    public List<Integer> votants;
 //    private Date dateDepot;
 }

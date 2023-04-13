@@ -43,6 +43,10 @@ public class Proposition extends PropositionGenerale{
     @CollectionTable(name = "EQUIPES", joinColumns = @JoinColumn(name = "PROPRIETAIRE"))
     @Column(name = "EQUIPE_ID")
     private List<Integer> equipes;
+    @ElementCollection(targetClass=Integer.class)
+    @CollectionTable(name = "VOTANTS", joinColumns = @JoinColumn(name = "EQUIPE_ID"))
+    @Column(name = "VOTANTS_ID")
+    private List<Integer> votants;
 //    @Column(name = "DATEDEPOT")
 //    private Date dateDepot;
 
