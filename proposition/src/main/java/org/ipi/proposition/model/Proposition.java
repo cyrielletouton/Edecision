@@ -28,8 +28,8 @@ public class Proposition extends PropositionGenerale{
     @Column(name = "description")
     private String description;
     @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false)
-    private Status status;
+    @Column(name = "statut", nullable = false)
+    private statut statut;
     @Column(name = "ESTACCEPTE", nullable = false)
     private boolean estAccepte;
     @Column(name = "MAXVOTE")

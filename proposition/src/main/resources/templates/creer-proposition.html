@@ -13,8 +13,8 @@
   <label for="commentaire">Commentaire : </label>
   <input id="commentaire" name="commentaire" th:field="*{commentaire}" th:value="*{commentaire}" required type="text">
   <br>
-  <label for="choixStatus">Status : </label>
-  <select id="choixStatus" name="status" th:field="*{status}" required>
+  <label for="choixstatut">statut : </label>
+  <select id="choixstatut" name="statut" th:field="*{statut}" required>
     <option th:each="statut : ${tousStatus}" th:text="${statut}" th:value="${statut}" th:selected="${proposition.status == statut}"></option>
   </select>
   <br>

@@ -5,7 +5,7 @@
     <title>Propositions</title>
 </head>
 <body>
-<!-- TODO: Trier les propositions par status, ex : pas possible de modifier les TERMINE -->
+<!-- TODO: Trier les propositions par statut, ex : pas possible de modifier les TERMINE -->
 <h2 th:text="'Les propositions ouvertes par l\'membres : '+${idUtilisateur}">Les propositions ouvertes par l'membres :</h2>
 <a th:href="@{/create/equipe/{id}/creer-proposition(id=${idUtilisateur})}">Créer proposition</a>
 <br>
@@ -13,7 +13,7 @@
     <!-- TODO: Ne pas afficher la modification de proposition si proposition est TERMINE -->
     <a th:href="@{/update/equipe/{idUtilisateur}/modifier-proposition/{idProposition}(idUtilisateur=${idUtilisateur},idProposition=${proposition.id})}">Modifier problématique</a>
     <p>Problematique : <span th:text="${proposition.problematique}"></span></p>
-    <p>Status problématique : <span th:text="${proposition.status}"></span></p>
+    <p>statut problématique : <span th:text="${proposition.statut}"></span></p>
     <p>Scope : <span th:text="${#strings.listJoin(proposition.scope,',')}"></span></p>
     <p>Date dépôt : <span th:text="${proposition.dateDepot}"></span></p>
     <a th:href="@{/delete/supprimer-proposition/{id}(id=${proposition.id})}">Supprimer proposition</a>
@@ -22,7 +22,7 @@
 <h2>Les propositions ouvertes pour l'équipe :</h2>
 <div th:each="proposition : ${propositionScopeList}">
     <p>Problematique : <span th:text="${proposition.problematique}"></span></p>
-    <p>Status problématique : <span th:text="${proposition.status}"></span></p>
+    <p>statut problématique : <span th:text="${proposition.status}"></span></p>
     <p>Proprietaire : <span th:text="${#strings.listJoin(proposition.proprietaires,',')}"></span></p>
     <p>Date dépôt : <span th:text="${proposition.dateDepot}"></span></p>
     <hr>

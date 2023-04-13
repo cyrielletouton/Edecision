@@ -3,17 +3,13 @@ package org.ipi.vote.service;
 import org.ipi.vote.controller.VoteController;
 import org.ipi.vote.model.PropositionDto;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Objects;
-
-import static org.ipi.vote.model.StatusDto.ENCOURS;
+import static org.ipi.vote.model.statutDto.ENCOURS;
 
 @Component
 public class VoteService {
@@ -32,7 +28,7 @@ public class VoteService {
         PropositionDto propositionOfCurrentVote = prop.getBody();
         if (propositionOfCurrentVote != null){
             // Verifier si la proposition est votable
-            if (propositionOfCurrentVote.status == ENCOURS) {
+            if (propositionOfCurrentVote.statu == ENCOURS) {
                 // Verifier si le votant appartient à l'équipe
 
             }
@@ -57,7 +53,7 @@ public class VoteService {
         //ResponseEntity<PropositionDto> response = restTemplate.exchange(apiGateway + propositionApi + "/update/" + propId, HttpMethod.PUT, request, PropositionDto.class);
 
         // Check if the response is OK
-//        if (response.getStatusCode() == HttpStatus.OK) {
+//        if (response.getstatuCode() == Httpstatu.OK) {
 //            // The update was successful
 //            logger.info("yes");
 //        } else {

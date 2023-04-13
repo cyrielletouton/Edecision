@@ -1,6 +1,6 @@
 package org.ipi.proposition.model;
 
-public enum Status {
+public enum statut {
     OUVERT,
     ENCOURS,
     TERMINE;

@@ -100,12 +100,12 @@ public class VoteController {
         List<Vote> votesList = voteRepository.findAll();
         List<Vote> votesUtilisateur = voteRepository.findAllByUtilisateur(id);
         ////////// RECUPERER TOUTES LES PROPOSITIONS DISPONIBLES //////////
-        ////////// RECUPERER TOUTES LES STATUS DE VOTE UTILISATEUR DISPONIBLES //////////
+        ////////// RECUPERER TOUTES LES statu DE VOTE UTILISATEUR DISPONIBLES //////////
         // TODO: RECUPERER LES PROPOSITIONS DISPONIBLES POUR L'UTILISATEUR ET NON GLOBALES //
         HashSet<String> propositionList = new HashSet<>();
-        HashSet<VoteStatut> statusVoteList = new HashSet<>();
+        HashSet<VoteStatut> statuVoteList = new HashSet<>();
         for (Vote vote : votesList) {
-            statusVoteList.add(vote.getVoteStatut());
+            statuVoteList.add(vote.getVoteStatut());
             propositionList.add(vote.getProposition());
         }
         ////////// UN UTILISATEUR NE PEUT VOTER QU'UNE FOIS PAS PROPOSITION //////////
@@ -119,7 +119,7 @@ public class VoteController {
         propositionList.removeAll(toRemove);
         out.addAttribute("user", id);
         out.addAttribute("propositionList",propositionList);
-        out.addAttribute("statusVoteList",statusVoteList);
+        out.addAttribute("statuVoteList",statuVoteList);
         out.addAttribute("vote",new Vote());
         return "creer-vote";
     }

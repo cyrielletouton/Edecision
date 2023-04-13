@@ -1,6 +1,6 @@
 package org.ipi.vote.model;
 
-public enum StatusDto {
+public enum statutDto {
     OUVERT,
     ENCOURS,
     TERMINE;

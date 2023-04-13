@@ -121,15 +121,15 @@ public class PropositionController {
     public String modifierPropositionFormulaire(Model out, @PathVariable String idUtilisateur, @PathVariable Long idProposition){
         Proposition propositionParID = propositionRepository.findById(idProposition).get();
         List<Proposition> propositionList = propositionRepository.findAll();
-        ///// TROUVER TOUS LES UTILISATEURS ET STATUS DISPONIBLES /////
+        ///// TROUVER TOUS LES UTILISATEURS ET statut DISPONIBLES /////
         HashSet<String> proprietairesList = new HashSet<>();
-        HashSet<Status> statusList = new HashSet<>();
+        HashSet<statut> statutList = new HashSet<>();
         for (Proposition proposition : propositionList){
             proprietairesList.addAll(proposition.getProprietaires());
-            statusList.addAll(Collections.singleton(proposition.getStatus()));
+            statutList.addAll(Collections.singleton(proposition.getstatut()));
         }
         out.addAttribute("proprietaires", proprietairesList);
-        out.addAttribute("tousStatus", statusList);
+        out.addAttribute("tousstatut", statutList);
         out.addAttribute("propositionList", propositionList);
         out.addAttribute("proposition", propositionParID);
         return "modifier-proposition";
@@ -138,16 +138,16 @@ public class PropositionController {
         @GetMapping("/create/equipe/{id}/creer-proposition")
     public String creerPropositionFormulaire(Model out, @PathVariable String id){
         List<Proposition> propositionList = propositionRepository.findAll();
-        ///// TROUVER TOUS LES UTILISATEURS ET STATUS DISPONIBLES /////
+        ///// TROUVER TOUS LES UTILISATEURS ET statut DISPONIBLES /////
         HashSet<String> utilisateursList = new HashSet<>();
-        HashSet<Status> statusList = new HashSet<>();
+        HashSet<statut> statutList = new HashSet<>();
         for (Proposition proposition : propositionList){
             utilisateursList.addAll(proposition.getProprietaires());
-            statusList.addAll(Collections.singleton(proposition.getStatus()));
+            statutList.addAll(Collections.singleton(proposition.getstatut()));
         }
         out.addAttribute("proprietaireID", id);
         out.addAttribute("utilisateursList", utilisateursList);
-        out.addAttribute("tousStatus", statusList);
+        out.addAttribute("tousstatut", statutList);
         out.addAttribute("proposition", new Proposition());
         return "creer-proposition";
     }

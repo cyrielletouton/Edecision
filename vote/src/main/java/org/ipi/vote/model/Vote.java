@@ -20,7 +20,7 @@ public class Vote {
     @Column(name = "id", nullable = false)
     private Long id;
     @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false)
+    @Column(name = "statu", nullable = false)
     private VoteStatut voteStatut;
     @Column(name = "membre", nullable = false)
     private Long membre;

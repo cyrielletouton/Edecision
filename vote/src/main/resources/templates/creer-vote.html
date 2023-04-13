@@ -8,9 +8,9 @@
 <form th:action="@{/create/membres/creer-vote}" method="post" th:object="${vote}">
     <label for="idUtilisateur">ID membres : </label>
     <input id="idUtilisateur" name="membres" type="text" th:placeholder="${user}" th:value="${user}" readonly>
-    <label for="choixVoteStatus">Choix status : </label>
-    <select id="choixVoteStatus" name="choixVoteStatus" th:field="*{voteStatut}" required>
-        <option th:each="status : ${statusVoteList}" th:text="${status}" th:value="${status}"></option>
+    <label for="choixVotestatu">Choix statu : </label>
+    <select id="choixVotestatu" name="choixVotestatu" th:field="*{voteStatut}" required>
+        <option th:each="statu : ${statuVoteList}" th:text="${statu}" th:value="${statu}"></option>
     </select>
     <label for="choixProposition">Choix proposition : </label>
     <select id="choixProposition" name="choixProposition" th:field="*{proposition}" required>
