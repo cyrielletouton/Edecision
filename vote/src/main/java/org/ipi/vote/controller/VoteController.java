@@ -27,7 +27,7 @@ public class VoteController {
         voteRepository.save(vote);
         logger.info("Vote saved:" + vote.toString());
         logger.info(vote.getProposition().toString());
-        voteService.updatePropositionAfterVote(vote.getProposition(), vote.getMembre());
+        voteService.updatePropositionAfterVote(vote.getProposition(), vote.getMembre(), vote.getEquipe());
 
         return ResponseEntity.ok(vote);
     }

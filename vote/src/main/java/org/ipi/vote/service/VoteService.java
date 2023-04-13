@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 import static org.ipi.vote.model.statutDto.ENCOURS;
+import static org.ipi.vote.model.statutDto.TERMINE;
 
 @Component
 public class VoteService {
@@ -24,54 +25,46 @@ public class VoteService {
 
     RestTemplate restTemplate = new RestTemplate();
 
-    public void updatePropositionAfterVote(long propId, long voterId){
-        ResponseEntity <PropositionDto> prop =  restTemplate.getForEntity(apiGateway + propositionApi + "/get/" + Long.toString(propId), PropositionDto.class);
-        // Verifier si la proposition existe
+    public void updatePropositionAfterVote(long propId, long voterId, long voteEquipe) {
+        ResponseEntity<PropositionDto> prop = restTemplate.getForEntity(apiGateway + propositionApi + "/get/" + Long.toString(propId), PropositionDto.class);
+        logger.info("mise à jour proposition");
         PropositionDto propositionOfCurrentVote = prop.getBody();
-        if (propositionOfCurrentVote != null){
-            // Verifier si la proposition est votable
+        if (propositionOfCurrentVote != null) {
             if (propositionOfCurrentVote.statut == ENCOURS) {
-                // Verifier si le votant appartient à l'équipe
-                logger.info(String.valueOf(propositionOfCurrentVote.statut));
-                boolean votantAllowed = false;
-                for (Integer votant : propositionOfCurrentVote.votants) {
-                    if (votant == voterId) {
-                        votantAllowed = true;
+                logger.info("proposition en cours");
+                boolean voterInTheTeam = false;
+                for (Long equipe : propositionOfCurrentVote.equipes) {
+                    if (equipe == voteEquipe) {
+                        logger.info("votant dans la bonne équipe");
+                        voterInTheTeam = true;
                         break;
                     }
                 }
-                if(votantAllowed){
-                    logger.info("allowed to vote");
+                if (voterInTheTeam){
+                    boolean voterAlreadyVoted = false;
+                    for (Long votant : propositionOfCurrentVote.votants) {
+                        if (votant == voterId) {
+                            voterAlreadyVoted = true;
+                            break;
+                        }
+                    }
+                    if (!voterAlreadyVoted) {
+                        logger.info("autorisé à voter");
+                        propositionOfCurrentVote.votants.add(voterId);
+                        propositionOfCurrentVote.nbrVote += 1;
+                        if (propositionOfCurrentVote.nbrVote == propositionOfCurrentVote.maxVote){
+                            propositionOfCurrentVote.statut = TERMINE;
+                        }
+
+                        // Mettre à jour la proposition
+                    } else {
+                        logger.info("déjà voté");
+                    }
+                } else {
+                    logger.info("votant dans la mauvaise équipe");
                 }
             }
         }
-
-
-//        HttpEntity<PropositionDto> request = new HttpEntity<>(Objects.requireNonNull(propositionOfCurrentVote.getBody()));
-
-
-
-
-        // increment le nombre max de vote si il est null ou 0
-
-        // Verifier si le votant a déjà voté
-
-        // Si les conditions précédentes sont réunies :
-
-        // Mettre à jour la proposition
-
-        // Si tout le monde a voté alors cloturer la proposition
-
-        //ResponseEntity<PropositionDto> response = restTemplate.exchange(apiGateway + propositionApi + "/update/" + propId, HttpMethod.PUT, request, PropositionDto.class);
-
-        // Check if the response is OK
-//        if (response.getstatuCode() == Httpstatu.OK) {
-//            // The update was successful
-//            logger.info("yes");
-//        } else {
-//            // The update was not successful
-//            logger.info("no");
-//        }
     }
 
 
