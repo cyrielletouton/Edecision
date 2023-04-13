@@ -30,6 +30,6 @@ CREATE TABLE amendements (
 DROP TABLE IF EXISTS votants;
 
 CREATE TABLE votants (
-                         votants_id bigint NOT NULL,
-                         equipe_id bigint NOT NULL
+                         votants_id bigint null,
+                         equipe_id bigint null
 );
