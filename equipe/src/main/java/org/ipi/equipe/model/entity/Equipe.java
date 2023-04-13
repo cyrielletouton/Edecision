@@ -24,11 +24,6 @@ public class Equipe {
     @Column(name = "type", nullable = false)
     private TypeEquipe typeEquipe;
 
-    @ElementCollection(targetClass=Long.class)
-    @CollectionTable(name = "PROJET", joinColumns = @JoinColumn(name = "EQUIPE_ID"))
-    @Column(name = "PROJET_ID")
-    private List<Long> projets;
-
     @Column(name = "DERNIEREPROPOSITION")
     private Date derniereProposition;
 

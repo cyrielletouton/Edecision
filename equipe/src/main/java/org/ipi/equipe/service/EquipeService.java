@@ -31,7 +31,6 @@ public class EquipeService {
         composition.setTypeEquipe(equipe.getTypeEquipe());
         composition.setId(equipe.getId());
         composition.setDerniereProposition(equipe.getDerniereProposition());
-        composition.setProjets(equipe.getProjets());
 
         MembresDTO[] membres = restTemplate.getForEntity(apiGateway + membresApi + "get", MembresDTO[].class).getBody();
         for (MembresDTO membre : membres) {
@@ -42,6 +41,8 @@ public class EquipeService {
             }
         }
         composition.setMembres(membresIds);
+        //TODO: Projets, in the same way as Membres
+
         return composition;
     }
 }
