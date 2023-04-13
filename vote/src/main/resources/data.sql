@@ -1,3 +1,3 @@
-INSERT INTO votes (statu, membre, proposition, equipe)
+INSERT INTO votes (statut, membre, proposition, equipe)
 VALUES
     ('POUR',1,1,1);

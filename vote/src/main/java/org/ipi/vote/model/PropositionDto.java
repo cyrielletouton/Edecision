@@ -6,7 +6,7 @@ public class PropositionDto {
     public Long id;
     public String titre;
     public String description;
-    public statutDto statu;
+    public statutDto statut;
     public boolean estAccepte;
     public int maxVote;
     public int nbrVote;
