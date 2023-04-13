@@ -9,6 +9,8 @@ import org.springframework.web.client.RestTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
+
 import static org.ipi.vote.model.statutDto.ENCOURS;
 
 @Component
@@ -22,15 +24,25 @@ public class VoteService {
 
     RestTemplate restTemplate = new RestTemplate();
 
-    public void updatePropositionAfterVote(String propId, long voterId){
-        ResponseEntity <PropositionDto> prop =  restTemplate.getForEntity(apiGateway + propositionApi + "/get/" + propId, PropositionDto.class);
+    public void updatePropositionAfterVote(long propId, long voterId){
+        ResponseEntity <PropositionDto> prop =  restTemplate.getForEntity(apiGateway + propositionApi + "/get/" + Long.toString(propId), PropositionDto.class);
         // Verifier si la proposition existe
         PropositionDto propositionOfCurrentVote = prop.getBody();
         if (propositionOfCurrentVote != null){
             // Verifier si la proposition est votable
-            if (propositionOfCurrentVote.statu == ENCOURS) {
+            if (propositionOfCurrentVote.statut == ENCOURS) {
                 // Verifier si le votant appartient à l'équipe
-
+                logger.info(String.valueOf(propositionOfCurrentVote.statut));
+                boolean votantAllowed = false;
+                for (Integer votant : propositionOfCurrentVote.votants) {
+                    if (votant == voterId) {
+                        votantAllowed = true;
+                        break;
+                    }
+                }
+                if(votantAllowed){
+                    logger.info("allowed to vote");
+                }
             }
         }
 

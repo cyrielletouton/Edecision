@@ -27,7 +27,7 @@ public class VoteController {
         voteRepository.save(vote);
         logger.info("Vote saved:" + vote.toString());
         logger.info(vote.getProposition().toString());
-        voteService.updatePropositionAfterVote("1", vote.getMembre());
+        voteService.updatePropositionAfterVote(vote.getProposition(), vote.getMembre());
 
         return ResponseEntity.ok(vote);
     }
@@ -73,11 +73,11 @@ public class VoteController {
         return ResponseEntity.ok(id);
     }
 
-    @GetMapping("/ok")
-    public ResponseEntity<String> ok(){
-        voteService.updatePropositionAfterVote("1", 1);
-        return ResponseEntity.ok("ok");
-    }
+//    @GetMapping("/ok")
+//    public ResponseEntity<String> ok(){
+//        voteService.updatePropositionAfterVote("1", 1);
+//        return ResponseEntity.ok("ok");
+//    }
 
 
     /*
@@ -100,7 +100,7 @@ public class VoteController {
         List<Vote> votesList = voteRepository.findAll();
         List<Vote> votesUtilisateur = voteRepository.findAllByUtilisateur(id);
         ////////// RECUPERER TOUTES LES PROPOSITIONS DISPONIBLES //////////
-        ////////// RECUPERER TOUTES LES statu DE VOTE UTILISATEUR DISPONIBLES //////////
+        ////////// RECUPERER TOUTES LES statut DE VOTE UTILISATEUR DISPONIBLES //////////
         // TODO: RECUPERER LES PROPOSITIONS DISPONIBLES POUR L'UTILISATEUR ET NON GLOBALES //
         HashSet<String> propositionList = new HashSet<>();
         HashSet<VoteStatut> statuVoteList = new HashSet<>();
