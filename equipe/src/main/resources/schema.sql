@@ -5,10 +5,3 @@ CREATE TABLE teams (
   type enum ('DEVELOPPEMENT','ANALYSE_ET_CONCEPTION','PLANIFICATION','TEST_ET_DEPLOIEMENT','RECHERCHE','MAINTENANCE','COMMUNAUTE') default NOT NULL,
   derniereProposition DATE NULL
 );
-
-DROP TABLE IF EXISTS projet;
-
-CREATE TABLE projet (
-    projet_id bigint default NULL,
-    equipe_id bigint default NULL
-);
