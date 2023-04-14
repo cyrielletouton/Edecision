@@ -9,6 +9,7 @@ CREATE TABLE propositions
     estAccepte  boolean       default NOT NULL,
     maxVote     int           default NULL,
     nbrVote     int           default NULL,
+    nbrAbstention int default NULL,
     proprietaire bigint default NOT NULL,
     votants int default NOT NULL
 );

@@ -36,6 +36,8 @@ public class Proposition extends PropositionGenerale{
     private int maxVote;
     @Column(name = "NBRVOTE")
     private int nbrVote;
+    @Column(name= "NBRABSTENTION")
+    private int nbrAbstention;
     @Column(name = "PROPRIETAIRE")
     private int proprietaire;
     //Liste d'équipes

@@ -4,5 +4,4 @@ public enum VoteStatut {
     POUR,
     CONTRE,
     ABSTENTION;
-
 }

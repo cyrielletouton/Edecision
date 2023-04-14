@@ -10,6 +10,7 @@ public class PropositionDto {
     public boolean estAccepte;
     public int maxVote;
     public int nbrVote;
+    public int nbrAbstention;
     public int proprietaire;
     public List<Long> equipes;
     public List<Long> votants;
