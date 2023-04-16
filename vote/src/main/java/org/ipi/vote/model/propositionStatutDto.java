@@ -1,7 +1,7 @@
 package org.ipi.vote.model;
 
-public enum statutDto {
-    OUVERT,
+public enum propositionStatutDto {
+    OUVERTE,
     ENCOURS,
     TERMINE;
 }

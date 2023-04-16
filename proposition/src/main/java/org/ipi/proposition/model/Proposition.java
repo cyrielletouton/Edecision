@@ -6,8 +6,6 @@ import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.List;
 
 //Specify that a class is an entity
@@ -29,7 +27,7 @@ public class Proposition extends PropositionGenerale{
     private String description;
     @Enumerated(EnumType.STRING)
     @Column(name = "statut", nullable = false)
-    private statut statut;
+    private propositionStatut statut;
     @Column(name = "ESTACCEPTE", nullable = false)
     private boolean estAccepte;
     @Column(name = "MAXVOTE")

@@ -1,7 +1,7 @@
 package org.ipi.proposition.model;
 
-public enum statut {
-    OUVERT,
+public enum propositionStatut {
+    OUVERTE,
     ENCOURS,
     TERMINE;
 }

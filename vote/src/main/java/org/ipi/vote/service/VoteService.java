@@ -10,10 +10,8 @@ import org.springframework.web.client.RestTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.List;
-
-import static org.ipi.vote.model.statutDto.ENCOURS;
-import static org.ipi.vote.model.statutDto.TERMINE;
+import static org.ipi.vote.model.propositionStatutDto.ENCOURS;
+import static org.ipi.vote.model.propositionStatutDto.TERMINE;
 
 @Component
 public class VoteService {
