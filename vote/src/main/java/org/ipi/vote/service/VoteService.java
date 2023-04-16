@@ -61,10 +61,11 @@ public class VoteService {
                             // Mise à jour du status des votes si nécessaire
                             propositionOfCurrentVote = concludeVote(propositionOfCurrentVote);
                             // Mettre à jour la proposition
-                            if (propositionOfCurrentVote.statut == TERMINE) {
-                                // testé
-                                logger.info("la proposition a été votée");
-                            }
+                            HttpHeaders headers = new HttpHeaders();
+                            headers.setContentType(MediaType.APPLICATION_JSON);
+                            HttpEntity<PropositionDto> request = new HttpEntity<>(propositionOfCurrentVote, headers);
+                            restTemplate.postForEntity( apiGateway + propositionApi + "/update/" + propositionOfCurrentVote.id, request, String.class);
+
                         } else {
                             // testé
                             logger.info("ce votant a déjà voté");
@@ -108,6 +109,10 @@ public class VoteService {
                 proposition.statut = TERMINE;
                 proposition.estAccepte = false;
             }
+        }
+        if (proposition.statut == TERMINE) {
+            // testé
+            logger.info("la proposition est clôturée");
         }
         return proposition;
     }
