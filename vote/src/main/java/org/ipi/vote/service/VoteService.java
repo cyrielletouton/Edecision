@@ -114,7 +114,7 @@ public class VoteService {
             // testé
             logger.info("la proposition est clôturée");
         }
+
         return proposition;
     }
-
 }
