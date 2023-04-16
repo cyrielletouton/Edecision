@@ -7,11 +7,15 @@ import org.ipi.equipe.model.dto.MembresDTO;
 import org.ipi.equipe.repository.EquipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Component
 public class EquipeService {
@@ -56,5 +60,18 @@ public class EquipeService {
         }
         composition.setProjets(projetsId);
         return composition;
+    }
+
+    public CompositionEquipe updateProjetWithEquipe(Long projetId, Long equipeId){
+        CompositionEquipe compoEquipe = compositionEquipeService(equipeId);
+        ProjetDTO projet = restTemplate.getForEntity(apiGateway + projetApi + "get/" + projetId, ProjetDTO.class).getBody();
+        if(projet != null){
+            projet.getEquipes().add(equipeId);
+        }
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<ProjetDTO> request = new HttpEntity<>(projet, headers);
+        restTemplate.postForEntity( apiGateway + projetApi + "/update/" + projetId, request, String.class);
+        return compoEquipe;
     }
 }

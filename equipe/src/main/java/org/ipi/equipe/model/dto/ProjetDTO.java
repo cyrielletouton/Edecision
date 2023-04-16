@@ -12,9 +12,7 @@ import java.util.List;
 @Setter
 @ToString
 public class ProjetDTO {
-
     private Long id;
-
     private String nom;
     private List<Long> equipes;
     private List<Long> propositions;

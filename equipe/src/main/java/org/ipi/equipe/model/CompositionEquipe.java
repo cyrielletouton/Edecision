@@ -14,11 +14,7 @@ import java.util.List;
 @ToString
 public class CompositionEquipe {
     private Long id;
-
     private TypeEquipe typeEquipe;
-
     private List<Long> projets;
-
     private List<Long> membres;
-    private Date derniereProposition;
 }

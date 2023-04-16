@@ -64,6 +64,11 @@ public class EquipeController {
         return ResponseEntity.ok(equipes);
     }
 
+    @PostMapping("/give/{equipeId}/projet/{projetId}")
+    public ResponseEntity<CompositionEquipe> giveProjetToEquipe(@PathVariable Long equipeId, @PathVariable Long projetId){
+        return ResponseEntity.ok(equipeService.updateProjetWithEquipe(equipeId, projetId));
+    }
+
 /*
     @GetMapping("/update/{id}/modifier-equipe")
     public String modifierEquipeFormulaire(Model out, @PathVariable Long id){

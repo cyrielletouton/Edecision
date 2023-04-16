@@ -1,0 +1,10 @@
+[
+  {
+    "name" : "equipe 3",
+    "typeEquipe": "DEVELOPPEMENT"
+  },
+  {
+    "name" : "equipe 4",
+    "typeEquipe": "ANALYSE_ET_CONCEPTION"
+  }
+]

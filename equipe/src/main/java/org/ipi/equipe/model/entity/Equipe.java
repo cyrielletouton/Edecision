@@ -20,6 +20,9 @@ public class Equipe {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(name="name", nullable = false)
+    private String name;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "type", nullable = false)
     private TypeEquipe typeEquipe;

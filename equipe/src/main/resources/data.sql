@@ -1,4 +1,4 @@
-INSERT INTO teams (type)
+INSERT INTO teams (name, type)
 VALUES
-    ('DEVELOPPEMENT'),
-    ('ANALYSE_ET_CONCEPTION');
+    ('equipe 1', 'DEVELOPPEMENT'),
+    ('equipe 2','ANALYSE_ET_CONCEPTION');
