@@ -34,7 +34,6 @@ public class EquipeService {
         Equipe equipe = equipeRepository.findById(id).get();
         composition.setTypeEquipe(equipe.getTypeEquipe());
         composition.setId(equipe.getId());
-        composition.setDerniereProposition(equipe.getDerniereProposition());
 
         MembresDTO[] membres = restTemplate.getForEntity(apiGateway + membresApi + "get", MembresDTO[].class).getBody();
         for (MembresDTO membre : membres) {

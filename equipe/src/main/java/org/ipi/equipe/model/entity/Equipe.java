@@ -24,8 +24,6 @@ public class Equipe {
     @Column(name = "type", nullable = false)
     private TypeEquipe typeEquipe;
 
-    @Column(name = "DERNIEREPROPOSITION")
-    private Date derniereProposition;
 
     public void integrerUtilisateur(){
 
