@@ -30,12 +30,15 @@ public class VoteService {
         PropositionDto propositionOfCurrentVote = prop.getBody();
         if (propositionOfCurrentVote != null) {
             if (propositionOfCurrentVote.statut == ENCOURS) {
+                // testé
                 logger.info("mise à jour proposition");
                 if (propositionOfCurrentVote.statut == ENCOURS) {
+                    // testé
                     logger.info("proposition en cours");
                     boolean voterInTheTeam = false;
                     for (Long equipe : propositionOfCurrentVote.equipes) {
                         if (equipe == voteEquipe) {
+                            // testé
                             logger.info("votant dans la bonne équipe");
                             voterInTheTeam = true;
                             break;
@@ -50,6 +53,7 @@ public class VoteService {
                             }
                         }
                         if (!voterAlreadyVoted) {
+                            // testé
                             logger.info("autorisé à voter");
                             propositionOfCurrentVote.votants.add(voterId);
                             // Compte des votes pour la proposition
@@ -58,21 +62,23 @@ public class VoteService {
                             propositionOfCurrentVote = concludeVote(propositionOfCurrentVote);
                             // Mettre à jour la proposition
                             if (propositionOfCurrentVote.statut == TERMINE) {
+                                // testé
                                 logger.info("la proposition a été votée");
                             }
                         } else {
-                            logger.info("déjà voté");
+                            // testé
+                            logger.info("ce votant a déjà voté");
                         }
                     } else {
+                        // testé
                         logger.info("votant dans la mauvaise équipe");
                     }
                 }
+            } else {
+                // testé
+                logger.info("proposion pas encore ouverte au vote");
             }
-
-        } else {
-            logger.info("proposion pas encore ouverte au vote");
         }
-
     }
 
     public PropositionDto calculateVote(PropositionDto proposition, VoteStatut voteStatut) {
