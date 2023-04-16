@@ -23,10 +23,6 @@ public class Membre {
     private String nom;
     @Column(name = "mdp", nullable = false)
     private String mdp;
-    @ElementCollection(targetClass=Long.class)
-    @CollectionTable(name = "PROPOSITIONS", joinColumns = @JoinColumn(name = "MEMBRE_ID"))
-    @Column(name = "PROPOSITION_ID")
-    private List<Long> propositions;
     @Column(name = "equipe", nullable = false)
     private Long equipe;
 

@@ -2,61 +2,51 @@
   {
     "nom": "Membre A",
     "mdp": "passA",
-    "propositions": [],
     "equipe": 3
   },
   {
     "nom": "Membre B",
     "mdp": "passB",
-    "propositions": [],
     "equipe": 3
   },
   {
     "nom": "Membre C",
     "mdp": "passC",
-    "propositions": [],
     "equipe": 3
   },
   {
     "nom": "Membre D",
     "mdp": "passD",
-    "propositions": [],
     "equipe": 3
   },
   {
     "nom": "Membre E",
     "mdp": "passE",
-    "propositions": [],
     "equipe": 3
   },
   {
     "nom": "Membre F",
     "mdp": "passF",
-    "propositions": [],
     "equipe": 4
   },
   {
     "nom": "Membre G",
     "mdp": "passG",
-    "propositions": [],
     "equipe": 4
   },
   {
     "nom": "Membre H",
     "mdp": "passH",
-    "propositions": [],
     "equipe": 4
   },
   {
     "nom": "Membre I",
     "mdp": "passI",
-    "propositions": [],
     "equipe": 4
   },
   {
     "nom": "Membre J",
     "mdp": "passJ",
-    "propositions": [],
     "equipe": 4
   }
 ]
