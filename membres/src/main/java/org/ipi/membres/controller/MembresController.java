@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -51,6 +52,12 @@ public class MembresController {
     public ResponseEntity<Long> deleteMembre(@PathVariable Long id){
         membresRepository.deleteById(id);
         return ResponseEntity.ok(id);
+    }
+
+    @PostMapping("/createMany")
+    public ResponseEntity<Membre[]> createMembres(@RequestBody Membre[] membres){
+        membresRepository.saveAll(Arrays.asList(membres));
+        return ResponseEntity.ok(membres);
     }
 
     /*
