@@ -20,26 +20,26 @@ public class MembreController {
     @Autowired
     private MembreRepository membresRepository;
 
-    //Create utilisateur
+    //Create membre
     @PostMapping("/create")
     public ResponseEntity<Membre> createMembre(@RequestBody Membre membre) {
         membresRepository.save(membre);
         return ResponseEntity.ok(membre);
     }
-    //Get utilisateurs
+    //Get membre
     @GetMapping("/get")
     public ResponseEntity<List<Membre>> getMembres(){
         List<Membre> membresList = membresRepository.findAll();
         logger.info(membresList.toString());
         return ResponseEntity.ok(membresList);
     }
-    //Get utilisateur by id
+    //Get membre by id
     @GetMapping("/get/{id}")
     public ResponseEntity<Membre> getMembresById(@PathVariable Long id){
         Membre membres = membresRepository.findById(id).get();
         return ResponseEntity.ok(membres);
     }
-    //Update utilisateur
+    //Update membre
     @PostMapping("/update/{id}")
     public ResponseEntity<Membre> updateMembre(@RequestBody Membre updatedMembres, @PathVariable Long id){
         Membre membres = membresRepository.findById(id).get();
@@ -47,13 +47,13 @@ public class MembreController {
         membresRepository.save(updatedMembres);
         return ResponseEntity.ok(updatedMembres);
     }
-
+    //Delete membre
     @GetMapping("/delete/{id}")
     public ResponseEntity<Long> deleteMembre(@PathVariable Long id){
         membresRepository.deleteById(id);
         return ResponseEntity.ok(id);
     }
-
+    //Create many membres
     @PostMapping("/createMany")
     public ResponseEntity<Membre[]> createMembres(@RequestBody Membre[] membres){
         membresRepository.saveAll(Arrays.asList(membres));

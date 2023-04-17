@@ -1,6 +1,5 @@
 package org.ipi.membre.service;
 
-import org.ipi.membre.model.Membre;
 import org.ipi.membre.repository.MembreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

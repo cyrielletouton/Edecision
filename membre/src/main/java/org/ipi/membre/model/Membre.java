@@ -25,8 +25,4 @@ public class Membre {
     private String mdp;
     @Column(name = "equipe", nullable = false)
     private Long equipe;
-
-    public void details(){
-
-    }
 }
