@@ -25,7 +25,7 @@ public class VoteService {
     RestTemplate restTemplate = new RestTemplate();
 
     public void updatePropositionAfterVote(long propId, long voterId, long voteEquipe, VoteStatut voteStatut) {
-        ResponseEntity<PropositionDto> prop = restTemplate.getForEntity(apiGateway + propositionApi + "/get/" + Long.toString(propId), PropositionDto.class);
+        ResponseEntity<PropositionDto> prop = restTemplate.getForEntity(apiGateway + propositionApi + "/get/" + propId, PropositionDto.class);
 
         PropositionDto propositionOfCurrentVote = prop.getBody();
         if (propositionOfCurrentVote != null) {
