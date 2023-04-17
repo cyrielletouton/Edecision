@@ -68,34 +68,4 @@ public class EquipeController {
     public ResponseEntity<CompositionEquipe> giveProjetToEquipe(@PathVariable Long equipeId, @PathVariable Long projetId){
         return ResponseEntity.ok(equipeService.updateProjetWithEquipe(equipeId, projetId));
     }
-
-/*
-    @GetMapping("/update/{id}/modifier-equipe")
-    public String modifierEquipeFormulaire(Model out, @PathVariable Long id){
-        Equipe equipe = equipeRepository.findById(id).get();
-        ///// TROUVE TOUS LES UTILISATEURS DISPONIBLES /////
-        ///// TROUVE TOUS LES PROJETS DISPONIBLES /////
-        List<Equipe> equipeList = equipeRepository.findAll();
-        HashSet<String> utilisateursList = new HashSet<>();
-        HashSet<String> findAllProjet = new HashSet<>();
-        for (Equipe equipeElmt : equipeList) {
-            utilisateursList.addAll(equipeElmt.getUtilisateurs());
-            //TODO: A voir si ça fonctionne vraiment si projet attribué à aucun utilisateur
-            findAllProjet.addAll(equipeElmt.getProjets());
-        }
-
-        out.addAttribute("findAllProjet", findAllProjet);
-        out.addAttribute("equipe", equipe);
-        out.addAttribute("tousUtilisateurs", utilisateursList);
-        return "modifier-equipe";
-    }
-
-    @GetMapping("/getHTML")
-    public String voirEquipes(Model out){
-        List<Equipe> equipeList = equipeRepository.findAll();
-        out.addAttribute("equipes", equipeList);
-        return "voir-equipes";
-    }
-
- */
 }
