@@ -1,13 +1,13 @@
-package org.ipi.membres;
+package org.ipi.membre;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MembresApplication {
+public class MembreApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MembresApplication.class, args);
+		SpringApplication.run(MembreApplication.class, args);
 	}
 
 }

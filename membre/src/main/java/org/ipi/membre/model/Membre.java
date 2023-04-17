@@ -1,4 +1,4 @@
-package org.ipi.membres.model;
+package org.ipi.membre.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

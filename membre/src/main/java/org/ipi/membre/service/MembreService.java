@@ -1,12 +1,9 @@
-package org.ipi.membres.service;
+package org.ipi.membre.service;
 
-import org.ipi.membres.model.Membre;
+import org.ipi.membre.model.Membre;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.Arrays;
 
 @Component
 public class MembreService {
