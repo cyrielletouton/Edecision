@@ -1,6 +1,5 @@
 package org.ipi.proposition.model;
 
-import javax.persistence.*;
 
 public class VoteDto {
     private Long id;

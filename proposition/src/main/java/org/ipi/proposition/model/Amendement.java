@@ -3,7 +3,6 @@ package org.ipi.proposition.model;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 
@@ -11,7 +10,6 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
-@Component
 @Table(name = "AMENDEMENTS")
 public class Amendement extends PropositionGenerale{
     @Id
