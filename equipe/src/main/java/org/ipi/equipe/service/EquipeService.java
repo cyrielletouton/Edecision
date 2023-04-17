@@ -52,7 +52,6 @@ public class EquipeService {
             }
         }
         composition.setMembres(membresIds);
-        //TODO: Projets, in the same way as Membres
         ProjetDTO[] projets = restTemplate.getForEntity(apiGateway + projetApi + "get", ProjetDTO[].class).getBody();
         for (ProjetDTO projet : projets) {
             Long projetId = projet.getId();

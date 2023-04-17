@@ -15,7 +15,9 @@ public class MembreService {
 
     RestTemplate restTemplate = new RestTemplate();
     
-    public void createMembreService(Membre membres){
+    public void createMembreService(Membre membre){
+        //Create membre
 
+        //Add membre to equipe
     }
 }
