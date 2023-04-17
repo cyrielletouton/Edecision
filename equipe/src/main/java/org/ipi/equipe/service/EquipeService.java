@@ -13,6 +13,9 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -29,6 +32,7 @@ public class EquipeService {
     RestTemplate restTemplate = new RestTemplate();
     @Autowired
     private EquipeRepository equipeRepository;
+    Logger logger = LoggerFactory.getLogger(EquipeService.class);
 
     public CompositionEquipe compositionEquipeService(Long id) {
         List<Long> membresIds = new ArrayList<>();
@@ -62,8 +66,7 @@ public class EquipeService {
         return composition;
     }
 
-    public CompositionEquipe updateProjetWithEquipe(Long projetId, Long equipeId){
-        CompositionEquipe compoEquipe = compositionEquipeService(equipeId);
+    public CompositionEquipe updateProjetWithEquipe(Long equipeId, Long projetId){
         ProjetDTO projet = restTemplate.getForEntity(apiGateway + projetApi + "get/" + projetId, ProjetDTO.class).getBody();
         if(projet != null){
             projet.getEquipes().add(equipeId);
@@ -71,7 +74,8 @@ public class EquipeService {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<ProjetDTO> request = new HttpEntity<>(projet, headers);
+        logger.info(apiGateway + projetApi + "/update/" + projetId);
         restTemplate.postForEntity( apiGateway + projetApi + "/update/" + projetId, request, String.class);
-        return compoEquipe;
+        return compositionEquipeService(equipeId);
     }
 }

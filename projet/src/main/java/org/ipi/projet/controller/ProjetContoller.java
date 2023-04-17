@@ -38,7 +38,7 @@ public class ProjetContoller {
     }
     //Update projet
     @PostMapping("/update/{id}")
-    public ResponseEntity<Projet>  updateProjetById(@RequestBody Projet updatedProjet, @RequestParam Long id) {
+    public ResponseEntity<Projet>  updateProjetById(@RequestBody Projet updatedProjet, @PathVariable Long id) {
         Projet projet = projetRepository.findById(id).get();
         updatedProjet.setId(projet.getId());
         projetRepository.save(updatedProjet);
