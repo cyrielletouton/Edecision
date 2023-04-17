@@ -59,41 +59,4 @@ public class MembreController {
         membresRepository.saveAll(Arrays.asList(membres));
         return ResponseEntity.ok(membres);
     }
-
-    /*
-        @GetMapping("/update/{id}/modifier-utilisateur")
-    public String modifierUtilisateurFormulaire(Model out,@PathVariable Long id){
-        List<Utilisateur> utilisateurList = membresRepository.findAll();
-        Utilisateur utilisateur = membresRepository.findById(id).get();
-        ///// TROUVE TOUTES LES EQUIPES DISPONIBLES /////
-        ///// TROUVE TOUTES LES PROPOSITIONS DISPONIBLES /////
-        HashSet<String> equipesListe = new HashSet<>();
-        HashSet<String> propositionsListe = new HashSet<>();
-        for (Utilisateur utilisateurItem : utilisateurList){
-            equipesListe.addAll(utilisateurItem.getEquipes());
-            propositionsListe.addAll(utilisateurItem.getPropositions());
-        }
-        out.addAttribute("utilisateur", utilisateur);
-        out.addAttribute("equipesListe", equipesListe);
-        out.addAttribute("propositionsListe", propositionsListe);
-
-        return "modifier-utilisateur";
-    }
-    @GetMapping("/create/creer-utilisateur")
-    public String creerUtilisateurFormulaire(Model out){
-        List<Membres> utilisateursListe = membresRepository.findAll();
-        ///// TROUVER TOUTES LES EQUIPES ET PROPOSITIONS DISPONIBLES /////
-        HashSet<String> equipesListe = new HashSet<>();
-        HashSet<String> propositionsListe = new HashSet<>();
-        for (Membres membres : utilisateursListe){
-            equipesListe.addAll(membres.getEquipes());
-            propositionsListe.addAll(membres.getPropositions());
-        }
-        out.addAttribute("equipesListe", equipesListe);
-        out.addAttribute("propositionsListe", propositionsListe);
-        out.addAttribute("utilisateur", new Membres());
-        return "creer-utilisateur";
-    }
-
-     */
 }

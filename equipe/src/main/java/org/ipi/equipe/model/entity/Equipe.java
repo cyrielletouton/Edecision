@@ -26,22 +26,4 @@ public class Equipe {
     @Enumerated(EnumType.STRING)
     @Column(name = "type", nullable = false)
     private TypeEquipe typeEquipe;
-
-
-    public void integrerUtilisateur(){
-
-    }
-
-    public void supprimerUtilisateur(){
-
-    }
-    public void creerEquipe(){
-
-    }
-    public void modifierEquipe(){
-
-    }
-    public void supprimerEquipe(){
-
-    }
 }
