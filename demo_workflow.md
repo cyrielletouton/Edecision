@@ -6,10 +6,16 @@
 
 POUR LA DEMO : 
 1. Création d'un projet
+   * vérifier que le projet existe
 2. Création de deux équipes sur ce projet
+   * vérifier que les deux équipes existent
 3. On ajoute l'équipe au projet
+   * vérifier que la composition de l'équipe (ajoute du projet)
 4. Création de dix membres répartis dans les équipes
+   * vérifier que les membres existent
+   * vérifier que la composition est bonne (ajout des membres)
 5. Un membre crée une proposition
+
 
 [//]: # (// OLD)
 
