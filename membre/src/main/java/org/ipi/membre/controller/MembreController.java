@@ -1,6 +1,6 @@
 package org.ipi.membre.controller;
 
-import org.ipi.membre.repository.MembresRepository;
+import org.ipi.membre.repository.MembreRepository;
 import org.ipi.membre.model.Membre;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,12 +13,12 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8080")
-public class MembresController {
+public class MembreController {
 
-    Logger logger = LoggerFactory.getLogger(MembresController.class);
+    Logger logger = LoggerFactory.getLogger(MembreController.class);
 
     @Autowired
-    private MembresRepository membresRepository;
+    private MembreRepository membresRepository;
 
     //Create utilisateur
     @PostMapping("/create")
