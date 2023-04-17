@@ -5,7 +5,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -30,14 +29,4 @@ public class Projet {
     @CollectionTable(name = "PROPOSITION", joinColumns = @JoinColumn(name = "PROJET_ID"))
     @Column(name = "PROPOSITION_ID")
     private List<Long> propositions;
-
-    //public void intégrerEquipe(){
-
-    //}
-    //public void supprimerEquipe(){}
-    public void creerProjet(){}
-    public void voirTousProjets(){}
-    public void voirProjetParId(){}
-    public void supprimerProjet(){}
-    public void mettreAJourProjet(){}
 }
