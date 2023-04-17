@@ -2,6 +2,7 @@ package org.ipi.proposition.controller;
 
 import org.ipi.proposition.model.Proposition;
 import org.ipi.proposition.repository.PropositionRepository;
+import org.ipi.proposition.service.PropositionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,11 +14,14 @@ import java.util.*;
 public class PropositionController {
     @Autowired
     private PropositionRepository propositionRepository;
+    @Autowired
+    private PropositionService propositionService;
 
     //Create proposition
     @PostMapping("/create")
     public ResponseEntity<Proposition> create(@RequestBody Proposition proposition){
         propositionRepository.save(proposition);
+        propositionService.updateProjetOfProposition(proposition.getId());
         return ResponseEntity.ok(proposition);
     }
     //Get all proposition

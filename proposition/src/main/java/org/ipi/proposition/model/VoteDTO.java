@@ -1,7 +1,7 @@
 package org.ipi.proposition.model;
 
 
-public class VoteDto {
+public class VoteDTO {
     private Long id;
     private String voteStatut;
     private Long utilisateur;
