@@ -1,6 +1,6 @@
 package org.ipi.proposition.model;
 
-public enum propositionStatut {
+public enum PropositionStatut {
     OUVERTE,
     ENCOURS,
     TERMINE;
