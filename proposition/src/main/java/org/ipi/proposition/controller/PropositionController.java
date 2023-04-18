@@ -21,6 +21,7 @@ public class PropositionController {
     @PostMapping("/create")
     public ResponseEntity<Proposition> create(@RequestBody Proposition proposition){
         propositionRepository.save(proposition);
+        propositionService.updatePropositionWithUserDetails(proposition.getProprietaire(), proposition.getProjetId());
         propositionService.updateProjetOfProposition(proposition.getId());
         return ResponseEntity.ok(proposition);
     }
@@ -44,7 +45,7 @@ public class PropositionController {
         //Find proposition by equipe id
         List<Proposition> propositionProprietaireList = new ArrayList<>();
         for (Proposition proposition : propositions){
-            int proprietaireID = proposition.getProprietaire();
+            long proprietaireID = proposition.getProprietaire();
                 if (proprietaireID == id){
                     propositionProprietaireList.add(proposition);
             }

@@ -18,9 +18,17 @@ public class PropositionService {
     private String apiGateway;
     @Value("${api.projet}")
     private String projetApi;
+    @Value("${api.equipe")
+    private String equipeApi;
     Logger logger = LoggerFactory.getLogger(PropositionController.class);
 
     RestTemplate restTemplate = new RestTemplate();
+
+    public void updatePropositionWithUserDetails(long proprietaireId, long projetId){
+        // get membre pour equipeId
+        // get compo equipe avec equipeId, pour projetId
+        ResponseEntity<EquipeDTO> equipe = restTemplate.getForEntity(apiGateway + equipe + "/get/" + proprietaireId, ProjetDTO.class);
+    }
 
     public void updateProjetOfProposition(long propositionId) {
         ResponseEntity<ProjetDTO> projet = restTemplate.getForEntity(apiGateway + projetApi + "/get/" + propositionId, ProjetDTO.class);

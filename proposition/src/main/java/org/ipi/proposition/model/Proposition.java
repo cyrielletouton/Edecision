@@ -25,7 +25,7 @@ public class Proposition extends PropositionGenerale{
     private String description;
     @Enumerated(EnumType.STRING)
     @Column(name = "statut", nullable = false)
-    private propositionStatut statut;
+    private PropositionStatut statut;
     @Column(name = "ESTACCEPTE", nullable = false)
     private boolean estAccepte;
     @Column(name = "MAXVOTE")
@@ -35,7 +35,7 @@ public class Proposition extends PropositionGenerale{
     @Column(name= "NBRABSTENTION")
     private int nbrAbstention;
     @Column(name = "PROPRIETAIRE")
-    private int proprietaire;
+    private long proprietaire;
     //Liste d'équipes
     @ElementCollection(targetClass=Integer.class)
     @CollectionTable(name = "EQUIPES", joinColumns = @JoinColumn(name = "PROPRIETAIRE"))
