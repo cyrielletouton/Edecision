@@ -45,10 +45,7 @@ public class Proposition extends PropositionGenerale{
     @CollectionTable(name = "VOTANTS", joinColumns = @JoinColumn(name = "EQUIPE_ID"))
     @Column(name = "VOTANTS_ID")
     private List<Long> votants;
-//    @Column(name = "DATEDEPOT")
-//    private Date dateDepot;
+    @Column(name = "PROJETID")
+    private Long projetId;
 
-    public void escalade(){
-
-    }
 }

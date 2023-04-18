@@ -11,7 +11,8 @@ CREATE TABLE propositions
     nbrVote     int           default NULL,
     nbrAbstention int default NULL,
     proprietaire bigint default NOT NULL,
-    votants int default NOT NULL
+    votants int default NOT NULL,
+    projetId int default NOT NULL
 );
 
 DROP TABLE IF EXISTS equipes;
