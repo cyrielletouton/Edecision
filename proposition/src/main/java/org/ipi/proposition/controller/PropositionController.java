@@ -1,8 +1,12 @@
 package org.ipi.proposition.controller;
 
+import org.ipi.proposition.model.EquipeDTO;
+import org.ipi.proposition.model.MembreDTO;
 import org.ipi.proposition.model.Proposition;
 import org.ipi.proposition.repository.PropositionRepository;
 import org.ipi.proposition.service.PropositionService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +16,7 @@ import java.util.*;
 @RestController
 @CrossOrigin(origins = "http://localhost:8080")
 public class PropositionController {
+    Logger logger = LoggerFactory.getLogger(PropositionController.class);
     @Autowired
     private PropositionRepository propositionRepository;
     @Autowired
@@ -20,8 +25,8 @@ public class PropositionController {
     //Create proposition
     @PostMapping("/create")
     public ResponseEntity<Proposition> create(@RequestBody Proposition proposition){
+        proposition = propositionService.updateProposition(proposition);
         propositionRepository.save(proposition);
-        propositionService.updatePropositionWithUserDetails(proposition.getProprietaire(), proposition.getProjetId());
         propositionService.updateProjetOfProposition(proposition.getId());
         return ResponseEntity.ok(proposition);
     }
