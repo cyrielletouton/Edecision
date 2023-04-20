@@ -5,7 +5,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Getter
@@ -21,12 +20,6 @@ public class Projet {
 
     @Column(name = "nom", nullable = false)
     private String nom;
-    @ElementCollection(targetClass=Long.class)
-    @CollectionTable(name = "EQUIPE", joinColumns = @JoinColumn(name = "PROJET_ID"))
-    @Column(name = "EQUIPE_ID")
-    private List<Long> equipes;
-    @ElementCollection(targetClass=Long.class)
-    @CollectionTable(name = "PROPOSITION", joinColumns = @JoinColumn(name = "PROJET_ID"))
-    @Column(name = "PROPOSITION_ID")
-    private List<Long> propositions;
+    @Column(name = "equipes", nullable = false)
+    private String equipes;
 }

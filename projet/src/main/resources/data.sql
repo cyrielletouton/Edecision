@@ -1,12 +1,3 @@
-INSERT INTO projet (nom)
+INSERT INTO projet (nom, equipes)
 VALUES
-  ('Projet 1');
-
-INSERT INTO equipe (projet_id,equipe_id)
-VALUES
-    ('1','1'),
-    ('1','2');
-
-INSERT INTO proposition (projet_id,proposition_id)
-VALUES
-    ('1','1');
+  ('Projet 1', '1,2');

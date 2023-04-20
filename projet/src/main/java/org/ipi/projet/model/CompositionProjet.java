@@ -1,4 +1,4 @@
-package org.ipi.equipe.model.dto;
+package org.ipi.projet.model;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -11,9 +11,10 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-public class ProjetDTO {
+public class CompositionProjet {
     private Long id;
+
     private String nom;
     private List<Long> equipes;
-
+    private List<Long> propositions;
 }
