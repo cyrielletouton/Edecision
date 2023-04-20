@@ -15,13 +15,6 @@ CREATE TABLE propositions
     projetId int default NOT NULL
 );
 
-DROP TABLE IF EXISTS equipes;
-
-CREATE TABLE equipes (
-                         equipe_id bigint NOT NULL,
-                         proprietaire bigint NOT NULL
-);
-
 DROP TABLE IF EXISTS amendements;
 
 CREATE TABLE amendements (

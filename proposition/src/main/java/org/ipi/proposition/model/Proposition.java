@@ -38,11 +38,6 @@ public class Proposition extends PropositionGenerale{
     private long proprietaire;
     @Column(name = "PROJETID")
     private Long projetId;
-    //Liste d'équipes
-    @ElementCollection(targetClass=Long.class)
-    @CollectionTable(name = "EQUIPES", joinColumns = @JoinColumn(name = "PROPRIETAIRE"))
-    @Column(name = "EQUIPE_ID")
-    private List<Long> equipes;
     @ElementCollection(targetClass=Long.class)
     @CollectionTable(name = "VOTANTS", joinColumns = @JoinColumn(name = "EQUIPE_ID"))
     @Column(name = "VOTANTS_ID")

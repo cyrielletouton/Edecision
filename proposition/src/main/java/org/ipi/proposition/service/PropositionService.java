@@ -1,10 +1,7 @@
 package org.ipi.proposition.service;
 
 import org.ipi.proposition.controller.PropositionController;
-import org.ipi.proposition.model.EquipeDTO;
-import org.ipi.proposition.model.MembreDTO;
-import org.ipi.proposition.model.ProjetDTO;
-import org.ipi.proposition.model.Proposition;
+import org.ipi.proposition.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -40,9 +38,10 @@ public class PropositionService {
             if(equipeOfProposition != null){
                 logger.info("equipe de la proposition trouvé");
                 // TODO : Vérifier que le membre peut faire une proposition sur ce projet
-                List<Long> equipes = proposition.getEquipes();
-                equipes.add(equipeOfProposition.id);
-                proposition.setEquipes(equipes);
+                //Partie commentée, car une proposition ne possède plus de champ équipe
+                //List<Long> equipes = proposition.getEquipes();
+                //equipes.add(equipeOfProposition.id);
+                //proposition.setEquipes(equipes);
                 updateProjetOfProposition(proposition.getId());
             } else {
                 throw new RuntimeException("membre non trouvé");
@@ -74,5 +73,16 @@ public class PropositionService {
         HttpEntity<ProjetDTO> request = new HttpEntity<>(projetOfProposition, headers);
         restTemplate.postForEntity( apiGateway + projetApi + "/update/" + projetOfProposition.getId(), request, String.class);
         logger.info("projet de la proposition mis à jour");
+    }
+
+    public void compositionProposition(Long proprietaireId){
+        CompositionPropositionDTO compositionProposition = new CompositionPropositionDTO();
+        List<Long> equipes = new ArrayList<>();
+
+        MembreDTO proprietaire = membreOfProposition(proprietaireId);
+        //Retrieving equipe
+        EquipeDTO equipeProprietaire = equipeOfProposition(proprietaire.equipe);
+        equipes.add(equipeProprietaire.id);
+        compositionProposition.setEquipes(equipes);
     }
 }
