@@ -17,8 +17,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.LongStream;
 
 @Component
 public class EquipeService {
@@ -55,7 +57,7 @@ public class EquipeService {
         ProjetDTO[] projets = restTemplate.getForEntity(apiGateway + projetApi + "get", ProjetDTO[].class).getBody();
         for (ProjetDTO projet : projets) {
             Long projetId = projet.getId();
-            for (Long equipeId : projet.getEquipes()) {
+            for (Long equipeId : stringToLongArray(projet.getEquipes())) {
                 if( equipeId == id){
                     projetsId.add(projetId);
                 }
@@ -68,7 +70,7 @@ public class EquipeService {
     public CompositionEquipe updateProjetWithEquipe(Long equipeId, Long projetId){
         ProjetDTO projet = restTemplate.getForEntity(apiGateway + projetApi + "get/" + projetId, ProjetDTO.class).getBody();
         if(projet != null){
-            projet.getEquipes().add(equipeId);
+            projet.setEquipes(addLongToString(projet.getEquipes(), equipeId));
         }
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -76,5 +78,20 @@ public class EquipeService {
         logger.info(apiGateway + projetApi + "/update/" + projetId);
         restTemplate.postForEntity( apiGateway + projetApi + "/update/" + projetId, request, String.class);
         return compositionEquipeService(equipeId);
+    }
+
+    private Long[] stringToLongArray(String str) {
+        String[] strArray = str.split(",");
+        return LongStream.range(0, strArray.length)
+                .mapToObj(i -> Long.parseLong(strArray[(int) i].trim()))
+                .toArray(Long[]::new);
+    }
+
+    public static String addLongToString(String equipes, Long newEquipe) {
+        String newLongStr = newEquipe.toString();
+        String[] strArray = equipes.split(",");
+        String[] newStrArray = Arrays.copyOf(strArray, strArray.length + 1);
+        newStrArray[strArray.length] = newLongStr;
+        return String.join(",", newStrArray);
     }
 }

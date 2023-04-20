@@ -5,8 +5,6 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
 @Getter
 @Setter
@@ -14,6 +12,6 @@ import java.util.List;
 public class ProjetDTO {
     private Long id;
     private String nom;
-    private List<Long> equipes;
+    private String equipes;
 
 }
