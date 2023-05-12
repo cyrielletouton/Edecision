@@ -24,12 +24,16 @@ public class VoteController {
     //Create vote
     @PostMapping("/create")
     public ResponseEntity<Vote> createVote(@RequestBody Vote vote){
-        voteRepository.save(vote);
-        logger.info("Vote saved:" + vote.toString());
-        logger.info(vote.getProposition().toString());
-        voteService.updatePropositionAfterVote(vote.getProposition(), vote.getMembre(), vote.getEquipe(), vote.getVoteStatut());
+        boolean createVote = voteService.updatePropositionAfterVote(vote.getProposition(), vote.getMembre(), vote.getEquipe(), vote.getVoteStatut());
 
-        return ResponseEntity.ok(vote);
+        if(createVote) {
+            voteRepository.save(vote);
+            logger.info("Vote saved:" + vote.toString());
+            logger.info(vote.getProposition().toString());
+            return ResponseEntity.ok(vote);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     //Get votes

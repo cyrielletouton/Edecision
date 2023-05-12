@@ -86,7 +86,6 @@ public class EquipeService {
     }
 
     private Long[] stringToLongArray(String str) {
-        //logger.info(str);
         String[] strArray = str.split(",");
         return LongStream.range(0, strArray.length)
                 .mapToObj(i -> Long.parseLong(strArray[(int) i].trim()))

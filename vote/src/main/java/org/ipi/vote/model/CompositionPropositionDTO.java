@@ -1,11 +1,10 @@
-package org.ipi.proposition.model;
+package org.ipi.vote.model;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.*;
 import java.util.List;
 
 @Getter
@@ -17,7 +16,7 @@ public class CompositionPropositionDTO {
     private Long id;
     private String titre;
     private String description;
-    private PropositionStatut statut;
+    private PropositionStatutDTO statut;
     private boolean estAccepte;
     private int maxVote;
     private int nbrVote;

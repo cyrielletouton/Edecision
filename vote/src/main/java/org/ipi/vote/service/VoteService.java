@@ -1,6 +1,7 @@
 package org.ipi.vote.service;
 
 import org.ipi.vote.controller.VoteController;
+import org.ipi.vote.model.CompositionPropositionDTO;
 import org.ipi.vote.model.PropositionDto;
 import org.ipi.vote.model.VoteStatut;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,8 +11,12 @@ import org.springframework.web.client.RestTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static org.ipi.vote.model.propositionStatutDto.ENCOURS;
-import static org.ipi.vote.model.propositionStatutDto.TERMINE;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.LongStream;
+
+import static org.ipi.vote.model.PropositionStatutDTO.ENCOURS;
+import static org.ipi.vote.model.PropositionStatutDTO.TERMINE;
 
 @Component
 public class VoteService {
@@ -24,58 +29,66 @@ public class VoteService {
 
     RestTemplate restTemplate = new RestTemplate();
 
-    public void updatePropositionAfterVote(long propId, long voterId, long voterEquipe, VoteStatut voteStatut) {
-        ResponseEntity<PropositionDto> prop = restTemplate.getForEntity(apiGateway + propositionApi + "/get/" + propId, PropositionDto.class);
+    public boolean updatePropositionAfterVote(long propId, long voterId, long voterEquipe, VoteStatut voteStatut) {
+        boolean createVote = false;
 
+        ResponseEntity<PropositionDto> prop = restTemplate.getForEntity(apiGateway + propositionApi + "/get/" + propId, PropositionDto.class);
         PropositionDto propositionOfCurrentVote = prop.getBody();
         if (propositionOfCurrentVote != null) {
             if (propositionOfCurrentVote.statut == ENCOURS) {
-                // testé
                 logger.info("mise à jour proposition, vote en cours");
-                    boolean voterInTheTeam = false;
-                    for (Long equipe : propositionOfCurrentVote.equipes) {
+                boolean voterInTheTeam = false;
+                // Récup la compo d'une proposition
+                ResponseEntity<CompositionPropositionDTO> compositionPropositionResponse = restTemplate.getForEntity(apiGateway + propositionApi + "/get/" + propId + "/composition", CompositionPropositionDTO.class);
+                CompositionPropositionDTO compositionProposition = compositionPropositionResponse.getBody();
+                if (compositionProposition != null) {
+                    for (Long equipe : compositionProposition.getEquipes()) {
                         if (equipe == voterEquipe) {
-                            // testé
                             logger.info("votant dans la bonne équipe");
                             voterInTheTeam = true;
                             break;
                         }
                     }
-                    if (voterInTheTeam) {
-                        boolean voterAlreadyVoted = false;
-                        for (Long votant : propositionOfCurrentVote.votants) {
-                            if (votant == voterId) {
-                                voterAlreadyVoted = true;
-                                break;
-                            }
-                        }
-                        if (!voterAlreadyVoted) {
-                            // testé
-                            logger.info("autorisé à voter");
-                            propositionOfCurrentVote.votants.add(voterId);
-                            // Compte des votes pour la proposition
-                            propositionOfCurrentVote = calculateVote(propositionOfCurrentVote, voteStatut);
-                            // Mise à jour du status des votes si nécessaire
-                            propositionOfCurrentVote = concludeVote(propositionOfCurrentVote);
-                            // Mettre à jour la proposition
-                            HttpHeaders headers = new HttpHeaders();
-                            headers.setContentType(MediaType.APPLICATION_JSON);
-                            HttpEntity<PropositionDto> request = new HttpEntity<>(propositionOfCurrentVote, headers);
-                            restTemplate.postForEntity( apiGateway + propositionApi + "/update/" + propositionOfCurrentVote.id, request, String.class);
+                }
 
-                        } else {
-                            // testé
-                            logger.info("ce votant a déjà voté");
+                if (voterInTheTeam) {
+                    boolean voterAlreadyVoted = false;
+                    for (Long votant : stringToLongArray(compositionProposition.getVotants())) {
+                        if (votant == voterId) {
+                            logger.info("pas autorisé à voter : déjà voté");
+                            voterAlreadyVoted = true;
+                            break;
                         }
+                    }
+                    if (!voterAlreadyVoted) {
+                        // testé
+                        logger.info("autorisé à voter");
+                        propositionOfCurrentVote.votants = addLongToString(propositionOfCurrentVote.votants, voterId);
+                        // Compte des votes pour la proposition
+                        propositionOfCurrentVote = calculateVote(propositionOfCurrentVote, voteStatut);
+                        // Mise à jour du status des votes si nécessaire
+                        propositionOfCurrentVote = concludeVote(propositionOfCurrentVote);
+                        // Mettre à jour la proposition
+                        HttpHeaders headers = new HttpHeaders();
+                        headers.setContentType(MediaType.APPLICATION_JSON);
+                        HttpEntity<PropositionDto> request = new HttpEntity<>(propositionOfCurrentVote, headers);
+                        restTemplate.postForEntity(apiGateway + propositionApi + "/update/" + propositionOfCurrentVote.id, request, String.class);
+                        createVote = true;
                     } else {
                         // testé
-                        logger.info("votant dans la mauvaise équipe");
+                        logger.info("ce votant a déjà voté");
                     }
+                } else {
+                    // testé
+                    logger.info("votant dans la mauvaise équipe");
+                }
             } else {
                 // testé
                 logger.info("proposition n'est pas en cours de vote");
             }
         }
+
+        return createVote;
     }
 
     public PropositionDto calculateVote(PropositionDto proposition, VoteStatut voteStatut) {
@@ -112,5 +125,25 @@ public class VoteService {
         }
 
         return proposition;
+    }
+
+    private Long[] stringToLongArray(String str) {
+        String[] strArray = str.split(",");
+        return LongStream.range(0, strArray.length)
+                .mapToObj(i -> Long.parseLong(strArray[(int) i].trim()))
+                .toArray(Long[]::new);
+    }
+
+    public String addLongToString(String votants, Long newVotant) {
+        if(votants.isBlank()){
+            return newVotant.toString();
+        }
+        else {
+            String newLongStr = newVotant.toString();
+            String[] strArray = votants.split(",");
+            String[] newStrArray = Arrays.copyOf(strArray, strArray.length + 1);
+            newStrArray[strArray.length] = newLongStr;
+            return String.join(",", newStrArray);
+        }
     }
 }

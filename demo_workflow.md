@@ -107,6 +107,7 @@ POUR LA DEMO :
    * get by equipe proposition (TODO)
 
 6. Voter pour une proposition
+   * Rendre la proposition votable
    * Vote pour la proposition (x2)
    * Vote contre la proposition (x2)
    * S'abstenir (x1)
