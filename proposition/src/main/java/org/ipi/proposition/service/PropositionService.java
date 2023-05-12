@@ -21,9 +21,9 @@ public class PropositionService {
     private String apiGateway;
     @Value("${api.projet}")
     private String projetApi;
-    @Value("${api.equipe")
+    @Value("${api.equipe}")
     private String equipeApi;
-    @Value("${api.membre")
+    @Value("${api.membre}")
     private String membreApi;
     Logger logger = LoggerFactory.getLogger(PropositionController.class);
 
