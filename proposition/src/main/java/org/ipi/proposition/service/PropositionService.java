@@ -5,10 +5,8 @@ import org.ipi.proposition.model.*;
 import org.ipi.proposition.repository.PropositionRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -29,11 +27,8 @@ public class PropositionService {
     Logger logger = LoggerFactory.getLogger(PropositionController.class);
 
     RestTemplate restTemplate = new RestTemplate();
-    private final PropositionRepository propositionRepository;
-
-    public PropositionService(PropositionRepository propositionRepository) {
-        this.propositionRepository = propositionRepository;
-    }
+    @Autowired
+    PropositionRepository propositionRepository;
 
     /*
     public Proposition updateProposition(Proposition proposition){
