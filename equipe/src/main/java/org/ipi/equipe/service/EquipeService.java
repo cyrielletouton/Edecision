@@ -67,7 +67,6 @@ public class EquipeService {
                     }
                 }
             }
-
         }
         composition.setProjets(projetsId);
         return composition;
@@ -87,13 +86,14 @@ public class EquipeService {
     }
 
     private Long[] stringToLongArray(String str) {
+        //logger.info(str);
         String[] strArray = str.split(",");
         return LongStream.range(0, strArray.length)
                 .mapToObj(i -> Long.parseLong(strArray[(int) i].trim()))
                 .toArray(Long[]::new);
     }
 
-    public static String addLongToString(String equipes, Long newEquipe) {
+    public String addLongToString(String equipes, Long newEquipe) {
         if(equipes.isBlank()){
             return newEquipe.toString();
         }
@@ -104,6 +104,5 @@ public class EquipeService {
             newStrArray[strArray.length] = newLongStr;
             return String.join(",", newStrArray);
         }
-
     }
 }
