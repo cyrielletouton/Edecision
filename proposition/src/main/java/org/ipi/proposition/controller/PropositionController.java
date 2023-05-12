@@ -1,5 +1,6 @@
 package org.ipi.proposition.controller;
 
+import org.ipi.proposition.model.CompositionPropositionDTO;
 import org.ipi.proposition.model.EquipeDTO;
 import org.ipi.proposition.model.MembreDTO;
 import org.ipi.proposition.model.Proposition;
@@ -70,5 +71,10 @@ public class PropositionController {
     public ResponseEntity<Long> delete(@PathVariable Long id){
         propositionRepository.deleteById(id);
         return ResponseEntity.ok(id);
+    }
+
+    @GetMapping("/get/{id}/composition")
+    public ResponseEntity<CompositionPropositionDTO> getComposition(@PathVariable Long id){
+        return ResponseEntity.ok(propositionService.compositionProposition(id));
     }
 }

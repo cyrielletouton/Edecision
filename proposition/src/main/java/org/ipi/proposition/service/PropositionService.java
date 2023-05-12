@@ -2,6 +2,7 @@ package org.ipi.proposition.service;
 
 import org.ipi.proposition.controller.PropositionController;
 import org.ipi.proposition.model.*;
+import org.ipi.proposition.repository.PropositionRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,6 +29,11 @@ public class PropositionService {
     Logger logger = LoggerFactory.getLogger(PropositionController.class);
 
     RestTemplate restTemplate = new RestTemplate();
+    private final PropositionRepository propositionRepository;
+
+    public PropositionService(PropositionRepository propositionRepository) {
+        this.propositionRepository = propositionRepository;
+    }
 
     public Proposition updateProposition(Proposition proposition){
         MembreDTO membreOfProposition = restTemplate.getForEntity(apiGateway + membreApi + "/get/" + proposition.getProprietaire(), MembreDTO.class).getBody();
@@ -80,14 +86,28 @@ public class PropositionService {
         logger.info("projet de la proposition mis à jour");
     }
 
-    public void compositionProposition(Long proprietaireId){
+    public CompositionPropositionDTO compositionProposition(Long propositionId){
+        Proposition proposition = propositionRepository.findById(propositionId).get();
         CompositionPropositionDTO compositionProposition = new CompositionPropositionDTO();
+        compositionProposition.setId(proposition.getId());
+        compositionProposition.setProprietaire(proposition.getProprietaire());
+        compositionProposition.setDescription(proposition.getDescription());
+        compositionProposition.setMaxVote(proposition.getMaxVote());
+        compositionProposition.setEstAccepte(proposition.isEstAccepte());
+        compositionProposition.setNbrAbstention(proposition.getNbrAbstention());
+        compositionProposition.setNbrVote(proposition.getNbrVote());
+        compositionProposition.setProjetId(proposition.getProjetId());
+        compositionProposition.setStatut(proposition.getStatut());
+        compositionProposition.setTitre(proposition.getTitre());
+        compositionProposition.setVotants(proposition.getVotants());
+
         List<Long> equipes = new ArrayList<>();
 
-        MembreDTO proprietaire = membreOfProposition(proprietaireId);
+        MembreDTO proprietaire = membreOfProposition(proposition.getProprietaire());
         //Retrieving equipe
         EquipeDTO equipeProprietaire = equipeOfProposition(proprietaire.equipe);
         equipes.add(equipeProprietaire.id);
         compositionProposition.setEquipes(equipes);
+        return compositionProposition;
     }
 }

@@ -25,5 +25,5 @@ public class CompositionPropositionDTO {
     private Long projetId;
     //Liste d'équipes
     private List<Long> equipes;
-    private List<Long> votants;
+    private String votants;
 }
