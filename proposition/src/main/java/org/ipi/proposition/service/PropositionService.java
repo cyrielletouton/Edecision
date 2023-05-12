@@ -35,6 +35,7 @@ public class PropositionService {
         this.propositionRepository = propositionRepository;
     }
 
+    /*
     public Proposition updateProposition(Proposition proposition){
         MembreDTO membreOfProposition = restTemplate.getForEntity(apiGateway + membreApi + "/get/" + proposition.getProprietaire(), MembreDTO.class).getBody();
         if (membreOfProposition != null){
@@ -57,6 +58,7 @@ public class PropositionService {
         }
         return proposition;
     }
+     */
 
     public MembreDTO membreOfProposition(long membreId){
         ResponseEntity<MembreDTO> membre = restTemplate.getForEntity(apiGateway + membreApi + "/get/" + membreId, MembreDTO.class);
@@ -68,6 +70,7 @@ public class PropositionService {
         return equipe.getBody();
     }
 
+    /*
     public void updateProjetOfProposition(long propositionId) {
         ResponseEntity<ProjetDTO> projet = restTemplate.getForEntity(apiGateway + projetApi + "/get/" + propositionId, ProjetDTO.class);
         List<Long> propositionsId = new ArrayList<>();
@@ -85,6 +88,7 @@ public class PropositionService {
         restTemplate.postForEntity( apiGateway + projetApi + "/update/" + projetOfProposition.getId(), request, String.class);
         logger.info("projet de la proposition mis à jour");
     }
+     */
 
     public CompositionPropositionDTO compositionProposition(Long propositionId){
         Proposition proposition = propositionRepository.findById(propositionId).get();
