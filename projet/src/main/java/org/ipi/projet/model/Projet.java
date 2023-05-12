@@ -20,6 +20,6 @@ public class Projet {
 
     @Column(name = "nom", nullable = false)
     private String nom;
-    @Column(name = "equipes", nullable = false)
+    @Column(name = "equipes", nullable = true)
     private String equipes;
 }
