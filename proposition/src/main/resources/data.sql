@@ -5,10 +5,3 @@ VALUES
 INSERT INTO amendements (contenu)
 VALUES
     ('Contenu 1');
-
-INSERT INTO votants (votants_id,equipe_id)
-VALUES
-    (2,1),
-    (3,1),
-    (4,1),
-    (5,1);

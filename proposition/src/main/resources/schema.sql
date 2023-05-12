@@ -11,7 +11,7 @@ CREATE TABLE propositions
     nbrVote     int           default NULL,
     nbrAbstention int default NULL,
     proprietaire bigint default NOT NULL,
-    votants int default NOT NULL,
+    votants varchar(5000) default NOT NULL,
     projetId int default NOT NULL
 );
 
@@ -20,11 +20,4 @@ DROP TABLE IF EXISTS amendements;
 CREATE TABLE amendements (
                              id bigint AUTO_INCREMENT PRIMARY KEY NOT NULL,
                              contenu varchar(255) default NOT NULL
-);
-
-DROP TABLE IF EXISTS votants;
-
-CREATE TABLE votants (
-                         votants_id bigint null,
-                         equipe_id bigint null
 );

@@ -25,7 +25,7 @@ public class PropositionController {
     //Create proposition
     @PostMapping("/create")
     public ResponseEntity<Proposition> create(@RequestBody Proposition proposition){
-        proposition = propositionService.updateProposition(proposition);
+        //proposition = propositionService.updateProposition(proposition);
         propositionRepository.save(proposition);
         propositionService.updateProjetOfProposition(proposition.getId());
         return ResponseEntity.ok(proposition);
