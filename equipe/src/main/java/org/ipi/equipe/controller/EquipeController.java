@@ -58,6 +58,7 @@ public class EquipeController {
         return ResponseEntity.ok(id);
     }
 
+    //TODO: Mettre les equipes dans les projets lors de la création d'une equipe qui appartient à un projet
     @PostMapping("/createMany")
     public ResponseEntity<Equipe[]> createMembres(@RequestBody Equipe[] equipes){
         equipeRepository.saveAll(Arrays.asList(equipes));

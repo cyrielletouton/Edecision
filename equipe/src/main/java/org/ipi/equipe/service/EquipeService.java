@@ -57,7 +57,7 @@ public class EquipeService {
         ProjetDTO[] projets = restTemplate.getForEntity(apiGateway + projetApi + "get", ProjetDTO[].class).getBody();
         for (ProjetDTO projet : projets) {
             Long projetId = projet.getId();
-            if (projet.getEquipes().length() == 1){
+            if (projet.getEquipes().isBlank()){
                 projetsId.add(projetId);
             }
             else {
@@ -81,8 +81,8 @@ public class EquipeService {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<ProjetDTO> request = new HttpEntity<>(projet, headers);
-        logger.info(apiGateway + projetApi + "/update/" + projetId);
-        restTemplate.postForEntity( apiGateway + projetApi + "/update/" + projetId, request, String.class);
+        logger.info(apiGateway + projetApi + "update/" + projetId);
+        restTemplate.postForEntity( apiGateway + projetApi + "update/" + projetId, request, String.class);
         return compositionEquipeService(equipeId);
     }
 
@@ -94,10 +94,16 @@ public class EquipeService {
     }
 
     public static String addLongToString(String equipes, Long newEquipe) {
-        String newLongStr = newEquipe.toString();
-        String[] strArray = equipes.split(",");
-        String[] newStrArray = Arrays.copyOf(strArray, strArray.length + 1);
-        newStrArray[strArray.length] = newLongStr;
-        return String.join(",", newStrArray);
+        if(equipes.isBlank()){
+            return newEquipe.toString();
+        }
+        else {
+            String newLongStr = newEquipe.toString();
+            String[] strArray = equipes.split(",");
+            String[] newStrArray = Arrays.copyOf(strArray, strArray.length + 1);
+            newStrArray[strArray.length] = newLongStr;
+            return String.join(",", newStrArray);
+        }
+
     }
 }
