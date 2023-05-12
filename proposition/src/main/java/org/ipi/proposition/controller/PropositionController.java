@@ -26,9 +26,8 @@ public class PropositionController {
     //Create proposition
     @PostMapping("/create")
     public ResponseEntity<Proposition> create(@RequestBody Proposition proposition){
-        //proposition = propositionService.updateProposition(proposition);
         propositionRepository.save(proposition);
-        //propositionService.updateProjetOfProposition(proposition.getId());
+        // TODO : Update le nb max de votants en se basant sur le nb de membres de l'équipe de la proposition.
         return ResponseEntity.ok(proposition);
     }
     //Get all proposition

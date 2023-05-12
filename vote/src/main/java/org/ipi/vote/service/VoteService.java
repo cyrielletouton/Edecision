@@ -53,13 +53,17 @@ public class VoteService {
 
                 if (voterInTheTeam) {
                     boolean voterAlreadyVoted = false;
-                    for (Long votant : stringToLongArray(compositionProposition.getVotants())) {
-                        if (votant == voterId) {
-                            logger.info("pas autorisé à voter : déjà voté");
-                            voterAlreadyVoted = true;
-                            break;
+                    // We need to check if voter already voted, only if al least one person already voted
+                    if(!compositionProposition.getVotants().isBlank()){
+                        for (Long votant : stringToLongArray(compositionProposition.getVotants())) {
+                            if (votant == voterId) {
+                                logger.info("pas autorisé à voter : déjà voté");
+                                voterAlreadyVoted = true;
+                                break;
+                            }
                         }
                     }
+
                     if (!voterAlreadyVoted) {
                         // testé
                         logger.info("autorisé à voter");
@@ -72,6 +76,7 @@ public class VoteService {
                         HttpHeaders headers = new HttpHeaders();
                         headers.setContentType(MediaType.APPLICATION_JSON);
                         HttpEntity<PropositionDto> request = new HttpEntity<>(propositionOfCurrentVote, headers);
+                        // TODO : faire un endpoint qui permet d'ajouter les votants plutôt qu'update toute la proposition
                         restTemplate.postForEntity(apiGateway + propositionApi + "/update/" + propositionOfCurrentVote.id, request, String.class);
                         createVote = true;
                     } else {

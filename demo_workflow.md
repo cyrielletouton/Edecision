@@ -12,6 +12,7 @@ POUR LA DEMO :
    "equipes": ""
    }`
    * vérifier que le projet existe
+   `http://localhost:8080/api/projet/get/2`
 2. Création de deux équipes sur ce projet
    `http://localhost:8080/api/equipe/createMany`
    `[
@@ -25,9 +26,11 @@ POUR LA DEMO :
    }
    ]`
    * vérifier que les deux équipes existent
+   `http://localhost:8080/api/equipe/get`
 3. On ajoute l'équipe au projet
    `http://localhost:8080/api/equipe/give/3/projet/2`
    * vérifier que la composition de l'équipe (ajout du projet)
+   `http://localhost:8080/api/equipe/get/3/composition`
 4. Création de dix membres répartis dans les équipes
    `http://localhost:8080/api/membre/createMany`
    `[
@@ -84,6 +87,7 @@ POUR LA DEMO :
    ]
    `
    * vérifier que les membres existent
+   `http://localhost:8080/api/membre/get`
    * vérifier que la composition est bonne (ajout des membres)
    `http://localhost:8080/api/equipe/get/3/composition`
 5. Un membre crée une proposition
@@ -108,7 +112,27 @@ POUR LA DEMO :
 
 6. Voter pour une proposition
    * Rendre la proposition votable
+   `http://localhost:8080/api/proposition/update/2`
+     `{
+     "titre": "test",
+     "description": "test",
+     "statut": "ENCOURS",
+     "estAccepte": false,
+     "maxVote": 5,
+     "nbrVote": 0,
+     "nbrAbstention": 0,
+     "proprietaire": 11,
+     "projetId": 2,
+     "votants": ""
+     }`
    * Vote pour la proposition (x2)
+   `http://localhost:8080/api/vote/create`
+   `{
+     "voteStatut": "POUR",
+     "membre": 11,
+     "proposition": 2,
+     "equipe": 3
+     }`
    * Vote contre la proposition (x2)
    * S'abstenir (x1)
 
