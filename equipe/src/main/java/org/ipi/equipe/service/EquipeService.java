@@ -57,11 +57,17 @@ public class EquipeService {
         ProjetDTO[] projets = restTemplate.getForEntity(apiGateway + projetApi + "get", ProjetDTO[].class).getBody();
         for (ProjetDTO projet : projets) {
             Long projetId = projet.getId();
-            for (Long equipeId : stringToLongArray(projet.getEquipes())) {
-                if( equipeId == id){
-                    projetsId.add(projetId);
+            if (projet.getEquipes().length() == 1){
+                projetsId.add(projetId);
+            }
+            else {
+                for (Long equipeId : stringToLongArray(projet.getEquipes())) {
+                    if( equipeId == id){
+                        projetsId.add(projetId);
+                    }
                 }
             }
+
         }
         composition.setProjets(projetsId);
         return composition;
