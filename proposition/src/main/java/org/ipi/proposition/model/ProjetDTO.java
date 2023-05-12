@@ -15,6 +15,6 @@ import java.util.List;
 public class ProjetDTO {
     public Long id;
     public String nom;
-    public List<Long> equipes;
+    public String equipes;
     public List<Long> propositions;
 }

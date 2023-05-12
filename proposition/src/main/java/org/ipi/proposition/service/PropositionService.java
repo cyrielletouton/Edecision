@@ -30,9 +30,9 @@ public class PropositionService {
     RestTemplate restTemplate = new RestTemplate();
 
     public Proposition updateProposition(Proposition proposition){
-        MembreDTO membreOfProposition = membreOfProposition(proposition.getProprietaire());
+        MembreDTO membreOfProposition = restTemplate.getForEntity(apiGateway + membreApi + "/get/" + proposition.getProprietaire(), MembreDTO.class).getBody();
         if (membreOfProposition != null){
-            EquipeDTO equipeOfProposition = equipeOfProposition(membreOfProposition.id);
+            EquipeDTO equipeOfProposition = equipeOfProposition(membreOfProposition.getEquipe());
             logger.info("membre de la proposition trouvé");
             proposition.setProprietaire(membreOfProposition.id);
             if(equipeOfProposition != null){
@@ -64,8 +64,13 @@ public class PropositionService {
 
     public void updateProjetOfProposition(long propositionId) {
         ResponseEntity<ProjetDTO> projet = restTemplate.getForEntity(apiGateway + projetApi + "/get/" + propositionId, ProjetDTO.class);
+        List<Long> propositionsId = new ArrayList<>();
         ProjetDTO projetOfProposition = projet.getBody();
         if(projetOfProposition != null){
+            if(projetOfProposition.getPropositions() == null){
+                propositionsId.add(propositionId);
+                projetOfProposition.setPropositions(propositionsId);
+            }
             projetOfProposition.getPropositions().add(propositionId);
         }
         HttpHeaders headers = new HttpHeaders();
