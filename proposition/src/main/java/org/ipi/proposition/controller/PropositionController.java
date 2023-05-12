@@ -43,11 +43,10 @@ public class PropositionController {
         Proposition proposition =  propositionRepository.findById(id).get();
         return ResponseEntity.ok(proposition);
     }
-    // TODO : to test, not if its works
+    // TODO : à faire
     @GetMapping("/get/byEquipe/{id}")
     public ResponseEntity<List<Proposition>> getPropositionByEquipeId(@PathVariable int id) {
         List<Proposition> propositions = propositionRepository.findAll();
-
         //Find proposition by equipe id
         List<Proposition> propositionProprietaireList = new ArrayList<>();
         for (Proposition proposition : propositions){
