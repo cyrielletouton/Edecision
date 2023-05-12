@@ -93,7 +93,7 @@ POUR LA DEMO :
    "description": "test",
    "statut": "OUVERTE",
    "estAccepte": false,
-   "maxVote": 0,
+   "maxVote": 5,
    "nbrVote": 0,
    "nbrAbstention": 0,
    "proprietaire": 11,
