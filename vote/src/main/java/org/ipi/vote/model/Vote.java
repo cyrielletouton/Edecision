@@ -28,7 +28,6 @@ public class Vote {
     private Long proposition;
     @Column(name = "equipe", nullable = false)
     private Long equipe;
-
     private void consulterResultats(){
 
     }
