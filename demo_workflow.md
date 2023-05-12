@@ -15,6 +15,9 @@ POUR LA DEMO :
    * vérifier que les membres existent
    * vérifier que la composition est bonne (ajout des membres)
 5. Un membre crée une proposition
+   * vérifier que la proposition existe
+   * vérifier la composition de la proposition
+   * get by equipe proposition
 
 
 [//]: # (// OLD)
