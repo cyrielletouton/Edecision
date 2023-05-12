@@ -24,20 +24,17 @@ public class VoteService {
 
     RestTemplate restTemplate = new RestTemplate();
 
-    public void updatePropositionAfterVote(long propId, long voterId, long voteEquipe, VoteStatut voteStatut) {
+    public void updatePropositionAfterVote(long propId, long voterId, long voterEquipe, VoteStatut voteStatut) {
         ResponseEntity<PropositionDto> prop = restTemplate.getForEntity(apiGateway + propositionApi + "/get/" + propId, PropositionDto.class);
 
         PropositionDto propositionOfCurrentVote = prop.getBody();
         if (propositionOfCurrentVote != null) {
             if (propositionOfCurrentVote.statut == ENCOURS) {
                 // testé
-                logger.info("mise à jour proposition");
-                if (propositionOfCurrentVote.statut == ENCOURS) {
-                    // testé
-                    logger.info("proposition en cours");
+                logger.info("mise à jour proposition, vote en cours");
                     boolean voterInTheTeam = false;
                     for (Long equipe : propositionOfCurrentVote.equipes) {
-                        if (equipe == voteEquipe) {
+                        if (equipe == voterEquipe) {
                             // testé
                             logger.info("votant dans la bonne équipe");
                             voterInTheTeam = true;
@@ -74,10 +71,9 @@ public class VoteService {
                         // testé
                         logger.info("votant dans la mauvaise équipe");
                     }
-                }
             } else {
                 // testé
-                logger.info("proposion pas encore ouverte au vote");
+                logger.info("proposition n'est pas en cours de vote");
             }
         }
     }
