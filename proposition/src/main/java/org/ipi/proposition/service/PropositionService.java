@@ -91,7 +91,6 @@ public class PropositionService {
         compositionProposition.setId(proposition.getId());
         compositionProposition.setProprietaire(proposition.getProprietaire());
         compositionProposition.setDescription(proposition.getDescription());
-        compositionProposition.setMaxVote(proposition.getMaxVote());
         compositionProposition.setEstAccepte(proposition.isEstAccepte());
         compositionProposition.setNbrAbstention(proposition.getNbrAbstention());
         compositionProposition.setNbrVote(proposition.getNbrVote());
@@ -107,6 +106,10 @@ public class PropositionService {
         EquipeDTO equipeProprietaire = equipeOfProposition(proprietaire.equipe);
         equipes.add(equipeProprietaire.id);
         compositionProposition.setEquipes(equipes);
+        //Récupérer le nombre de membres d'une équipe
+        CompositionEquipeDTO compositionEquipe = restTemplate.getForEntity(apiGateway + equipeApi + "/get/" + equipeProprietaire.getId() + "/composition", CompositionEquipeDTO.class).getBody();
+
+        compositionProposition.setMaxVote(compositionEquipe.getMembres().size());
         return compositionProposition;
     }
 }
