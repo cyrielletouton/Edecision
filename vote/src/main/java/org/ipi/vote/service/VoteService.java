@@ -128,6 +128,7 @@ public class VoteService {
                 proposition.statut = TERMINE;
                 proposition.estAccepte = false;
             }
+            // TODO : MISSING THE EQUAL CASE !!!!!!
         }
         if (proposition.statut == TERMINE) {
             // testé
