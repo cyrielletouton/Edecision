@@ -29,7 +29,27 @@ curl -X POST -H "Content-Type: application/json" -d "{\"titre\":\"test\",\"descr
 echo "Proposition updated"
 echo "\-/-\-/-/-\-/-\-/-\-/-\-/-\-/-\-/-\-/-\-/-\-/"
 
-echo "Voting : member 11"
+echo "Voting : member 11 (POUR)"
 curl -X POST -H "Content-Type: application/json" -d "{\"voteStatut\":\"POUR\",\"membre\":11,\"proposition\":2,\"equipe\":3}" http://localhost:8080/api/vote/create & echo.
+echo "Proposition voted"
+echo "\-/-\-/-/-\-/-\-/-\-/-\-/-\-/-\-/-\-/-\-/-\-/"
+
+echo "Voting : member 12 (POUR)"
+curl -X POST -H "Content-Type: application/json" -d "{\"voteStatut\":\"POUR\",\"membre\":12,\"proposition\":2,\"equipe\":3}" http://localhost:8080/api/vote/create & echo.
+echo "Proposition voted"
+echo "\-/-\-/-/-\-/-\-/-\-/-\-/-\-/-\-/-\-/-\-/-\-/"
+
+echo "Voting : member 13 (CONTRE)"
+curl -X POST -H "Content-Type: application/json" -d "{\"voteStatut\":\"CONTRE\",\"membre\":13,\"proposition\":2,\"equipe\":3}" http://localhost:8080/api/vote/create & echo.
+echo "Proposition voted"
+echo "\-/-\-/-/-\-/-\-/-\-/-\-/-\-/-\-/-\-/-\-/-\-/"
+
+echo "Voting : member 14 (CONTRE)"
+curl -X POST -H "Content-Type: application/json" -d "{\"voteStatut\":\"CONTRE\",\"membre\":14,\"proposition\":2,\"equipe\":3}" http://localhost:8080/api/vote/create & echo.
+echo "Proposition voted"
+echo "\-/-\-/-/-\-/-\-/-\-/-\-/-\-/-\-/-\-/-\-/-\-/"
+
+echo "Voting : member 15 (ABSTENTION)"
+curl -X POST -H "Content-Type: application/json" -d "{\"voteStatut\":\"CONTRE\",\"membre\":15,\"proposition\":2,\"equipe\":3}" http://localhost:8080/api/vote/create & echo.
 echo "Proposition voted"
 echo "\-/-\-/-/-\-/-\-/-\-/-\-/-\-/-\-/-\-/-\-/-\-/"
