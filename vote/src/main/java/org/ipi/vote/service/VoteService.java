@@ -12,11 +12,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.LongStream;
 
 import static org.ipi.vote.model.PropositionStatutDTO.ENCOURS;
 import static org.ipi.vote.model.PropositionStatutDTO.TERMINE;
+import static org.ipi.vote.model.VoteStatut.*;
 
 @Component
 public class VoteService {
@@ -66,10 +66,12 @@ public class VoteService {
 
                     if (!voterAlreadyVoted) {
                         // testé
-                        logger.info("autorisé à voter");
+                        logger.info("autorisé à voter : vote");
                         propositionOfCurrentVote.votants = addLongToString(propositionOfCurrentVote.votants, voterId);
                         // Compte des votes pour la proposition
-                        propositionOfCurrentVote = calculateVote(propositionOfCurrentVote, voteStatut);
+                        logger.info("nbr vote avant calculate : " + propositionOfCurrentVote.nbrVote);
+                        propositionOfCurrentVote = calculateVote(propositionOfCurrentVote, formatVoteStatut(voteStatut));
+                        logger.info("nbr vote après calculate : " + propositionOfCurrentVote.nbrVote);
                         // Mise à jour du status des votes si nécessaire
                         propositionOfCurrentVote = concludeVote(propositionOfCurrentVote);
                         // Mettre à jour la proposition
@@ -97,17 +99,20 @@ public class VoteService {
     }
 
     public PropositionDto calculateVote(PropositionDto proposition, VoteStatut voteStatut) {
-        if (voteStatut == VoteStatut.POUR) {
+        logger.info("enters calculate");
+        if (voteStatut == POUR) {
+            logger.info("enters POUR");
             proposition.nbrVote += 1;
-        } else if (voteStatut == VoteStatut.ABSTENTION) {
+        } else if (voteStatut == ABSTENTION) {
+            logger.info("enters ABSTENTION");
             proposition.nbrAbstention += 1;
             proposition.maxVote -= 1;
         }
-
         return proposition;
     }
 
     public PropositionDto concludeVote(PropositionDto proposition) {
+        logger.info("on est dans conclude vote");
         if (proposition.maxVote == proposition.nbrVote) {
             logger.info("nb maximum de votes");
             if (proposition.maxVote == 0) {
@@ -150,5 +155,17 @@ public class VoteService {
             newStrArray[strArray.length] = newLongStr;
             return String.join(",", newStrArray);
         }
+    }
+
+    public VoteStatut formatVoteStatut(VoteStatut statut) {
+        VoteStatut result;
+        if(statut.toString().contains("POUR")) {
+            result = POUR;
+        } else if(statut.toString().contains("CONTRE")){
+            result = CONTRE;
+        } else {
+            result = ABSTENTION;
+        }
+        return result;
     }
 }

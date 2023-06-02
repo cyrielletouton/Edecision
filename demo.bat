@@ -30,7 +30,7 @@ echo "Proposition updated"
 echo "\-/-\-/-/-\-/-\-/-\-/-\-/-\-/-\-/-\-/-\-/-\-/"
 
 echo "Voting : member 11 (POUR)"
-curl -X POST -H "Content-Type: application/json" -d "{\"voteStatut\":\"POUR\",\"membre\":11,\"proposition\":2,\"equipe\":3}" http://localhost:8080/api/vote/create & echo.
+curl -X POST -H "Content-Type: application/json" -d "{\"voteStatut\":\"POUR\",\"membre\":11,\"proposition\":2,\"equipe\":3}" http://localhost:8080/api/vote/create
 echo "Proposition voted"
 echo "\-/-\-/-/-\-/-\-/-\-/-\-/-\-/-\-/-\-/-\-/-\-/"
 
