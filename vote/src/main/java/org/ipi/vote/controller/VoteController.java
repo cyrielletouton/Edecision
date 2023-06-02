@@ -29,7 +29,6 @@ public class VoteController {
         if(createVote) {
             voteRepository.save(vote);
             logger.info("Vote saved:" + vote.toString());
-            logger.info(vote.getProposition().toString());
             return ResponseEntity.ok(vote);
         } else {
             return ResponseEntity.notFound().build();
