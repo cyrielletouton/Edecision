@@ -50,6 +50,6 @@ echo "Proposition voted"
 echo "\-/-\-/-/-\-/-\-/-\-/-\-/-\-/-\-/-\-/-\-/-\-/"
 
 echo "Voting : member 15 (ABSTENTION)"
-curl -X POST -H "Content-Type: application/json" -d "{\"voteStatut\":\"CONTRE\",\"membre\":15,\"proposition\":2,\"equipe\":3}" http://localhost:8080/api/vote/create & echo.
+curl -X POST -H "Content-Type: application/json" -d "{\"voteStatut\":\"ABSTENTION\",\"membre\":15,\"proposition\":2,\"equipe\":3}" http://localhost:8080/api/vote/create & echo.
 echo "Proposition voted"
 echo "\-/-\-/-/-\-/-\-/-\-/-\-/-\-/-\-/-\-/-\-/-\-/"
