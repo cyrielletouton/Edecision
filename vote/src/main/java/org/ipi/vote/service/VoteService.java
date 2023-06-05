@@ -147,7 +147,7 @@ public class VoteService {
                 proposition.statut = TERMINE;
                 proposition.estAccepte = false;
             }
-            if (realMajority < proposition.nbrVote) {
+            if (realMajority < proposition.nbrVote && proposition.maxVote != proposition.nbrAbstention) {
                 logger.info("proposition acceptée");
                 proposition.statut = TERMINE;
                 proposition.estAccepte = true;
@@ -159,6 +159,7 @@ public class VoteService {
             }
             if (realMajority == proposition.nbrVote){
                 logger.info("égalité");
+                // TODO
             }
         }
         if (proposition.statut == TERMINE) {
