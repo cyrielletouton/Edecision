@@ -85,9 +85,7 @@ public class VoteService {
                         CompositionPropositionDTO compositionPropositionUpdated = compositionPropositionResponseUpdated.getBody();
 
                         // Compte des votes pour la proposition
-                        logger.info("nbr vote avant calculate : " + propositionOfCurrentVote.nbrVote);
                         propositionOfCurrentVote = calculateVote(propositionOfCurrentVote, formatVoteStatut(voteStatut));
-                        logger.info("nbr vote après calculate : " + propositionOfCurrentVote.nbrVote);
                         // Mise à jour du status des votes si nécessaire
 
                         if (compositionPropositionUpdated != null){
@@ -131,20 +129,18 @@ public class VoteService {
         int majority = proposition.maxVote/2;
         // La vraie majorité est égale à la majorité moins le nb d'abstention (car abstention n'est pas comptabilisée comme un vote)
         int realMajority = majority - proposition.nbrAbstention;
-        logger.info("compositionProposition.getVotants() -- 1 " + compositionProposition.getVotants());
-
         // If no comme in the string of the composition, that means there is only one voter
         if(!compositionProposition.getVotants().contains(",")) {
             nbVotants = 1;
-            logger.info("compositionProposition.getVotants() -- 2" + compositionProposition.getVotants());
         } else {
-            logger.info("compositionProposition.getVotants() -- 3" + compositionProposition.getVotants());
             nbVotants = stringToLongArray(compositionProposition.getVotants()).length;
         }
+        logger.info("realMAJ = " + realMajority);
         logger.info("nb votants TOTAL : " + nbVotants);
+        logger.info("nbVote = " + proposition.nbrVote);
 
         // Il faut vérifier que le vote est terminé
-        if (proposition.maxVote == proposition.nbrVote) {
+        if (proposition.maxVote == nbVotants) {
             logger.info("tout les votants ont exprimés leur suffrage");
             if (proposition.maxVote == proposition.nbrAbstention) {
                 logger.info("proposition refusée, 100% d'abstention");
