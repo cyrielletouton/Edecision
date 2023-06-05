@@ -65,32 +65,43 @@ public class VoteService {
                     }
 
                     if (!voterAlreadyVoted) {
-                        // testé
                         logger.info("autorisé à voter : vote");
                         propositionOfCurrentVote.votants = addLongToString(propositionOfCurrentVote.votants, voterId);
+
+                        logger.info("ajouté au votants " + propositionOfCurrentVote.votants);
+
+                        // Mettre à jour la proposition APRES CALCUL ET CONCLUSION DU VOTE (votants => composition proposition)
+                        HttpHeaders headers = new HttpHeaders();
+                        headers.setContentType(MediaType.APPLICATION_JSON);
+                        HttpEntity<PropositionDto> request = new HttpEntity<>(propositionOfCurrentVote, headers);
+                        restTemplate.postForEntity(apiGateway + propositionApi + "/update/" + propositionOfCurrentVote.id, request, String.class);
+                        // Mise à jour de la composition de la proposition car celle-ci a changé
+                        ResponseEntity<CompositionPropositionDTO> compositionPropositionResponseUpdated = restTemplate.getForEntity(apiGateway + propositionApi + "/get/" + propId + "/composition", CompositionPropositionDTO.class);
+                        CompositionPropositionDTO compositionPropositionUpdated = compositionPropositionResponse.getBody();
+
                         // Compte des votes pour la proposition
                         logger.info("nbr vote avant calculate : " + propositionOfCurrentVote.nbrVote);
                         propositionOfCurrentVote = calculateVote(propositionOfCurrentVote, formatVoteStatut(voteStatut));
                         logger.info("nbr vote après calculate : " + propositionOfCurrentVote.nbrVote);
                         // Mise à jour du status des votes si nécessaire
-                        propositionOfCurrentVote = concludeVote(propositionOfCurrentVote, compositionProposition);
-                        // Mettre à jour la proposition
-                        HttpHeaders headers = new HttpHeaders();
-                        headers.setContentType(MediaType.APPLICATION_JSON);
-                        HttpEntity<PropositionDto> request = new HttpEntity<>(propositionOfCurrentVote, headers);
+
+                        propositionOfCurrentVote = concludeVote(propositionOfCurrentVote, compositionPropositionUpdated);
+
+                        // Mettre à jour la proposition APRES CALCUL ET CONCLUSION DU VOTE (statut proposition)
                         // TODO : faire un endpoint qui permet d'ajouter les votants plutôt qu'update toute la proposition
+                        headers = new HttpHeaders();
+                        headers.setContentType(MediaType.APPLICATION_JSON);
+                        request = new HttpEntity<>(propositionOfCurrentVote, headers);
                         restTemplate.postForEntity(apiGateway + propositionApi + "/update/" + propositionOfCurrentVote.id, request, String.class);
+
                         createVote = true;
                     } else {
-                        // testé
                         logger.info("ce votant a déjà voté");
                     }
                 } else {
-                    // testé
                     logger.info("votant dans la mauvaise équipe");
                 }
             } else {
-                // testé
                 logger.info("proposition n'est pas en cours de vote");
             }
         }
@@ -148,7 +159,6 @@ public class VoteService {
             }
         }
         if (proposition.statut == TERMINE) {
-            // testé
             logger.info("la proposition est clôturée");
         }
 
