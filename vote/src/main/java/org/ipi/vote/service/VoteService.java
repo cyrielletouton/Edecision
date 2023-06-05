@@ -75,9 +75,14 @@ public class VoteService {
                         headers.setContentType(MediaType.APPLICATION_JSON);
                         HttpEntity<PropositionDto> request = new HttpEntity<>(propositionOfCurrentVote, headers);
                         restTemplate.postForEntity(apiGateway + propositionApi + "/update/" + propositionOfCurrentVote.id, request, String.class);
+
+//                        // On récupère la proposition mise à jour
+//                        ResponseEntity<PropositionDto> propUpdated = restTemplate.getForEntity(apiGateway + propositionApi + "/get/" + propId, PropositionDto.class);
+//                        PropositionDto propositionOfCurrentVoteUpdated = prop.getBody();
+
                         // Mise à jour de la composition de la proposition car celle-ci a changé
                         ResponseEntity<CompositionPropositionDTO> compositionPropositionResponseUpdated = restTemplate.getForEntity(apiGateway + propositionApi + "/get/" + propId + "/composition", CompositionPropositionDTO.class);
-                        CompositionPropositionDTO compositionPropositionUpdated = compositionPropositionResponse.getBody();
+                        CompositionPropositionDTO compositionPropositionUpdated = compositionPropositionResponseUpdated.getBody();
 
                         // Compte des votes pour la proposition
                         logger.info("nbr vote avant calculate : " + propositionOfCurrentVote.nbrVote);
@@ -85,7 +90,9 @@ public class VoteService {
                         logger.info("nbr vote après calculate : " + propositionOfCurrentVote.nbrVote);
                         // Mise à jour du status des votes si nécessaire
 
-                        propositionOfCurrentVote = concludeVote(propositionOfCurrentVote, compositionPropositionUpdated);
+                        if (compositionPropositionUpdated != null){
+                            propositionOfCurrentVote = concludeVote(propositionOfCurrentVote, compositionPropositionUpdated);
+                        }
 
                         // Mettre à jour la proposition APRES CALCUL ET CONCLUSION DU VOTE (statut proposition)
                         // TODO : faire un endpoint qui permet d'ajouter les votants plutôt qu'update toute la proposition
