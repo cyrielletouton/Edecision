@@ -38,7 +38,6 @@ public class Proposition extends PropositionGenerale{
     private long proprietaire;
     @Column(name = "PROJETID")
     private Long projetId;
-
     @Column(name = "VOTANTS")
     private String votants;
 }
