@@ -11,7 +11,7 @@ echo "\-/-\-/-/-\-/-\-/-\-/-\-/-\-/-\-/-\-/-\-/-\-/"
 
 @echo off
 echo "Voting : member 11 (ABSTENTION)"
-curl -X POST -H "Content-Type: application/json" -d "{\"voteStatut\":\"ABSTENTION\",\"membre\":11,\"proposition\":4,\"equipe\":3}" http://localhost:8080/api/vote/create` & echo.
+curl -X POST -H "Content-Type: application/json" -d "{\"voteStatut\":\"ABSTENTION\",\"membre\":11,\"proposition\":4,\"equipe\":3}" http://localhost:8080/api/vote/create & echo.
 echo "Proposition voted"
 echo "\-/-\-/-/-\-/-\-/-\-/-\-/-\-/-\-/-\-/-\-/-\-/"
 
