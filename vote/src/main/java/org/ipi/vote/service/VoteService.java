@@ -73,7 +73,7 @@ public class VoteService {
                         propositionOfCurrentVote = calculateVote(propositionOfCurrentVote, formatVoteStatut(voteStatut));
                         logger.info("nbr vote après calculate : " + propositionOfCurrentVote.nbrVote);
                         // Mise à jour du status des votes si nécessaire
-                        propositionOfCurrentVote = concludeVote(propositionOfCurrentVote);
+                        propositionOfCurrentVote = concludeVote(propositionOfCurrentVote, compositionProposition);
                         // Mettre à jour la proposition
                         HttpHeaders headers = new HttpHeaders();
                         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -94,41 +94,58 @@ public class VoteService {
                 logger.info("proposition n'est pas en cours de vote");
             }
         }
-
         return createVote;
     }
 
     public PropositionDto calculateVote(PropositionDto proposition, VoteStatut voteStatut) {
-        logger.info("enters calculate");
         if (voteStatut == POUR) {
-            logger.info("enters POUR");
             proposition.nbrVote += 1;
-        } else if (voteStatut == ABSTENTION) {
-            logger.info("enters ABSTENTION");
+        }
+        if (voteStatut == ABSTENTION) {
             proposition.nbrAbstention += 1;
-            proposition.maxVote -= 1;
         }
         return proposition;
     }
 
-    public PropositionDto concludeVote(PropositionDto proposition) {
-        logger.info("on est dans conclude vote");
+    public PropositionDto concludeVote(PropositionDto proposition, CompositionPropositionDTO compositionProposition) {
+        int nbVotants;
+        // Majorité vaut la moitié du nombre max de vote
+        int majority = proposition.maxVote/2;
+        // La vraie majorité est égale à la majorité moins le nb d'abstention (car abstention n'est pas comptabilisée comme un vote)
+        int realMajority = majority - proposition.nbrAbstention;
+        logger.info("compositionProposition.getVotants() -- 1 " + compositionProposition.getVotants());
+
+        // If no comme in the string of the composition, that means there is only one voter
+        if(!compositionProposition.getVotants().contains(",")) {
+            nbVotants = 1;
+            logger.info("compositionProposition.getVotants() -- 2" + compositionProposition.getVotants());
+        } else {
+            logger.info("compositionProposition.getVotants() -- 3" + compositionProposition.getVotants());
+            nbVotants = stringToLongArray(compositionProposition.getVotants()).length;
+        }
+        logger.info("nb votants TOTAL : " + nbVotants);
+
+        // Il faut vérifier que le vote est terminé
         if (proposition.maxVote == proposition.nbrVote) {
-            logger.info("nb maximum de votes");
-            if (proposition.maxVote == 0) {
+            logger.info("tout les votants ont exprimés leur suffrage");
+            if (proposition.maxVote == proposition.nbrAbstention) {
                 logger.info("proposition refusée, 100% d'abstention");
                 proposition.statut = TERMINE;
                 proposition.estAccepte = false;
-            } else if ((proposition.maxVote / 2) - proposition.nbrAbstention < proposition.nbrVote) {
+            }
+            if (realMajority < proposition.nbrVote) {
                 logger.info("proposition acceptée");
                 proposition.statut = TERMINE;
                 proposition.estAccepte = true;
-            } else if (proposition.maxVote / 2 >= proposition.nbrVote) {
+            }
+            if (realMajority > proposition.nbrVote) {
                 logger.info("proposition refusée");
                 proposition.statut = TERMINE;
                 proposition.estAccepte = false;
             }
-            // TODO : MISSING THE EQUAL CASE !!!!!!
+            if (realMajority == proposition.nbrVote){
+                logger.info("égalité");
+            }
         }
         if (proposition.statut == TERMINE) {
             // testé
