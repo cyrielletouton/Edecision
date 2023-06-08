@@ -3,8 +3,10 @@ package org.ipi.vote.service;
 import org.ipi.vote.controller.VoteController;
 import org.ipi.vote.model.CompositionPropositionDTO;
 import org.ipi.vote.model.PropositionDto;
+import org.ipi.vote.model.Vote;
 import org.ipi.vote.model.VoteStatut;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -12,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.LongStream;
 
 import static org.ipi.vote.model.PropositionStatutDTO.ENCOURS;
@@ -25,6 +28,8 @@ public class VoteService {
     private String apiGateway;
     @Value("${api.proposition}")
     private String propositionApi;
+    @Value("${api.vote}")
+    private String voteApi;
     Logger logger = LoggerFactory.getLogger(VoteController.class);
 
     RestTemplate restTemplate = new RestTemplate();
@@ -76,10 +81,6 @@ public class VoteService {
                         HttpEntity<PropositionDto> request = new HttpEntity<>(propositionOfCurrentVote, headers);
                         restTemplate.postForEntity(apiGateway + propositionApi + "/update/" + propositionOfCurrentVote.id, request, String.class);
 
-//                        // On récupère la proposition mise à jour
-//                        ResponseEntity<PropositionDto> propUpdated = restTemplate.getForEntity(apiGateway + propositionApi + "/get/" + propId, PropositionDto.class);
-//                        PropositionDto propositionOfCurrentVoteUpdated = prop.getBody();
-
                         // Mise à jour de la composition de la proposition car celle-ci a changé
                         ResponseEntity<CompositionPropositionDTO> compositionPropositionResponseUpdated = restTemplate.getForEntity(apiGateway + propositionApi + "/get/" + propId + "/composition", CompositionPropositionDTO.class);
                         CompositionPropositionDTO compositionPropositionUpdated = compositionPropositionResponseUpdated.getBody();
@@ -125,17 +126,15 @@ public class VoteService {
 
     public PropositionDto concludeVote(PropositionDto proposition, CompositionPropositionDTO compositionProposition) {
         int nbVotants;
-        // Majorité vaut la moitié du nombre max de vote
-        int majority = proposition.maxVote/2;
-        // La vraie majorité est égale à la majorité moins le nb d'abstention (car abstention n'est pas comptabilisée comme un vote)
-        int realMajority = majority - proposition.nbrAbstention;
+        // Majorité vaut la moitié du nombre max de vote - abstention
+        int majority = (proposition.maxVote - proposition.nbrAbstention)/2;
         // If no comme in the string of the composition, that means there is only one voter
         if(!compositionProposition.getVotants().contains(",")) {
             nbVotants = 1;
         } else {
             nbVotants = stringToLongArray(compositionProposition.getVotants()).length;
         }
-        logger.info("realMAJ = " + realMajority);
+        logger.info("MAJ = " + majority);
         logger.info("nb votants TOTAL : " + nbVotants);
         logger.info("nbVote = " + proposition.nbrVote);
 
@@ -147,19 +146,36 @@ public class VoteService {
                 proposition.statut = TERMINE;
                 proposition.estAccepte = false;
             }
-            if (realMajority < proposition.nbrVote && proposition.maxVote != proposition.nbrAbstention) {
+            if (majority < proposition.nbrVote && proposition.maxVote != proposition.nbrAbstention) {
                 logger.info("proposition acceptée");
                 proposition.statut = TERMINE;
                 proposition.estAccepte = true;
             }
-            if (realMajority > proposition.nbrVote) {
+            if (majority > proposition.nbrVote) {
                 logger.info("proposition refusée");
                 proposition.statut = TERMINE;
                 proposition.estAccepte = false;
             }
-            if (realMajority == proposition.nbrVote){
+            if (majority == proposition.nbrVote && majority != 0){
                 logger.info("égalité");
-                // TODO
+                //Get vote by proposition ID
+                ResponseEntity<List<Vote>> votesResponse = restTemplate.exchange(
+                        apiGateway + voteApi + "/get/byPropositionId/" + proposition.id,
+                        HttpMethod.GET,
+                        null,
+                        new ParameterizedTypeReference<List<Vote>>() {}
+                );
+                List<Vote> votes = votesResponse.getBody();
+                if (votes != null){
+                    for (Vote vote : votes) {
+                        if (vote.getMembre() == proposition.proprietaire) {
+                            proposition.statut = TERMINE;
+                            proposition.estAccepte = true;
+                            break;
+                        }
+                    }
+                }
+                logger.info("la proposition est accepté (propriétaire majoritaire)");
             }
         }
         if (proposition.statut == TERMINE) {
