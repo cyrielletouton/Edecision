@@ -1,7 +1,7 @@
 package org.ipi.membre.controller;
 
 import org.ipi.membre.repository.MembreRepository;
-import org.ipi.membre.model.Membre;
+import org.ipi.membre.entity.Membre;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

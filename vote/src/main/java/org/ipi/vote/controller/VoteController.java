@@ -1,6 +1,6 @@
 package org.ipi.vote.controller;
 
-import org.ipi.vote.model.Vote;
+import org.ipi.vote.entity.Vote;
 import org.ipi.vote.repository.VoteRepository;
 import org.ipi.vote.service.VoteService;
 import org.slf4j.Logger;

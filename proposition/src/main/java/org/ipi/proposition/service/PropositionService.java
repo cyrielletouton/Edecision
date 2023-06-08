@@ -1,6 +1,7 @@
 package org.ipi.proposition.service;
 
 import org.ipi.proposition.controller.PropositionController;
+import org.ipi.proposition.entity.Proposition;
 import org.ipi.proposition.model.*;
 import org.ipi.proposition.repository.PropositionRepository;
 import org.slf4j.Logger;
@@ -30,64 +31,19 @@ public class PropositionService {
     @Autowired
     PropositionRepository propositionRepository;
 
-    /*
-    public Proposition updateProposition(Proposition proposition){
-        MembreDTO membreOfProposition = restTemplate.getForEntity(apiGateway + membreApi + "/get/" + proposition.getProprietaire(), MembreDTO.class).getBody();
-        if (membreOfProposition != null){
-            EquipeDTO equipeOfProposition = equipeOfProposition(membreOfProposition.getEquipe());
-            logger.info("membre de la proposition trouvé");
-            proposition.setProprietaire(membreOfProposition.id);
-            if(equipeOfProposition != null){
-                logger.info("equipe de la proposition trouvé");
-                // TODO : Vérifier que le membre peut faire une proposition sur ce projet
-                //Partie commentée, car une proposition ne possède plus de champ équipe
-                //List<Long> equipes = proposition.getEquipes();
-                //equipes.add(equipeOfProposition.id);
-                //proposition.setEquipes(equipes);
-                updateProjetOfProposition(proposition.getId());
-            } else {
-                throw new RuntimeException("membre non trouvé");
-            }
-        } else {
-            throw new RuntimeException("équipe non trouvé");
-        }
-        return proposition;
-    }
-     */
-
-    public MembreDTO membreOfProposition(long membreId){
-        ResponseEntity<MembreDTO> membre = restTemplate.getForEntity(apiGateway + membreApi + "/get/" + membreId, MembreDTO.class);
+    public MembreModel membreOfProposition(long membreId){
+        ResponseEntity<MembreModel> membre = restTemplate.getForEntity(apiGateway + membreApi + "/get/" + membreId, MembreModel.class);
         return membre.getBody();
     }
 
-    public EquipeDTO equipeOfProposition(long equipeId){
-        ResponseEntity<EquipeDTO> equipe = restTemplate.getForEntity(apiGateway + equipeApi + "/get/" + equipeId, EquipeDTO.class);
+    public EquipeModel equipeOfProposition(long equipeId){
+        ResponseEntity<EquipeModel> equipe = restTemplate.getForEntity(apiGateway + equipeApi + "/get/" + equipeId, EquipeModel.class);
         return equipe.getBody();
     }
 
-    /*
-    public void updateProjetOfProposition(long propositionId) {
-        ResponseEntity<ProjetDTO> projet = restTemplate.getForEntity(apiGateway + projetApi + "/get/" + propositionId, ProjetDTO.class);
-        List<Long> propositionsId = new ArrayList<>();
-        ProjetDTO projetOfProposition = projet.getBody();
-        if(projetOfProposition != null){
-            if(projetOfProposition.getPropositions() == null){
-                propositionsId.add(propositionId);
-                projetOfProposition.setPropositions(propositionsId);
-            }
-            projetOfProposition.getPropositions().add(propositionId);
-        }
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<ProjetDTO> request = new HttpEntity<>(projetOfProposition, headers);
-        restTemplate.postForEntity( apiGateway + projetApi + "/update/" + projetOfProposition.getId(), request, String.class);
-        logger.info("projet de la proposition mis à jour");
-    }
-     */
-
-    public CompositionPropositionDTO compositionProposition(Long propositionId){
+    public CompositionPropositionModel compositionProposition(Long propositionId){
         Proposition proposition = propositionRepository.findById(propositionId).get();
-        CompositionPropositionDTO compositionProposition = new CompositionPropositionDTO();
+        CompositionPropositionModel compositionProposition = new CompositionPropositionModel();
         compositionProposition.setId(proposition.getId());
         compositionProposition.setProprietaire(proposition.getProprietaire());
         compositionProposition.setDescription(proposition.getDescription());
@@ -101,13 +57,13 @@ public class PropositionService {
 
         List<Long> equipes = new ArrayList<>();
 
-        MembreDTO proprietaire = membreOfProposition(proposition.getProprietaire());
+        MembreModel proprietaire = membreOfProposition(proposition.getProprietaire());
         //Retrieving equipe
-        EquipeDTO equipeProprietaire = equipeOfProposition(proprietaire.equipe);
+        EquipeModel equipeProprietaire = equipeOfProposition(proprietaire.equipe);
         equipes.add(equipeProprietaire.id);
         compositionProposition.setEquipes(equipes);
         //Récupérer le nombre de membres d'une équipe
-        CompositionEquipeDTO compositionEquipe = restTemplate.getForEntity(apiGateway + equipeApi + "/get/" + equipeProprietaire.getId() + "/composition", CompositionEquipeDTO.class).getBody();
+        CompositionEquipeModel compositionEquipe = restTemplate.getForEntity(apiGateway + equipeApi + "/get/" + equipeProprietaire.getId() + "/composition", CompositionEquipeModel.class).getBody();
 
         compositionProposition.setMaxVote(compositionEquipe.getMembres().size());
         return compositionProposition;

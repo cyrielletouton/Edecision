@@ -1,12 +1,11 @@
 package org.ipi.projet.controller;
 
-import org.ipi.projet.model.Projet;
+import org.ipi.projet.entity.Projet;
 import org.ipi.projet.repository.ProjetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
 import java.util.List;
 
 @RestController

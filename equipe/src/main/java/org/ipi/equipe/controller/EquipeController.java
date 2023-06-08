@@ -1,14 +1,13 @@
 package org.ipi.equipe.controller;
 
-import org.ipi.equipe.model.CompositionEquipe;
-import org.ipi.equipe.model.entity.Equipe;
+import org.ipi.equipe.model.CompositionEquipeModel;
+import org.ipi.equipe.entity.Equipe;
 import org.ipi.equipe.repository.EquipeRepository;
 import org.ipi.equipe.service.EquipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.List;
 
 //Base path is /api/equipe/
@@ -39,7 +38,7 @@ public class EquipeController {
         return ResponseEntity.ok(equipe);
     }
     @GetMapping("/get/{id}/composition")
-    public ResponseEntity<CompositionEquipe> getCompositionEquipe(@PathVariable Long id){
+    public ResponseEntity<CompositionEquipeModel> getCompositionEquipe(@PathVariable Long id){
         return ResponseEntity.ok(equipeService.compositionEquipeService(id));
 
     }
@@ -58,15 +57,8 @@ public class EquipeController {
         return ResponseEntity.ok(id);
     }
 
-    //TODO: Mettre les equipes dans les projets lors de la création d'une equipe qui appartient à un projet
-    @PostMapping("/createMany")
-    public ResponseEntity<Equipe[]> createMembres(@RequestBody Equipe[] equipes){
-        equipeRepository.saveAll(Arrays.asList(equipes));
-        return ResponseEntity.ok(equipes);
-    }
-
     @PostMapping("/give/{equipeId}/projet/{projetId}")
-    public ResponseEntity<CompositionEquipe> giveProjetToEquipe(@PathVariable Long equipeId, @PathVariable Long projetId){
+    public ResponseEntity<CompositionEquipeModel> giveProjetToEquipe(@PathVariable Long equipeId, @PathVariable Long projetId){
         return ResponseEntity.ok(equipeService.updateProjetWithEquipe(equipeId, projetId));
     }
 }

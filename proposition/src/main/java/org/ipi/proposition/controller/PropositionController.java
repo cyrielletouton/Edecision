@@ -1,9 +1,7 @@
 package org.ipi.proposition.controller;
 
-import org.ipi.proposition.model.CompositionPropositionDTO;
-import org.ipi.proposition.model.EquipeDTO;
-import org.ipi.proposition.model.MembreDTO;
-import org.ipi.proposition.model.Proposition;
+import org.ipi.proposition.model.CompositionPropositionModel;
+import org.ipi.proposition.entity.Proposition;
 import org.ipi.proposition.repository.PropositionRepository;
 import org.ipi.proposition.service.PropositionService;
 import org.slf4j.Logger;
@@ -42,7 +40,7 @@ public class PropositionController {
         Proposition proposition =  propositionRepository.findById(id).get();
         return ResponseEntity.ok(proposition);
     }
-    // TODO : à faire
+
     @GetMapping("/get/byEquipe/{id}")
     public ResponseEntity<List<Proposition>> getPropositionByEquipeId(@PathVariable int id) {
         List<Proposition> propositions = propositionRepository.findAll();
@@ -72,7 +70,7 @@ public class PropositionController {
     }
 
     @GetMapping("/get/{id}/composition")
-    public ResponseEntity<CompositionPropositionDTO> getComposition(@PathVariable Long id){
+    public ResponseEntity<CompositionPropositionModel> getComposition(@PathVariable Long id){
         return ResponseEntity.ok(propositionService.compositionProposition(id));
     }
 }

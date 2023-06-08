@@ -1,10 +1,10 @@
 package org.ipi.vote.service;
 
 import org.ipi.vote.controller.VoteController;
-import org.ipi.vote.model.CompositionPropositionDTO;
-import org.ipi.vote.model.PropositionDto;
-import org.ipi.vote.model.Vote;
-import org.ipi.vote.model.VoteStatut;
+import org.ipi.vote.model.CompositionPropositionModel;
+import org.ipi.vote.model.PropositionModel;
+import org.ipi.vote.entity.Vote;
+import org.ipi.vote.entity.misc.VoteStatut;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
@@ -17,9 +17,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.LongStream;
 
-import static org.ipi.vote.model.PropositionStatutDTO.ENCOURS;
-import static org.ipi.vote.model.PropositionStatutDTO.TERMINE;
-import static org.ipi.vote.model.VoteStatut.*;
+import static org.ipi.vote.model.PropositionStatutModel.ENCOURS;
+import static org.ipi.vote.model.PropositionStatutModel.TERMINE;
+import static org.ipi.vote.entity.misc.VoteStatut.*;
 
 @Component
 public class VoteService {
@@ -37,15 +37,15 @@ public class VoteService {
     public boolean updatePropositionAfterVote(long propId, long voterId, long voterEquipe, VoteStatut voteStatut) {
         boolean createVote = false;
 
-        ResponseEntity<PropositionDto> prop = restTemplate.getForEntity(apiGateway + propositionApi + "/get/" + propId, PropositionDto.class);
-        PropositionDto propositionOfCurrentVote = prop.getBody();
+        ResponseEntity<PropositionModel> prop = restTemplate.getForEntity(apiGateway + propositionApi + "/get/" + propId, PropositionModel.class);
+        PropositionModel propositionOfCurrentVote = prop.getBody();
         if (propositionOfCurrentVote != null) {
             if (propositionOfCurrentVote.statut == ENCOURS) {
                 logger.info("mise à jour proposition, vote en cours");
                 boolean voterInTheTeam = false;
                 // Récup la compo d'une proposition
-                ResponseEntity<CompositionPropositionDTO> compositionPropositionResponse = restTemplate.getForEntity(apiGateway + propositionApi + "/get/" + propId + "/composition", CompositionPropositionDTO.class);
-                CompositionPropositionDTO compositionProposition = compositionPropositionResponse.getBody();
+                ResponseEntity<CompositionPropositionModel> compositionPropositionResponse = restTemplate.getForEntity(apiGateway + propositionApi + "/get/" + propId + "/composition", CompositionPropositionModel.class);
+                CompositionPropositionModel compositionProposition = compositionPropositionResponse.getBody();
                 if (compositionProposition != null) {
                     for (Long equipe : compositionProposition.getEquipes()) {
                         if (equipe == voterEquipe) {
@@ -78,12 +78,12 @@ public class VoteService {
                         // Mettre à jour la proposition APRES CALCUL ET CONCLUSION DU VOTE (votants => composition proposition)
                         HttpHeaders headers = new HttpHeaders();
                         headers.setContentType(MediaType.APPLICATION_JSON);
-                        HttpEntity<PropositionDto> request = new HttpEntity<>(propositionOfCurrentVote, headers);
+                        HttpEntity<PropositionModel> request = new HttpEntity<>(propositionOfCurrentVote, headers);
                         restTemplate.postForEntity(apiGateway + propositionApi + "/update/" + propositionOfCurrentVote.id, request, String.class);
 
                         // Mise à jour de la composition de la proposition car celle-ci a changé
-                        ResponseEntity<CompositionPropositionDTO> compositionPropositionResponseUpdated = restTemplate.getForEntity(apiGateway + propositionApi + "/get/" + propId + "/composition", CompositionPropositionDTO.class);
-                        CompositionPropositionDTO compositionPropositionUpdated = compositionPropositionResponseUpdated.getBody();
+                        ResponseEntity<CompositionPropositionModel> compositionPropositionResponseUpdated = restTemplate.getForEntity(apiGateway + propositionApi + "/get/" + propId + "/composition", CompositionPropositionModel.class);
+                        CompositionPropositionModel compositionPropositionUpdated = compositionPropositionResponseUpdated.getBody();
 
                         // Compte des votes pour la proposition
                         propositionOfCurrentVote = calculateVote(propositionOfCurrentVote, formatVoteStatut(voteStatut));
@@ -114,7 +114,7 @@ public class VoteService {
         return createVote;
     }
 
-    public PropositionDto calculateVote(PropositionDto proposition, VoteStatut voteStatut) {
+    public PropositionModel calculateVote(PropositionModel proposition, VoteStatut voteStatut) {
         if (voteStatut == POUR) {
             proposition.nbrVote += 1;
         }
@@ -124,7 +124,7 @@ public class VoteService {
         return proposition;
     }
 
-    public PropositionDto concludeVote(PropositionDto proposition, CompositionPropositionDTO compositionProposition) {
+    public PropositionModel concludeVote(PropositionModel proposition, CompositionPropositionModel compositionProposition) {
         int nbVotants;
         // Majorité vaut la moitié du nombre max de vote - abstention
         int majority = (proposition.maxVote - proposition.nbrAbstention)/2;
