@@ -14,6 +14,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.LongStream;
 
 @Component
 public class PropositionService {
@@ -30,6 +31,15 @@ public class PropositionService {
     RestTemplate restTemplate = new RestTemplate();
     @Autowired
     PropositionRepository propositionRepository;
+
+    public void createPropositionService(Proposition proposition){
+
+        MembreModel proprietaire = membreOfProposition(proposition.getProprietaire());
+        EquipeModel equipeProprietaire = equipeOfProposition(proprietaire.equipe);
+        CompositionEquipeModel compositionEquipe = restTemplate.getForEntity(apiGateway + equipeApi + "/get/" + equipeProprietaire.getId() + "/composition", CompositionEquipeModel.class).getBody();
+        proposition.setMaxVote(compositionEquipe.getMembres().size());
+        propositionRepository.save(proposition);
+    }
 
     public MembreModel membreOfProposition(long membreId){
         ResponseEntity<MembreModel> membre = restTemplate.getForEntity(apiGateway + membreApi + "/get/" + membreId, MembreModel.class);
@@ -67,5 +77,12 @@ public class PropositionService {
 
         compositionProposition.setMaxVote(compositionEquipe.getMembres().size());
         return compositionProposition;
+    }
+
+    private Long[] stringToLongArray(String str) {
+        String[] strArray = str.split(",");
+        return LongStream.range(0, strArray.length)
+                .mapToObj(i -> Long.parseLong(strArray[(int) i].trim()))
+                .toArray(Long[]::new);
     }
 }

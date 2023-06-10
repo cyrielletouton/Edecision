@@ -2,34 +2,13 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
-      <profile default="true" name="Default" enabled="true" />
       <profile name="Gradle Imported" enabled="true">
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.24/13a394eed5c4f9efb2a6d956e2086f1d81e857d9/lombok-1.18.24.jar" />
         </processorPath>
-        <module name="org.ipi.gateway.main" />
+        <module name="gateway.main" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="equipe" target="17" />
-      <module name="equipe.main" target="17" />
-      <module name="equipe.test" target="17" />
-      <module name="gateway" target="17" />
-      <module name="gateway.main" target="17" />
-      <module name="gateway.test" target="17" />
-      <module name="membres" target="17" />
-      <module name="membres.main" target="17" />
-      <module name="membres.test" target="17" />
-      <module name="projet" target="17" />
-      <module name="projet.main" target="17" />
-      <module name="projet.test" target="17" />
-      <module name="proposition" target="17" />
-      <module name="proposition.main" target="17" />
-      <module name="proposition.test" target="17" />
-      <module name="vote" target="17" />
-      <module name="vote.main" target="17" />
-      <module name="vote.test" target="17" />
-    </bytecodeTargetLevel>
   </component>
 </project>

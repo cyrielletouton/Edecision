@@ -4,17 +4,11 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Edecision.iml" filepath="$PROJECT_DIR$/.idea/Edecision.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/equipe.main.iml" filepath="$PROJECT_DIR$/.idea/modules/equipe.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/equipe.test.iml" filepath="$PROJECT_DIR$/.idea/modules/equipe.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/gateway.main.iml" filepath="$PROJECT_DIR$/.idea/modules/gateway.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/gateway.test.iml" filepath="$PROJECT_DIR$/.idea/modules/gateway.test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/membres.main.iml" filepath="$PROJECT_DIR$/.idea/modules/membres.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/membres.test.iml" filepath="$PROJECT_DIR$/.idea/modules/membres.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/membre.main.iml" filepath="$PROJECT_DIR$/.idea/modules/membre.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/projet.main.iml" filepath="$PROJECT_DIR$/.idea/modules/projet.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/projet.test.iml" filepath="$PROJECT_DIR$/.idea/modules/projet.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/proposition.main.iml" filepath="$PROJECT_DIR$/.idea/modules/proposition.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/proposition.test.iml" filepath="$PROJECT_DIR$/.idea/modules/proposition.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/vote.main.iml" filepath="$PROJECT_DIR$/.idea/modules/vote.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/vote.test.iml" filepath="$PROJECT_DIR$/.idea/modules/vote.test.iml" />
     </modules>
   </component>
 </project>
