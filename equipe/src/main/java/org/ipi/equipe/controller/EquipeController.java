@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 //Base path is /api/equipe/
@@ -25,6 +26,13 @@ public class EquipeController {
         equipeRepository.save(equipe);
         return ResponseEntity.ok(equipe);
     }
+
+    @PostMapping("/createMany")
+    public ResponseEntity<Equipe[]> createMembres(@RequestBody Equipe[] equipes){
+        equipeRepository.saveAll(Arrays.asList(equipes));
+        return ResponseEntity.ok(equipes);
+    }
+
     //Get équipes
     @GetMapping("/get")
     public ResponseEntity<List<Equipe>> getEquipe(){
