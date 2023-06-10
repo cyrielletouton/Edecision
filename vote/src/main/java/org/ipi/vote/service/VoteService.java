@@ -62,7 +62,7 @@ public class VoteService {
                     if(!compositionProposition.getVotants().isBlank()){
                         for (Long votant : stringToLongArray(compositionProposition.getVotants())) {
                             if (votant == voterId) {
-                                logger.info("pas autorisé à voter : déjà voté");
+                                logger.info("pas autorisé à voter, le votant a déjà voté");
                                 voterAlreadyVoted = true;
                                 break;
                             }
@@ -70,7 +70,7 @@ public class VoteService {
                     }
 
                     if (!voterAlreadyVoted) {
-                        logger.info("autorisé à voter : vote");
+                        logger.info("le votant n'a pas encore participé au vote, il est autorisé à voter");
                         propositionOfCurrentVote.votants = addLongToString(propositionOfCurrentVote.votants, voterId);
 
                         logger.info("ajouté au votants " + propositionOfCurrentVote.votants);
@@ -127,16 +127,13 @@ public class VoteService {
     public PropositionModel concludeVote(PropositionModel proposition, CompositionPropositionModel compositionProposition) {
         int nbVotants;
         // Majorité vaut la moitié du nombre max de vote - abstention
-        int majority = (proposition.maxVote - proposition.nbrAbstention)/2;
+        int majority = (int) Math.ceil((proposition.maxVote - proposition.nbrAbstention)/2);
         // If no comme in the string of the composition, that means there is only one voter
         if(!compositionProposition.getVotants().contains(",")) {
             nbVotants = 1;
         } else {
             nbVotants = stringToLongArray(compositionProposition.getVotants()).length;
         }
-        logger.info("MAJ = " + majority);
-        logger.info("nb votants TOTAL : " + nbVotants);
-        logger.info("nbVote = " + proposition.nbrVote);
 
         // Il faut vérifier que le vote est terminé
         if (proposition.maxVote == nbVotants) {
